@@ -1,0 +1,20 @@
+<!-- this is the get request  -->
+  <h2>Philadelphia Soup Kitchens</h2>
+
+<ul>
+  <% @soupkitchens.each do |soupkitchen| %>
+    <tr>
+        <td><%= soupkitchen.id %></td>
+        <td><%= soupkitchen.name %></td>
+        <td><%= soupkitchen.address %></td>
+    </tr>
+What to do with this: 1/take out link_to 2/add div with id=reviews
+    <%= link_to "See reviews and add your own", soupkitchen_path(soupkitchen) %>
+      <br>
+   </p>
+  <% end %> 
+
+</ul>
+  
+<%= link_to "Add new soup kitchen", new_soupkitchen_path %>
+

@@ -1,0 +1,32 @@
+<h2>Is there a soup kitchen that's not on our list? Add it here.</h2>
+
+<%= render 'form' %>
+
+<%= link_to "Back to All Soupkitchens", soupkitchens_path %>
+
+
+<section id= "soupkitchensResult">
+  <h3 id="soupkitchensName"></h3>
+  
+</section>
+
+<script type='text/javascript' charset='utf-8' >
+    $(function() {
+      $('form').submit(function(event) {
+        event.preventDefault();
+          alert("got to submit button")
+
+           const values = $(this).serialize();
+           const soupkitchens = $.post('/soupkitchens', values);
+           soupkitchens.done(function(data) {
+            console.log(data);
+          
+
+            $("#soupkitchensName").text(data["title"]);
+            $("#soupkitchensAddress").text(data["address"]);
+            $("soupkitchensComments").text(data["comments"]);  
+            
+           });
+        });
+    });
+</script>

@@ -51,4 +51,4 @@ class CommentsController < ApplicationController
      @comment = Comment.find(params[:id])
   end
 end
-end
+

@@ -1,6 +1,6 @@
 class SoupkitchensController < ApplicationController
   before_action :set_soupkitchen, only: [:show, :update, :destroy]
-  
+
   def index
     @soupkitchens = Soupkitchen.all
     json_response(@soupkitchens)
@@ -53,7 +53,7 @@ class SoupkitchensController < ApplicationController
 
   def destroy
     @soupkitchen.destroy
-     head :no_content
+     # head :no_content
     # redirect_to @soupkitchens_path
   end 
 
@@ -63,7 +63,7 @@ class SoupkitchensController < ApplicationController
   end 
 
   def set_soupkitchen
-    @soupkitchen = Soupkitchen.find(params[:soupkitchen_id])
+    @soupkitchen = Soupkitchen.find(params[:id])
   end 
 
 

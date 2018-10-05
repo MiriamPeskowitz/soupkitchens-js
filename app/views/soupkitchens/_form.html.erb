@@ -1,0 +1,56 @@
+<% if current_user %>
+  <% if @soupkitchen.errors.any? %>
+      <div id="error_explanation">
+          <h2>
+              <%= pluralize(@soupkitchen.errors.count, "error") %> prohibited this user from being saved:
+          </h2>
+
+          <ul>
+              <% @soupkitchen.errors.full_messages.each do |message| %>
+                  <li>
+                      <%= message %>
+                  </li>
+              <% end %>
+          </ul>
+      </div>
+  <% end %>
+
+
+  <%= form_for(@soupkitchen) do |f| %>
+      <% f.hidden_field :added_by, :value => current_user %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name %>               
+      <br>
+      
+      <%= f.label :address %>
+      <%= f.text_field :address %>
+      <br>
+
+
+      <%= f.label :city %>
+      <%= f.text_field :city, value: 'Philadelphia' %>
+      <br>
+        
+      <%= f.label :state %>
+      <%= f.text_field :state, value: 'PA' %>
+      <br>
+
+
+      <%= f.label :zipcode %>
+      <%= f.text_field :zipcode %>
+      <br>
+
+      <%= f.label :phone %>
+      <%= f.telephone_field :phone %>
+      <br>
+
+
+      <%= f.label :added_by %>
+      <%= f.text_field :added_by, value: current_user.first_name %>
+
+      <%= f.submit %>
+  <% end %>   
+<% else %>
+  <h4>Sorry, you'll have to sign up / log in to add a new soupkitchen. </h4>
+<% end %> 
