@@ -3,7 +3,6 @@ class SoupkitchensController < ApplicationController
 
   def index
     @soupkitchens = Soupkitchen.all
-    json_response(@soupkitchens)
   end
 
   def new
@@ -31,8 +30,9 @@ class SoupkitchensController < ApplicationController
 
 
   def show
-    # @soupkitchen = Soupkitchen.find(params[:id])
-    json_response(@soupkitchen)
+    @soupkitchen = Soupkitchen.find(params[:id])
+    # json_response(@soupkitchen)
+    render json: @soupkitchen
   end
 
   def edit 

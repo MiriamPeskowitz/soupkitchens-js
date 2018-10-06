@@ -5,6 +5,7 @@ class CommentsController < ApplicationController
     @soupkitchens = Soupkitchen.all
     @comments = Comment.all
     @users = User.all
+    render json: @comments
     # how to send json_response(@?????)
   end
 
@@ -12,8 +13,8 @@ class CommentsController < ApplicationController
     @comment = Comment.new  
     @soupkitchen = Soupkitchen.find(params[:soupkitchen_id])  
     if !logged_in?
-      # flash[:notice] = "You must be logged in to leave a comment." JS -- to dom 
-      # redirect_to soupkitchens_path(@soupkitchen)
+      flash[:notice] = "You must be logged in to leave a comment." JS -- to dom 
+      redirect_to soupkitchens_path(@soupkitchen)
     end 
   end 
 
@@ -25,15 +26,15 @@ class CommentsController < ApplicationController
 
       if @comment.save 
         # flash[:notice] = "Thanks! We added your comment."
-        json_response(@soupkitchen)
+        render json: @soupkitchen
         # redirect_to soupkitchen_path(@soupkitchen)
       else 
-        # flash.now[:notice] = "Something went wrong, try again."  JS to DOM 
-        # render 'soupkitchens/show'
+        flash.now[:notice] = "Something went wrong, try again."  
+        render 'soupkitchens/show'
       end
     else
-      # flash[:notice] = "Gotta' log in to leave a review." JS to DOM 
-      # redirect_to root_path
+      flash[:notice] = "Gotta' log in to leave a review." 
+      redirect_to root_path
     end
   end
 

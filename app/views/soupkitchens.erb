@@ -11,27 +11,7 @@
 </head>
 <body>
 
-# <%= yield %>
-
-
-  <h2>Philadelphia Soup Kitchens</h2>
-
-<ul>
-  <% @soupkitchens.each do |soupkitchen| %>
-    <p>
-    <%= soupkitchen.id %><br>
-    <%= soupkitchen.name %><br>
-    <%= soupkitchen.address %><br>
-
-    <%= link_to "See reviews and add your own", soupkitchen_path(soupkitchen) %>
-      <br>
-   </p>
-  <% end %> 
-
-</ul>
-  
-<%= link_to "Add new soup kitchen", new_soupkitchen_path %>
-
+<%= yield %>
 
 </body>
 </html>

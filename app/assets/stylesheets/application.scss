@@ -1,0 +1,14 @@
+ /*
+ *= require main
+ *= require bootstrap
+ *= require_tree .
+ *= require_self
+ */
+
+
+
+/* OR: boostrap-sprockets must be imported first, like this 
+@import "bootstrap-sprockets";
+@import "bootstrap";
+ do this and remove tree and self 
+*/

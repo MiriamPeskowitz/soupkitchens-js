@@ -1,20 +1,66 @@
 <!-- this is the get request  -->
-  <h2>Philadelphia Soup Kitchens</h2>
+<h2>Philadelphia Soup Kitchens</h2>
+  <button class="add-new-soup-kitchen">Add a new soupkitchen</button>
 
-<ul>
-  <% @soupkitchens.each do |soupkitchen| %>
-    <tr>
-        <td><%= soupkitchen.id %></td>
-        <td><%= soupkitchen.name %></td>
-        <td><%= soupkitchen.address %></td>
-    </tr>
-What to do with this: 1/take out link_to 2/add div with id=reviews
-    <%= link_to "See reviews and add your own", soupkitchen_path(soupkitchen) %>
-      <br>
-   </p>
-  <% end %> 
+<section id="new-soup-kitchen-form-goes-here"></sections>
 
-</ul>
-  
-<%= link_to "Add new soup kitchen", new_soupkitchen_path %>
+<section id="soupkitchen-data">
+  <ul>
+    <% @soupkitchens.each do |soupkitchen| %>
+     
+      <%= soupkitchen.id %><br>
+      <%= soupkitchen.name %><br>
+      <%= soupkitchen.address %><br>
+      Philadelphia, PA <%= soupkitchen.zipcode %>
+     
+      <button class="js-reviews" data-id="<%= soupkitchen.id %>"> See reviews and add your own </button> 
+      <section class="put-soupkitchen-comments-here"> </section> 
+          <br>
 
+    <% end %> 
+  </ul> 
+ </section> 
+
+
+<script type="text/javascript" charset="utf-8">
+  //later: move to soupkitchens.js
+  // $(document).on "turbolinks: load", function() {
+  $("button.js-reviews").click(function() {
+   
+      let id = $(this).data('id');
+    
+      $.getJSON("/comments/" + id )
+        
+        .done(function(data) {
+          console.log("success")
+          console.log(data)
+          
+//put the data on the page 
+    // $(".put-soupkitchen-comments-here").text()
+          
+
+        .error(function() {
+          console.log("error")
+        })
+
+    
+      
+       // $("#soupkitchen-" + id).html(data["id"]);
+       // $("#soupkitchen-" + name).html(data["name"]);
+       // $("#soupkitchen-" + address).html(data["address"]);
+
+      });
+    });
+
+
+  $(".add-new-soup-kitchen").click(function() {
+    // WHAT DO I DO HERE? I'VE HIJACKED THE BUTTON, WHERE DO I GET THE FORM TO ADD A NEW ONE. Put it in DOM  "put-new-soup-kitchen-form-here"
+    // Oh, I do a get request.
+    $.getJSON("/soupkitchens/new", function(data){
+      console.log(data);
+      // $(".new-soup-kitchen-form-goes-here").html(data["formMAKE THIS REAL"]);
+    });
+  });
+
+
+</script>
