@@ -14,18 +14,18 @@
     $(function() {
       $('form').submit(function(event) {
         event.preventDefault();
-          alert("got to submit button")
+          console.log("got to submit button")
 
            const values = $(this).serialize();
-           const soupkitchens = $.post('/soupkitchens', values);
-           soupkitchens.done(function(data) {
+           const newSoupkitchen = $.post('/soupkitchens', values);
+           newSoupkitchen.done(function(data) {
             console.log(data);
           
-
+// the place on the api, that will transfer it to the db. HELP 
             $("#soupkitchensName").text(data["title"]);
             $("#soupkitchensAddress").text(data["address"]);
-            $("soupkitchensComments").text(data["comments"]);  
-            
+            $("#soupkitchensComments").text(data["comments"]);
+            $("#soupkitchensNotes").text(data["notes"]);   
            });
         });
     });

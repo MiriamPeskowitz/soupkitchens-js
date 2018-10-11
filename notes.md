@@ -16,7 +16,23 @@ User stories
 
 
 
-8888
+
 <p id="soupkitchen-<%= soupkitchen.id %>-id" ></p>
         <p id="soupkitchen-<%= soupkitchen.name %>-name"</p>
         <p id="soupkitchen-<%= soupkitchen.address %>-address"</p>
+
+
+$(document).ready(function() {
+  $("#button").click(function(event){
+  var $button = $(this)
+  var url = $button.data("url")
+
+  $.get(url, function(response) {
+  console.log(response)
+  $button.before(response)
+})
+  event.preventDefault();
+})
+})
+
+rake routes || grep recipe

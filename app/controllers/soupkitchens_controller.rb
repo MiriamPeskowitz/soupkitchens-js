@@ -9,7 +9,7 @@ class SoupkitchensController < ApplicationController
     if logged_in?
       @soupkitchen = Soupkitchen.new
     else
-      # flash.now[:notice] = "You must be logged in to add a new soupkitchen." ADD JS
+      flash.now[:notice] = "You must be logged in to add a new soupkitchen."
     end 
   end
 

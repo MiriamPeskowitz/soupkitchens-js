@@ -45,6 +45,9 @@
       <%= f.telephone_field :phone %>
       <br>
 
+      <%= f.label :notes %>
+      <%= f.text_field :notes %>
+      <br>
 
       <%= f.label :added_by %>
       <%= f.text_field :added_by, value: current_user.first_name %>
@@ -52,5 +55,7 @@
       <%= f.submit %>
   <% end %>   
 <% else %>
+
   <h4>Sorry, you'll have to sign up / log in to add a new soupkitchen. </h4>
+  
 <% end %> 
