@@ -35,4 +35,8 @@ $(document).ready(function() {
 })
 })
 
+if ajax, you don't want to send back the layout
+def new 
+
+
 rake routes || grep recipe
