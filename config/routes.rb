@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
- root 'static#welcome'
+  root 'home#index'
 
 
   get '/signup', to: 'users#new', as: 'signup'
@@ -13,6 +13,10 @@ Rails.application.routes.draw do
 
   resources :soupkitchens do 
     resources :comments
+  end 
+
+  resources :foodpantries do 
+    
   end 
   
   # resources :food_pantries do 
