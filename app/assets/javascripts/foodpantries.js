@@ -1,5 +1,4 @@
-//some code in view 
-class Soupkitchen() {
+class Foodpantry() {
   constructor() {
     this.name = name 
     this.address = address
@@ -8,7 +7,7 @@ class Soupkitchen() {
     this.created_at = Date.parse(obj.created_at);
     this.updated_at = Date.parse(obj.updated_at);
   }
-  Soupkitchen.prototype.XXXX = function() {
+  Foodpantry.prototype.XXXX = function() {
     console.log("XXXX");
   }
 }
