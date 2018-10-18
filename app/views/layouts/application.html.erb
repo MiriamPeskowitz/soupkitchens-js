@@ -11,6 +11,7 @@
             <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
             
             <%= csrf_meta_tags %>
+             <%= csp_meta_tag %>
         </head>
     <body>
 
@@ -60,6 +61,11 @@
 
 
     <main>
+       <div class="flash"> 
+        <% flash.each do |name, message| %>
+            <div class="<%= name %>"><%= message %></div>
+        <% end %>     
+      </div>
       <%= yield %>
     </main>
 
