@@ -1,0 +1,34 @@
+<h3>Your Profile</h3>
+
+<p>Name: <%= @user.first_name %>  <%= @user.last_name %></p>
+
+
+<% if @user.about_me %>
+  <%= @user.about_me %>
+<% else %>
+  <h4>Want to add your profile?</h4> <%= link_to "Add profile", edit_user_path(@user) %>
+<% end %>
+<br>
+<%= link_to "Edit your profile", edit_user_path(@user) %>
+
+<h4> Your Reviews: </h4>
+
+    <% @user.comments.each do |comment| %>
+        <p> About <%= comment.soupkitchen.name %>, you said " <strong><%= comment.title %>:  </strong> <%= comment.content %>" </p>
+    <% end %>
+
+<br>
+
+<h3>You've visited and rated these soupkitchens: </h3>
+    <% @user.soupkitchens.uniq.each do |soupkitchen| %>
+
+       <li><%= soupkitchen.name %></li>
+    
+    <% end %>
+
+<br>     
+<br>
+
+<%= link_to "home", root_path %><br>
+<%= link_to "see all reviewers", users_path %>
+

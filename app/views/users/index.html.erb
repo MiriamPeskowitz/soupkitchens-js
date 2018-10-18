@@ -1,0 +1,9 @@
+<h3>Soupkitchen Reviewers</h3>
+
+<% @users.each do |user| %>
+  <p>
+     <%= link_to user.first_name, user_path(user) %> <br> 
+  </p>
+<% end %>
+
+

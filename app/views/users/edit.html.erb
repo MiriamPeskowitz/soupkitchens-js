@@ -1,0 +1,14 @@
+<h2>Hey <%= @user.first_name %>! </h2>
+
+<% if @user.about_me %>
+  <h3> Great job. Need to make any changes? </h3>
+
+<% else %>
+   <h3> Fill in "about me" and tell us something about yourself. </h3>
+<% end %>  
+
+    <%= render 'about_me' %>'
+
+
+<%= link_to "home", root_path %><br>
+<%= link_to "back to your profile page", user_path(@user) %>
