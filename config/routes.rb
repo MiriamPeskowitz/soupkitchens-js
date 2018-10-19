@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'home#index'
+  root 'api/v1/home#index'
 
 
   get '/signup', to: 'users#new', as: 'signup'
