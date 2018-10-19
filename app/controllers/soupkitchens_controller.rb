@@ -16,14 +16,14 @@ class SoupkitchensController < ApplicationController
   def create 
    if logged_in? 
       @soupkitchen = Soupkitchen.new(soupkitchen_params)
-      json_response(@todo) #:created
+      render json: @todo, status: 200
 
       if @soupkitchen.save
-        # flash[:notice] = "#{@soupkitchen.name} was successfully added to the Soupkitchens in list. Will you leave the first review?" ADD JS
+        flash[:notice] = "#{@soupkitchen.name} was successfully added to the Soupkitchens in list. Will you leave the first review?" 
         # redirect_to soupkitchen_path(@soupkitchen)
       else
-        # flash.now[:notice] = "Something went wrong"
-        # render :new
+        flash.now[:notice] = "Something went wrong"
+        render :new
       end 
     end
   end
@@ -32,7 +32,7 @@ class SoupkitchensController < ApplicationController
   def show
     @soupkitchen = Soupkitchen.find(params[:id])
     # json_response(@soupkitchen)
-    render json: @soupkitchen
+    render json: @soupkitchen, status: 200
   end
 
   def edit 

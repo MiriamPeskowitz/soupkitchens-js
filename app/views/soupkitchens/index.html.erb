@@ -39,15 +39,23 @@
 
 <script type="text/javascript" charset="utf-8">
   //later: move to soupkitchens.js
-  // $(document).on "turbolinks: load", function() {
+$(document).on "turbolinks: load", function() {
 
 // form for add a new soupkitchen
   $("button.js-add-new-soupkitchen").click(function() {
+    
+    $.fetch(url, {
+      method: GET
+    })
+    .then(successResponse =>successResponse.json())
+    .then(success => XXX)
+    .catch(error = > XXX)
+
 
     $("#load-new-soup-kitchen-form").text(
   })  
 
-// ??
+// ?? what resource am I exposeing here? Sk/new -- a form, and sending it to DOM. 
 //   $(".add-new-soup-kitchen").click(function() {
 //     // WHAT DO I DO HERE? I'VE HIJACKED THE BUTTON, WHERE DO I GET THE FORM TO ADD A NEW ONE. Put it in DOM  "put-new-soup-kitchen-form-here"
 //     // Oh, I do a get request.
