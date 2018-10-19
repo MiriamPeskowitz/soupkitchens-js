@@ -1,4 +1,4 @@
-class api::v1::CommentsController < ApplicationController
+class CommentsController < ApplicationController
 
 
   def index

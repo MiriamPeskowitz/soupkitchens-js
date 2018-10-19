@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'api/v1/home#index'
+  root 'home#index'
 
 
   get '/signup', to: 'users#new', as: 'signup'
@@ -11,14 +11,9 @@ Rails.application.routes.draw do
 
   resources :users
 
-  namespace :api do
-    namespace :v1 do
-      resources :soupkitchens do 
-        resources :comments
-      end
-    end 
+  resources :soupkitchens do 
+    resources :comments
   end 
-
 
   resources :foodpantries do 
     resources :comments
