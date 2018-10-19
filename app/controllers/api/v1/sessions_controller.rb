@@ -1,4 +1,4 @@
-class SessionsController < ApplicationController
+class api::v1::SessionsController < ApplicationController
 
 
   def new
