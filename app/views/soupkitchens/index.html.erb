@@ -1,93 +1,97 @@
 <!-- this is the get request  -->
 <h2>Philadelphia Soup Kitchens</h2>
 
-<section id="new-soupkitchen-button-and-form">
-  <button class="js-add-new-soupkitchen">Add a new soupkitchen</button>
+<section id="new-soupkitchen-button">
+    <button id="js-get-new-soupkitchen-form">Add a new soupkitchen</button>
 
-<!-- ADD THIS FROM JS -->
-<div id="load-new-soup-kitchen-form"></div>
+    <!-- ADD THIS FROM JS -- was a link to soupkitchens/new _form -->
+    <div id="load-new-soup-kitchen-form"></div>
   </section>
 
-<!-- ADD THIS? OR DELETE  -->
-<section id="more-about-soupkitchens">  </section>
+<!-- add soupkitchen data   -->
 
 <section id="soupkitchen-data">
-  <ul>
-    <% @soupkitchens.each do |soupkitchen| %>
-     
-      <%= soupkitchen.id %><br>
-      <%= soupkitchen.name %><br>
-      <%= soupkitchen.address %><br>
-      Philadelphia, PA <%= soupkitchen.zipcode %>
+    <ul>
+      <% @soupkitchens.each do |soupkitchen| %>
+       
+          <%= soupkitchen.id %><br>
+          <%= soupkitchen.name %><br>
+          <%= soupkitchen.address %><br>
+          Philadelphia, PA <%= soupkitchen.zipcode %>
 
-      <br>
+          <br>
+    <!-- this is a button to a fetch request, and <article> for the data to be put on the page -->
+          <button id="js-schedule" data-id="<%= soupkitchen.id %>"> Meal schedule </button> 
 
-      <button class="js-schedule" data-id="<%= soupkitchen.id %>"> Meal schedule </button> 
+         <article id="load-meal-schedule-here"> </article> 
+          <br>
+     <!-- this is a button to a fetch request -->      
+          <button id="js-reviews" data-id="<%= soupkitchen.id %>"> See reviews (and add your own) </button> 
 
-      <br>
-      
-      <button class="js-reviews" data-id="<%= soupkitchen.id %>"> See reviews (and add your own) </button> 
+          <article id="load-soupkitchen-comments-here"> </article> 
+          
+          <br>
 
-      <div class="load-soupkitchen-comments-here"> </div> 
-      
-      <br>
-
-    <% end %> 
-  </ul> 
+      <% end %> 
+    </ul> 
  </section> 
 
 
 <script type="text/javascript" charset="utf-8">
-  //later: move to soupkitchens.js
-$(document).on "turbolinks: load", function() {
 
-// form for add a new soupkitchen
-  $("button.js-add-new-soupkitchen").click(function() {
+  document.getElementById("js-add-new-soupkitchen-form").addEventListener('click', getForm)
+
+  function getForm() {
+    // console.log(123);
+    //fetch takes a url or a filename soupkitchens/new
+    const newForm =  '/soupkitchens/new'
+    //what is the thing I'm putting on the page? It's erb. 
+    // 'http://localhost:3000/soupkitchens/new'
+    // fetch(newForm)
+    fetch(newForm)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data)
+      document.getElementById("#load-new-soup-kitchen-form").text(data) 
+      });
+    //how do I load this? 
+    .catch(error => console.log(error))
+    // where do I write the error message? 
+  }
     
-    $.fetch(url, {
-      method: GET
-    })
-    .then(successResponse =>successResponse.json())
-    .then(success => XXX)
-    .catch(error = > XXX)
+
+document.getElementById("js-schedule PLUS data-set").addEventListener('click', getSchedule)
+
+  function getSchedule() {
+    const schedule = "WHAT/where is this";
+
+    fetch(schedule)
+    .then((res) => res.json());
+    .then(data) => {
+      // what to do with the data -- put it in class="load-meal-schedule-here"
+      let $schedule = document.getElementById("load-meal-schedule-here")
+      $schedule.attr('data-id').what next? 
+    }
+    .catch((err) => alert("error"));
+  }
 
 
-    $("#load-new-soup-kitchen-form").text(
-  })  
+document.getElementById('js-reviews').dataset.id.addEventListener('click', getReviews)
 
-// ?? what resource am I exposeing here? Sk/new -- a form, and sending it to DOM. 
-//   $(".add-new-soup-kitchen").click(function() {
-//     // WHAT DO I DO HERE? I'VE HIJACKED THE BUTTON, WHERE DO I GET THE FORM TO ADD A NEW ONE. Put it in DOM  "put-new-soup-kitchen-form-here"
-//     // Oh, I do a get request.
-
-
-//     $.getJSON("/soupkitchens/new", function(data){
-//       console.log(data);
-//       // $(".new-soup-kitchen-form-goes-here").html(data["formMAKE THIS REAL"]);
-//     });
-//   });
-// ??
-
-// load the reviews 
-  $("button.js-reviews").click(function() {
-   
-      let id = $(this).data('id');
-    
-      $.getJSON("/comments/" + id )
-        
-        .done(function(data) {
-          console.log("success")
-          console.log(data)
+function getReviews() {
+    reviews = "WHAT? "
+    fetch(reviews);
+    .then((res) => res.json());
+    .then(data) => {
+      what to do with the data
+      let $reviews = document.getElementById('load-soupkitchen-comments-here');
+      $reviews.attr('data-id').text = ????
+    }
+       .catch((err) => alert("error"));    
+}
           
-//put the data on the page 
-    // $(".put-soupkitchen-comments-here").text()
+
           
-
-        .error(function() {
-          console.log("error")
-        })
-
-    
       
        // $("#soupkitchen-" + id).html(data["id"]);
        // $("#soupkitchen-" + name).html(data["name"]);

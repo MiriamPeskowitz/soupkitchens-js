@@ -1,4 +1,4 @@
-class Foodpantry() {
+class Foodpantry {
   constructor() {
     this.name = name 
     this.address = address
@@ -7,7 +7,7 @@ class Foodpantry() {
     this.created_at = Date.parse(obj.created_at);
     this.updated_at = Date.parse(obj.updated_at);
   }
-  Foodpantry.prototype.XXXX = function() {
-    console.log("XXXX");
-  }
+  // Foodpantry.prototype.XXXX = function() {
+  //   console.log("XXXX");
+  // }
 }

@@ -16,10 +16,10 @@ class SoupkitchensController < ApplicationController
   def create 
    if logged_in? 
       @soupkitchen = Soupkitchen.new(soupkitchen_params)
-      render json: @todo, status: 200
+      render json: @soupkitchen, status: 200
 
       if @soupkitchen.save
-        flash[:notice] = "#{@soupkitchen.name} was successfully added to the Soupkitchens in list. Will you leave the first review?" 
+        flash[:notice] = "#{@soupkitchen.name} was successfully added to the soup kitchens list. Will you leave the first review?" 
         # redirect_to soupkitchen_path(@soupkitchen)
       else
         flash.now[:notice] = "Something went wrong"

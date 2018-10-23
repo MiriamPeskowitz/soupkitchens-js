@@ -1,7 +1,4 @@
-
-//create User model 
-
-class User() {
+class User {
   constructor() {
     this.firstName = firstName 
     this.lastName = lastName
@@ -11,7 +8,7 @@ class User() {
     this.created_at = Date.parse(obj.created_at);
     this.updated_at = Date.parse(obj.updated_at);
   }
-  User.prototype.XXXX = function() {
-    console.log("XXXX");
-  }
+  // User.prototype.XXXX = function() {
+  //   console.log("XXXX");
+  // }
 }

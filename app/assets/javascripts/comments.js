@@ -1,5 +1,4 @@
-//put code for comments here 
-class Comments() {
+class Comments {
   constructor() {
     this.title = title 
     this.content = content
@@ -8,7 +7,7 @@ class Comments() {
     this.created_at = Date.parse(obj.created_at);
     this.updated_at = Date.parse(obj.updated_at);
   }
-  Comments.prototype.XXXX = function() {
-    console.log("XXXX");
-  }
+  // Comment.prototype.XXXX = function() {
+  //   console.log("XXXX");
+  // }
 }
