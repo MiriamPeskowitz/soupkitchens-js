@@ -6,6 +6,74 @@
 
 
 
-@import "bootstrap-sprockets";
-@import "bootstrap";
-@import "main";
+// @import "bootstrap-sprockets";
+// @import "bootstrap";
+@import “materialize”;
+
+
+body {
+  background-color: white;
+  padding-top: 70px;
+  padding-bottom: 50px;
+  padding-left: 40px;
+  padding-right: 40px;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+  
+.theme-dropdown .dropdown-menu {
+  position: static;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.theme-showcase > p > .btn {
+  margin: 5px 0;
+}
+
+.center {
+  text-align: center;
+}
+
+.pic,
+.info {
+  padding: 20px;
+  display: inline-block;
+  background-color: #eeeeee;
+  border-radius: 7px;
+  vertical-align: middle;
+  margin: 10px;
+}
+
+.info {
+  height: 290px;
+  text-align: left;
+}
+
+.field_with_errors {
+  font-size: 12px;
+  padding: 2px;
+  background-color: blue;
+  display: table;
+}
+
+
+.notice {
+  color: green;
+}
+
+.recent-comments {
+  font-weight: bold;
+}
+
+.rating {
+  font-size: 12px;
+  font-weight: normal;
+  border: 3px solid blue;
+
+}

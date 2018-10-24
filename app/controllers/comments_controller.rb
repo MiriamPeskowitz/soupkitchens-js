@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
     @comments = Comment.all
     @users = User.all
     render json: @comments
-    # how to send json_response(@?????)
+    
   end
 
   def new   
@@ -25,7 +25,7 @@ class CommentsController < ApplicationController
       @comment.user_id = current_user.id
 
       if @comment.save 
-        # flash[:notice] = "Thanks! We added your comment."
+        flash[:notice] = "Thanks! We added your comment."
         render json: @soupkitchen
         # redirect_to soupkitchen_path(@soupkitchen)
       else 
