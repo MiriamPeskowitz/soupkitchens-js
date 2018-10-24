@@ -1,0 +1,7 @@
+<h4>Thanks for rating the soup kitchen.</h4>
+
+<h3><%= @soupkitchen.rating %> stars! </h3>
+
+  </br>
+Back to <%= link_to @soupkitchen.name, soupkitchen_path(@soupkitchen) %><br>
+<%= link_to 'Review other soupkitchens', soupkitchens_path %>

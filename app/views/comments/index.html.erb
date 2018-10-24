@@ -1,0 +1,14 @@
+<p>As of <%= @comments.date_today %>, there are 
+<%= @comments.count %> reviews,<%= @users.count %> reviewers and <%= @soupkitchens.count %> soupkitchens.
+
+<p>The last review was for <%= @comments.most_recently_updated %>.</p>
+
+<p class="recent-comments">Most recent comments 
+
+  <%  @comments.recent.each_with_index do |comment, index| %>
+  <p><%= index + 1 %>. <%= comment.soupkitchen.name %> <br> <%= comment.title %>: <%= comment.content %></p>
+  <% end %>
+
+
+
+</p>

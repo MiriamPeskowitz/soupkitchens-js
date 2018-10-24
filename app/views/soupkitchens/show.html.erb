@@ -1,0 +1,45 @@
+<p>
+<%= @soupkitchen.name %> <br>
+<%= @soupkitchen.address %> <br>
+<%= @soupkitchen.city  %> <br>
+<%= @soupkitchen.state  %> <br>
+<%= @soupkitchen.zipcode %> <br>
+<%= @soupkitchen.phone  %> <br>
+</p>
+
+
+<h3><%= pluralize(@soupkitchen.comments.count, "Review") %></h3> <br>
+
+<% @soupkitchen.comments.each do |comment| %>
+    <p>
+        Review by: <%= comment.user.first_name %> <br>
+        <strong><%= comment.title %></strong>  <br>
+        <%= comment.content %> 
+        <br>
+    </p> 
+    <div> 
+    
+      <% if current_user == comment.user_id %>
+          
+          <div class="rating"
+            <h4>This is your review. Want to add a rating? (1-5, 5's the best.)</h4>
+
+            <%= form_for(@soupkitchen) do  |f| %>
+              <p>
+                  <%= f.label :rating, "Rate #{@soupkitchen.name}:" %>
+                  <%= f.number_field :rating, in: 0..5 %>
+                  
+                  <%= f.submit "Send" %> </div> 
+              </p>
+          <% end %>    
+      <% end %> 
+    </div>  <br>
+  
+<% end %>
+<br>
+<%= link_to "Review #{@soupkitchen.name}", new_soupkitchen_comment_path(@soupkitchen) %><br>
+<br>
+Coming Soon: <%=  "Rate #{@soupkitchen.name}" %> <br>
+<%= link_to "(Sneak Peek)", edit_soupkitchen_path(@soupkitchen) %> <br>
+<br>
+<%= link_to 'See and Review other soupkitchens', soupkitchens_path %>

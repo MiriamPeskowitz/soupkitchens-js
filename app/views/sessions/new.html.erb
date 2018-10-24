@@ -1,0 +1,16 @@
+<h2>Signin </h2>
+
+<%= form_for(:sessions, url: signin_path) do |f| %> 
+
+  <%= f.label :first_name %>
+  <%= f.text_field :first_name %> <br>
+
+  <%= f.label :email %>
+  <%= f.email_field :email  %><br>
+  
+  <%= f.label :password, "Password (Minimum of 8 characters)"%>
+  <%= f.password_field :password %><br>
+
+    <%= f.submit "Sign In", class: "btn btn-primary" %>
+
+ <% end %>

@@ -10,6 +10,7 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'bootstrap-sass', '~> 3.3.7'
 gem 'sass-rails', '>= 3.2'
+gem 'uglifier', '>= 1.3.0'
 gem 'active_model_serializers'
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
@@ -28,10 +29,11 @@ gem 'validates_email_format_of', '~> 1.6', '>= 1.6.3'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise'
-
+gem 'omniauth'
 gem "omniauth-google-oauth2", "~> 0.2.1"
+
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
+gem 'rack-cors'
 # gem 'sprockets', '~> 4.0'
 
 group :development, :test do
@@ -42,6 +44,10 @@ group :development, :test do
   gem 'capybara', '>= 2.15', '< 4.0'
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'
+  
+  
+  # add gem for 
+
 end
 
 group :development do
