@@ -31,7 +31,6 @@ class SoupkitchensController < ApplicationController
 
   def show
     @soupkitchen = Soupkitchen.find(params[:id])
-    # json_response(@soupkitchen)
     render json: @soupkitchen, status: 200
   end
 

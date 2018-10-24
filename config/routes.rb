@@ -11,6 +11,7 @@ Rails.application.routes.draw do
         
       get '/auth/:provider/callback', to: 'sessions#create'
 
+      resources :comments, only: [:index]
       resources :users
 
    # tried scope:module :api do.. end  to wrap api versioning around this block 
@@ -21,9 +22,4 @@ Rails.application.routes.draw do
       resources :foodpantries do 
         resources :comments
       end 
-      
-      # resources :food_pantries do 
-      #   resources :comments
-      # end
- 
 end

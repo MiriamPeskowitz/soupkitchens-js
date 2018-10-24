@@ -27,7 +27,7 @@
           <br>
      <!-- this is a button to a fetch request -->      
           <button id="js-reviews" data-id="<%= soupkitchen.id %>"> See reviews (and add your own) </button> 
-
+//add link here that goes to the endpoint -- then the js can just take the href from this <a href 
           <article id="load-soupkitchen-comments-here"> </article> 
           
           <br>
@@ -39,66 +39,31 @@
 
 <script type="text/javascript" charset="utf-8">
 
-  document.getElementById("js-add-new-soupkitchen-form").addEventListener('click', getForm)
+  
 
-  function getForm() {
-    // console.log(123);
-    //fetch takes a url or a filename soupkitchens/new
-    const newForm =  '/soupkitchens/new'
-    //what is the thing I'm putting on the page? It's erb. 
-    // 'http://localhost:3000/soupkitchens/new'
-    // fetch(newForm)
-    fetch(newForm)
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data)
-      document.getElementById("#load-new-soup-kitchen-form").text(data) 
-      });
-    //how do I load this? 
-    .catch(error => console.log(error))
-    // where do I write the error message? 
-  }
-    
-
-document.getElementById("js-schedule PLUS data-set").addEventListener('click', getSchedule)
-
-  function getSchedule() {
-    const schedule = "WHAT/where is this";
-
-    fetch(schedule)
-    .then((res) => res.json());
-    .then(data) => {
-      // what to do with the data -- put it in class="load-meal-schedule-here"
-      let $schedule = document.getElementById("load-meal-schedule-here")
-      $schedule.attr('data-id').what next? 
-    }
-    .catch((err) => alert("error"));
-  }
-
-
-document.getElementById('js-reviews').dataset.id.addEventListener('click', getReviews)
+document.getElementById('js-reviews').addEventListener('click', getReviews)
 
 function getReviews() {
-    reviews = "WHAT? "
-    fetch(reviews);
-    .then((res) => res.json());
-    .then(data) => {
-      what to do with the data
+  debugger
+    reviews = `/soupkitchens/${data-id}/comments `;//fix data-id
+    fetch(reviews)
+    .then((res) => res.json())
+    .then((data) => {
+      // what to do with the data
       let $reviews = document.getElementById('load-soupkitchen-comments-here');
-      $reviews.attr('data-id').text = ????
-    }
+      // $reviews.attr('data-id').text = ????
+    })
        .catch((err) => alert("error"));    
 }
           
 
           
-      
+  //now, what about the initial load of the page?? 
+    //should there be an api call for that, too?     
        // $("#soupkitchen-" + id).html(data["id"]);
        // $("#soupkitchen-" + name).html(data["name"]);
        // $("#soupkitchen-" + address).html(data["address"]);
 
-      });
-    });
 
 
 
