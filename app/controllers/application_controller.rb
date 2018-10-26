@@ -1,7 +1,7 @@
-class ApplicationController < ActionController::API
+class ApplicationController < ActionController::Base
   include ActionController::Serialization
 
-# was: ActionController::API
+# was: ActionController::API wthough ::Base, it won't pickup applcation/layout
  # protects from CSRF-creates before_filter that calls the verify_authenticity_token function. 
   include SessionsHelper
 

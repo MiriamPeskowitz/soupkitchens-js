@@ -7,8 +7,9 @@
 
 
 // @import "bootstrap-sprockets";
-// @import "bootstrap";
-@import “materialize”;
+//move this to main.scss-- need to add *= require_main ??
+
+@import "bootstrap";
 
 
 body {
