@@ -12,6 +12,7 @@ gem 'puma', '~> 3.11'
 gem 'bootstrap', '~> 4.1', '>= 4.1.3'
 gem 'sass-rails', '>= 3.2'
 gem 'uglifier', '>= 1.3.0'
+gem 'coffee-rails'
 gem 'active_model_serializers'
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
