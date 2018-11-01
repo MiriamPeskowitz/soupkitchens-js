@@ -17,7 +17,6 @@ gem 'active_model_serializers'
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
-gem 'materialize-sass', '~> 0.96.1'
 gem 'bcrypt', '~> 3.1.7'
 gem 'jquery-rails'
 # gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'

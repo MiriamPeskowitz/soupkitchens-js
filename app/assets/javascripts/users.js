@@ -14,6 +14,4 @@ $(function(){
     //   console.log("XXXX");
     // }
   }
-
-
 })

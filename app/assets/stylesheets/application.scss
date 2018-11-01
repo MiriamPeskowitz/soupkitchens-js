@@ -7,8 +7,10 @@
 
 
 // @import "bootstrap-sprockets";
-// @import "bootstrap";
-@import “materialize”;
+//move this to main.scss-- need to add *= require_main ??
+
+@import "bootstrap";
+
 
 
 body {
@@ -25,8 +27,14 @@ body {
 main {
   flex: 1 0 auto;
 }
-        
 
+
+footer {
+  background-color: #F0E68C
+}  
+.navbar {
+  background-color: #F0E68C;
+} 
 
 
 .theme-dropdown .dropdown-menu {
