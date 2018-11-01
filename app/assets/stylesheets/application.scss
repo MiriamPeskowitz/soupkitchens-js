@@ -30,21 +30,24 @@ main {
 footer {
   background-color: #F0E68C;
 }  
+button {
+  color: gray;
+}
 
 .navbar {
   background-color: #F0E68C;
   color: gray;
 } 
 
-// .theme-dropdown .dropdown-menu {
-//   position: static;
-//   display: block;
-//   margin-bottom: 20px;
-// }
+.theme-dropdown .dropdown-menu {
+  position: static;
+  display: block;
+  margin-bottom: 20px;
+}
 
-// .theme-showcase > p > .btn {
-//   margin: 5px 0;
-// }
+.theme-showcase > p > .btn {
+  margin: 5px 0;
+}
 
 .center {
   text-align: center;

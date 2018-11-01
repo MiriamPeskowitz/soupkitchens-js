@@ -3,29 +3,35 @@
 
 <p>Sign in to leave your own reviews or to add new kitchens and pantries.</p>
 
-<div class=" row"><!-- panel-footer -->
-    <div class="col-xs-6 text-left">
-        <div class="previous">
-          <button type="button" class="btn btn-default btn-lg" id="soup-kitchen-button">
-              <span class="glyphicon glyphicon-chevron-left"><%= link_to "Soup Kitchens", soupkitchens_path %></span>
+
+<div class="navbar-default"><!-- panel-footer -->
+    
+        <div class="btn-group-large">
+          <button type="button" class="btn" id="soup-kitchen-button">
+              <%= link_to "Soup Kitchens", soupkitchens_path %>
           </button>
-        </div>
-    </div>
-    <div class="col-xs-6 text-right">   
-        <div class="next">
+       
+    
+    
           <button type="button" class="btn btn-default btn-lg" id="food-pantry-button">
               <span class="glyphicon glyphicon-chevron-right"><%= link_to "Food Pantries", foodpantries_path %></span>
           </button>
-        </div>
-    </div>
-</div>
-<!-- add dividing line here  -->
+      
+  </div>
+  <!-- ends button group -->
+
+
+
+
+
+<div class="navbar-default">
 <div id="soupkitchen-data">
 </div>
 
 <div id="foodpantry-data">
 </div>
-
+</div> 
+<!-- ends navbar -->
 
 
 
