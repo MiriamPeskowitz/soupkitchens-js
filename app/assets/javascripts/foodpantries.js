@@ -11,3 +11,19 @@ class Foodpantry {
   //   console.log("XXXX");
   // }
 }
+
+$(document).ready(function() {
+
+    $('#js-foodpantry-button').on("click", 
+    getFoodPantries);
+  
+  function  getFoodPantries(event) {
+    event.preventDefault();
+    console.log("got to foodpantries")
+    fetch('/foodpantries')
+    .then(response => response.json())
+    .then(console.log("got to 2d promise"))
+    // .then(data => console.log(data))
+  }
+
+});

@@ -20,11 +20,21 @@ $(document).ready(function() {
   function getSoupkitchens(event) {
     event.preventDefault();
     console.log("got to soupkitchens")
-    fetch('/soupkitchens/index')
+    fetch('/soupkitchens')
+    .then(response => console.log(response.text()))
     .then(response => response.json())
-    .then(data => console.log(data))
+
+    .then(console.log("got to 2d promise-replace this with a function "))
+    // .then(data => console.log(data))
+    .catch(error => console.log(error))
   }
+
+function putSoupKitchenDataInDom() {
+  
+  $('#soupkitchen-data'). 
+}
 
 });
 
 // this is closing bracket
+
