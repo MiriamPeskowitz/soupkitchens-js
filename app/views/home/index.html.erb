@@ -1,41 +1,26 @@
 <h2>Philly Soup Kitchens and Food Pantries </h2>
+
 <h4> Need a free meal or food supplies? Here's what people are saying about Philly's no-cost kitchens and pantries. </h4>
 
 <p>Sign in to leave your own reviews or to add new kitchens and pantries.</p>
 
+<section class="navbar2 navbar-default">
+    <button class="soupkitchens">Soupkitchens</button>
+    <button class="foodpantries">Food Pantries</button>
+</section>
 
-<div class="navbar-default"><!-- panel-footer -->
-    
-        <div class="btn-group-large">
-          <button type="button" class="btn" id="soup-kitchen-button">
-              <%= link_to "Soup Kitchens", soupkitchens_path %>
-          </button>
-       
-    
-    
-          <button type="button" class="btn btn-default btn-lg" id="food-pantry-button">
-              <span class="glyphicon glyphicon-chevron-right"><%= link_to "Food Pantries", foodpantries_path %></span>
-          </button>
-      
-  </div>
-  <!-- ends button group -->
+<section class="data">
+  <div id="soupkitchen-data"></div>
+  
+  <div id="foodpantry-data"></div>
+
+</section> 
 
 
 
+<!-- 
+<%= link_to "Soup Kitchens", soupkitchens_path %>
+<br>
 
-
-<div class="navbar-default">
-<div id="soupkitchen-data">
-</div>
-
-<div id="foodpantry-data">
-</div>
-</div> 
-<!-- ends navbar -->
-
-
-
-
-
-
-
+<%= link_to "Food Pantries", foodpantries_path %> Coming soon! 
+ -->

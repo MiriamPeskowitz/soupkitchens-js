@@ -2,11 +2,11 @@
 <h2>Philadelphia Soup Kitchens</h2>
 
 <section id="new-soupkitchen-button">
-    <button id="js-form">Add a new soupkitchen</button>
-<!-- 
-    ADD THIS FROM JS -- was a link to soupkitchens/new _form -->
-    <div id="js-load-form"></div>
-</section>
+    <button id="js-get-new-soupkitchen-form">Add a new soupkitchen</button>
+
+    <!-- ADD THIS FROM JS -- was a link to soupkitchens/new _form -->
+    <div id="load-new-soup-kitchen-form"></div>
+  </section>
 
 <!-- add soupkitchen data   -->
 
@@ -21,9 +21,9 @@
 
           <br>
     <!-- this is a button to a fetch request, and <article> for the data to be put on the page -->
-          <button id="js-get-meal-schedule" data-id="<%= soupkitchen.id %>"> Coming soon: Hours of Operation </button> 
+          <button id="js-schedule" data-id="<%= soupkitchen.id %>"> Meal schedule </button> 
 
-         <article id="js-meal-schedule"> </article> 
+         <article id="load-meal-schedule-here"> </article> 
           <br>
      <!-- this is a button to a fetch request -->      
           <button id="js-reviews" data-id="<%= soupkitchen.id %>"> See reviews (and add your own) </button> 
@@ -38,9 +38,13 @@
  </section> 
 
 
+<<<<<<< HEAD
 
 <script type="text/javascript" charset="utf-8">
 $(document).on "turbolinks: load" -- add this in -- 
+=======
+<script type="text/javascript" charset="utf-8">
+>>>>>>> parent of 55b2855... finish navbar
 
  document.getElementById("js-add-new-soupkitchen-form").addEventListener('click', getForm)
 
@@ -94,7 +98,13 @@ function getReviews() {
     })
        .catch((err) => alert("error"));    
 }
+<<<<<<< HEAD
                    
+=======
+          
+
+          
+>>>>>>> parent of 55b2855... finish navbar
   //now, what about the initial load of the page?? 
     //should there be an api call for that, too?     
        // $("#soupkitchen-" + id).html(data["id"]);
@@ -102,6 +112,13 @@ function getReviews() {
        // $("#soupkitchen-" + address).html(data["address"]);
 
 
+<<<<<<< HEAD
 </script>
 
 
+=======
+
+
+
+</script>
+>>>>>>> parent of 55b2855... finish navbar
