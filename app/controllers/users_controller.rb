@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  
+  protect_from_forgery
+
   def index
     @users = User.all
   end
@@ -7,7 +8,6 @@ class UsersController < ApplicationController
   def new
     @user = User.new
   end 
-
 
   def create
     @user = User.new(user_params)

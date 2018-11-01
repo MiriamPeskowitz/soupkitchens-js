@@ -12,7 +12,7 @@ find and load foodpantry data
 
 # Soupkitchens and Foodpantries Finder
 
-This is a prototype of my Code for Philly food justice project, that's also the Rails Portfolio Project for my Flatiron School FulLStack Developer Program.  The idea has a winding history, but this iteration comes from a conversation with an official at the Dept of Public Health that went something like, "What I really need is a Yelp for soup kitchens and food pantries." This is the poorest large city in the nation, and nearly 30% of the population relies on institutions like soupkitchens and foodpantries. That said, every city or town has people who rely on the kindness of free food donated and prepared by others, in ways that feel dignified and respectful. This app can be adapted for any locale.  
+This is a prototype of my Code for Philly food justice project. The original was coded in Rails; this refactor takes it closer to a Single Page Application, for the Rails/Jquery portfolio project at the Flatiron School FulLStack Developer Program. The idea has a winding history, but this iteration comes from a conversation with an official at the Dept of Public Health that went something like, "What we really need is a Yelp for soup kitchens and food pantries." This is the poorest large city in the nation, and nearly 30% of the population relies on institutions like soupkitchens and food pantries. That said, every city or town has people who rely on the kindness of free food donated and prepared by others, in ways that feel dignified and respectful. This app can be adapted for any locale.  The content challenge is to find the local dataset. 
 
 
 

@@ -1,15 +1,35 @@
 <h2>Philly Soup Kitchens and Food Pantries </h2>
-<h4> Need a meal? Here's what people are saying about our city's no-cost kitchens and pantries. </h4>
+<h4> Need a free meal or food supplies? Here's what people are saying about Philly's no-cost kitchens and pantries. </h4>
 
-<p>Wonder what your local soupkitchen or foodpantry is really like? </p>
-<p>Sign in to leave your own reviews.</p>
+<p>Sign in to leave your own reviews or to add new kitchens and pantries.</p>
+
+<div class=" row"><!-- panel-footer -->
+    <div class="col-xs-6 text-left">
+        <div class="previous">
+          <button type="button" class="btn btn-default btn-lg" id="soup-kitchen-button">
+              <span class="glyphicon glyphicon-chevron-left"><%= link_to "Soup Kitchens", soupkitchens_path %></span>
+          </button>
+        </div>
+    </div>
+    <div class="col-xs-6 text-right">   
+        <div class="next">
+          <button type="button" class="btn btn-default btn-lg" id="food-pantry-button">
+              <span class="glyphicon glyphicon-chevron-right"><%= link_to "Food Pantries", foodpantries_path %></span>
+          </button>
+        </div>
+    </div>
+</div>
+<!-- add dividing line here  -->
+<div id="soupkitchen-data">
+</div>
+
+<div id="foodpantry-data">
+</div>
 
 
-<%= link_to "Soup Kitchens", soupkitchens_path %>
-<br>
 
-<%= link_to "Food Pantries", foodpantries_path %> Coming soon! 
 
-<br>
 
-<p> new features? Can this be the single page, where all sk and fp's are loaded in? </p>
+
+
+

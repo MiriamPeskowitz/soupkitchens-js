@@ -2,11 +2,11 @@
 <h2>Philadelphia Soup Kitchens</h2>
 
 <section id="new-soupkitchen-button">
-    <button id="js-get-new-soupkitchen-form">Add a new soupkitchen</button>
-
-    <!-- ADD THIS FROM JS -- was a link to soupkitchens/new _form -->
-    <div id="load-new-soup-kitchen-form"></div>
-  </section>
+    <button id="js-form">Add a new soupkitchen</button>
+<!-- 
+    ADD THIS FROM JS -- was a link to soupkitchens/new _form -->
+    <div id="js-load-form"></div>
+</section>
 
 <!-- add soupkitchen data   -->
 
@@ -21,9 +21,9 @@
 
           <br>
     <!-- this is a button to a fetch request, and <article> for the data to be put on the page -->
-          <button id="js-schedule" data-id="<%= soupkitchen.id %>"> Meal schedule </button> 
+          <button id="js-get-meal-schedule" data-id="<%= soupkitchen.id %>"> Coming soon: Hours of Operation </button> 
 
-         <article id="load-meal-schedule-here"> </article> 
+         <article id="js-meal-schedule"> </article> 
           <br>
      <!-- this is a button to a fetch request -->      
           <button id="js-reviews" data-id="<%= soupkitchen.id %>"> See reviews (and add your own) </button> 
@@ -35,73 +35,4 @@
       <% end %> 
     </ul> 
  </section> 
-
-
-<script type="text/javascript" charset="utf-8">
-
- document.getElementById("js-add-new-soupkitchen-form").addEventListener('click', getForm)
-
-  function getForm() {
-    // console.log(123);
-    //fetch takes a url or a filename soupkitchens/new
-    const newForm =  '/soupkitchens/new'
-    //what is the thing I'm putting on the page? It's erb. 
-    // 'http://localhost:3000/soupkitchens/new'
-    // fetch(newForm)
-    fetch(newForm)
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data)
-      document.getElementById("#load-new-soup-kitchen-form").text(data) 
-      })
-    //how do I load this? 
-    .catch((error)=> console.log(error))
-    // where do I write the error message? 
-  }
-    
-
-document.getElementById("js-schedule PLUS data-set").addEventListener('click', getSchedule)
-
-  function getSchedule() {
-    const schedule = "WHAT/where is this";
-
-    fetch(schedule)
-    .then((res) => res.json())
-    .then((data) => {
-      // what to do with the data -- put it in class="load-meal-schedule-here"
-      let $schedule = document.getElementById("load-meal-schedule-here")
-      // $schedule.attr('data-id').what next? 
-    })
-    .catch((err) => alert("error"));
-  }
-
- 
-
-document.getElementById('js-reviews').addEventListener('click', getReviews)
-
-function getReviews() {
-  debugger
-    reviews = `/soupkitchens/${data-id}/comments `;//fix data-id
-    fetch(reviews)
-    .then((res) => res.json())
-    .then((data) => {
-      // what to do with the data
-      let $reviews = document.getElementById('load-soupkitchen-comments-here');
-      // $reviews.attr('data-id').text = ????
-    })
-       .catch((err) => alert("error"));    
-}
-          
-
-          
-  //now, what about the initial load of the page?? 
-    //should there be an api call for that, too?     
-       // $("#soupkitchen-" + id).html(data["id"]);
-       // $("#soupkitchen-" + name).html(data["name"]);
-       // $("#soupkitchen-" + address).html(data["address"]);
-
-
-
-
-
-</script>
+<!-- 
