@@ -20,25 +20,28 @@ $(document).ready(function() {
   function getSoupkitchens(event) {
     event.preventDefault();
             console.log("got to soupkitchens")
-    fetch('/soupkitchens')
+    fetch('/soupkitchens/')
         // .then(console.log("got to fetch"))
-    .then(function(res) {
-      return res.text();
-    })
-    .then(text => console.log(text))
+    // .then(function(res) {
+    //   return res.json();
+    // })
+    .then(res => res.json())
+    .then((data) => console.log(data))
+    // .then(text => console.log(text)) //test an error 
     // .then(function(data){
     //   console.log(JSON.stringify(data))
     // })
 
     // .then(response => response.json() )
 
-      // .then(console.log("got to 2d promise-replace this with a function " + res))
-  .then(data => putSoupKitchenInDom)
-  .catch(error => console.log(error))
+  .then(console.log("got to 2d promise-replace this with a function " ))
+  .then(data => SoupKitchenData(data))
+  .then(console.log("got to putSoupKitchenInDom put in then"))
+  .catch(err => console.log(err))
   }
 
-function putSoupKitchenDataInDom() {
-  console.log("got to putSoupKitchenInDome")
+function SoupKitchenData(data) {
+  console.log("got to putSoupKitchenInDom")
   let result = `data for each soupkitchen`;
     data.forEach(function(soupkitchen) {
       const {name, address, zipcode } = soupkitchen;
