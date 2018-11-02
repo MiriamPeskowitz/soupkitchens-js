@@ -43,6 +43,7 @@ $(document).ready(function() {
 function SoupKitchenData(data) {
   console.log("got to putSoupKitchenInDom")
   let result = `data for each soupkitchen`;
+ 
     data.forEach(function(soupkitchen) {
       const {name, address, zipcode } = soupkitchen;
       result +=

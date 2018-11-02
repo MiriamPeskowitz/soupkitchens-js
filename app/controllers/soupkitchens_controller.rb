@@ -3,6 +3,7 @@ class SoupkitchensController < ApplicationController
 
   def index
     @soupkitchens = Soupkitchen.all
+    render json: @soupkitchens, status: 200
   end
 
   def new
