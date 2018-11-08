@@ -15,58 +15,113 @@ class Soupkitchen {
 $(document).ready(function() {
 
     $('#js-soupkitchen-button').on("click", 
-    getSoupkitchens);
-  
-  function getSoupkitchens(event) {
-    event.preventDefault();
-            console.log("got to soupkitchens")
-    fetch('/soupkitchens/')
-        // .then(console.log("got to fetch"))
-    // .then(function(res) {
-    //   return res.json();
-    // })
-    .then(res => res.json())
-    .then((data) => console.log(data))
-    // .then(text => console.log(text)) //test an error 
-    // .then(function(data){
-    //   console.log(JSON.stringify(data))
-    // })
+    function(){
 
-    // .then(response => response.json() )
+      let url = '/soupkitchens/'
+      fetch(url)
+        .then((resp) => resp.json())
+        .then(function(data){
+          let soupkitchens = data;
+            return soupkitchens.map(function(soupkitchen){
+              let li = createNode('li'), 
+                  name = soupkitchen[name],
+                  span = createNode('span');
+            let x = span.innerHTML = `${name}`
+          })
+            $("soupkitchen-data").append(li)
+        })
 
-  .then(console.log("got to 2d promise-replace this with a function " ))
-  .then(data => SoupKitchenData(data))
-  .then(console.log("got to putSoupKitchenInDom put in then"))
-  .catch(err => console.log(err))
+       });
+      }); 
+
+function createNode(element) {
+      return document.createElement(element);
   }
 
-function SoupKitchenData(data) {
-  console.log("got to putSoupKitchenInDom")
-  let result = `data for each soupkitchen`;
- 
-    data.forEach(function(soupkitchen) {
-      const {name, address, zipcode } = soupkitchen;
-      result +=
-      `<div>
-          <h5> Name: ${name} </h5>
-          <ul>   
-              <li>Address: ${address} </li>
-              <li>Address: Philadelphia, PA ${zipcode} </li>
-              <li><button id="js-meal-schedule">Meal Schedule/add id thing</button>Goes to ${notes}</li>
-              <li><button id="js-see-reviews">See Reviews (and login to leave your own)${comments}</li>
-          </ul>      
-            <div id="js-load-meal-schedule"></div>
-            <div id="js-load-reviews"></div>
-      </div> `
-    });
+     
+  //      fetch('/soupkitchens/')
+  //         .then(console.log("got here"))
+  //         .then(res => res.json())
+  //         .then(console.log("got to res json"))
+  //         .then(function(data){
+  //            for (var i = 0; i < data.soupkitchens.length; i++) {
+  //     var listItem = document.createElement('li');
+  //     listItem.innerHTML = '<strong>' + data.soupkitchens[i].Name + '</strong> can be found in ' +
+  //                          data.soupkitchens[i].Location +
+  //                          '. Cost: <strong>£' + data.soupkitchens[i].Price + '</strong>';
+  //     myList.appendChild(listItem);
+  //   }
+  //         })
+  //   });
+  // });
 
 
-  $('#soupkitchen-data').innerHTML = result;
-};
+  
+//   function getSoupkitchens(event) {
+//     event.preventDefault();
+//             console.log("got to soupkitchens");
+
+//     fetch('/soupkitchens/')
+//          .then(console.log("got to fetch"))
+//     // .then(function(res) {
+//     //   return res.json();
+//     // })
+//     .then(res => res.json())
+//     .then(function(data){   
+//       let result = `<h2>Soupkitchens</h2>`
+//       console.log(result)
+//     data.forEach((soupkitchen) => {
+//       let soupkitchen = data.results;
+//       result +=
+//       `<div>
+//           <h5> Name: ${name} </h5>
+//           <ul>   
+//               <li>Address: ${address} </li>
+//               <li>Address: Philadelphia, PA ${zipcode} </li>
+//               <li><button id="js-meal-schedule">Meal Schedule/add id thing</button>Goes to ${notes}</li>
+//               <li><button id="js-see-reviews">See Reviews (and login to leave your own)${comments}</li>
+//           </ul>      
+//             <div id="js-load-meal-schedule"></div>
+//             <div id="js-load-reviews"></div>
+//       </div> `
+//     });
+//      $('#soupkitchen-data').innerHTML = result;
+//   })
+//   .catch(err => console.log(`problem at: err`))
+
+// }
+//     // .then(function(data){
+//     //   console.log(JSON.stringify(data))
+//     // })
+
+  
 
 
-//after this, do reviews,return to home. 
-});
 
-// this is closing bracket
+// function SoupKitchenData(data) {
+//   console.log("got to putSoupKitchenInDom");
+// }; 
+
+// }); 
+  // let result = `<h2>Stuff</h2>`;
+
+  //   data.forEach((soupkitchen) => {
+  //     const {name, address, zipcode } = soupkitchen;
+  //     result +=
+  //     `<div>
+  //         <h5> Name: ${name} </h5>
+  //         <ul>   
+  //             <li>Address: ${address} </li>
+  //             <li>Address: Philadelphia, PA ${zipcode} </li>
+  //             <li><button id="js-meal-schedule">Meal Schedule/add id thing</button>Goes to ${notes}</li>
+  //             <li><button id="js-see-reviews">See Reviews (and login to leave your own)${comments}</li>
+  //         </ul>      
+  //           <div id="js-load-meal-schedule"></div>
+  //           <div id="js-load-reviews"></div>
+  //     </div> `
+  //   });
+
+
+  // $('#soupkitchen-data').innerHTML = result;
+
 
