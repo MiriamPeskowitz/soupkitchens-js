@@ -15,12 +15,8 @@ class Soupkitchen {
     // } -- can be a formating method 
   }
 
-Soupkitchen.prototype.formatHtmlForEntry = function() {
-    `<p> ${soupkitchen.name}<br> ${soupkitchen.address}<br>${soupkitchen.zipcode}<br> ${soupkitchen.notes}<br> <button>Review</button> <br>`
-}
-
-// const header = new Header(){
-//   "Content-Type": 'application/json'
+// Soupkitchen.prototype.formatHtmlForEntry = function() {
+//     `<p> ${soupkitchen.name}<br> ${soupkitchen.address}<br>${soupkitchen.zipcode}<br> ${soupkitchen.notes}<br> <button>Review</button> <br>`
 // }
 
 $('#js-soupkitchen-button').on("click", indexFetch);
@@ -39,7 +35,7 @@ function indexFetch(){
      .then((resp) => resp.json())
      .then(data => {
       let soupkitchens = data;
-      let soupkitchenTitle = `<h3> Soupkitchens </h3>`
+      let soupkitchenTitle = `<h4> Soupkitchens </h4>`
       let reviewButton = `<button id="reviewButton">Reviews</button>`
 
       soupkitchens.forEach(function(soupkitchen){
