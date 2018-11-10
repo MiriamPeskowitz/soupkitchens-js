@@ -23,7 +23,6 @@ $('#js-soupkitchen-button').on("click", indexFetch);
 
 
 function indexFetch(){
-  // console.log("got to index fetch")
     const request = new Request('/soupkitchens', {
        headers: new Headers({
       'Content-Type': 'application/json'
@@ -34,13 +33,13 @@ function indexFetch(){
      // .then(console.log("got to fetch"))
      .then((resp) => resp.json())
      .then(data => {
-      let soupkitchens = data;
-      let soupkitchenTitle = `<h4> Soupkitchens </h4>`
-      let reviewButton = `<button id="reviewButton">Reviews</button>`
+      const soupkitchens = data;
+      const soupkitchenTitle = `<h4> Soupkitchens </h4>`
+      const reviewButton = `<button id="review-button">Reviews</button>`
 
       soupkitchens.forEach(function(soupkitchen){
 
-        const entry = `<p> ${soupkitchen.name}<br> ${soupkitchen.address}<br>${soupkitchen.zipcode}<br> ${soupkitchen.notes}<br> <button>Review</button> <br>`
+        const entry = `<p> ${soupkitchen.name}<br> ${soupkitchen.address}<br>${soupkitchen.zipcode}<br> ${soupkitchen.notes}<br> ${reviewButton} `
 
         $('#soupkitchen-data').append(entry);
       })
