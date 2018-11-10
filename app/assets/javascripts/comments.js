@@ -14,7 +14,6 @@ $(document).ready(function() {
     // Comment.prototype.XXXX = function() {
     //   console.log("XXXX");
     // }
-  debugger
 $("#review-button").on('click', alert(event.target.value));
 
 function commentFetch(event) {
