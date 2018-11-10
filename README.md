@@ -23,7 +23,7 @@ In the web app's current form, you can check out reviews of soup kitchens and fo
 
 ## Installation/Development
 
-Uses Ruby 2.3.1 and Rails 5.2.0.
+Uses Ruby 2.5.1 and Rails 5.2.0.
 Fork, copy the files to your local machine, $ bundle install
 $ rake db:migrate, and run on localhost:3000.
 I plan to deploy to Heroku.
