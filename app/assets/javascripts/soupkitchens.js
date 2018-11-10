@@ -1,42 +1,86 @@
+
+$(document).ready(function() {
+
 class Soupkitchen {
-    constructor() {
+    constructor(name, address, zipcode, notes) {
       this.name = name; 
       this.address = address;
       this.zipcode = zipcode;
       this.notes = notes;
-      this.created_at = Date.parse(obj.created_at);
-      this.updated_at = Date.parse(obj.updated_at);
+      // this.created_at = Date.parse(obj.created_at);
+      // this.updated_at = Date.parse(obj.updated_at);
     }
     // Soupkitchen.prototype.XXXX = function() {
     //   console.log("XXXX");
     // } -- can be a formating method 
   }
 
-$(document).ready(function() {
+Soupkitchen.prototype.formatHtmlForName = function() {
+  return `<li>${this.name}</li>`
+}
 
-    $('#js-soupkitchen-button').on("click", 
-    function(){
+// const header = new Header(){
+//   "Content-Type": 'application/json'
+// }
 
-      let url = '/soupkitchens/'
-      fetch(url)
-        .then((resp) => resp.json())
-        .then(function(data){
-          let soupkitchens = data;
-            return soupkitchens.map(function(soupkitchen){
-              let li = createNode('li'), 
-                  name = soupkitchen[name],
-                  span = createNode('span');
-            let x = span.innerHTML = `${name}`
-          })
-            $("soupkitchen-data").append(li)
-        })
+$('#js-soupkitchen-button').on("click", indexFetch);
 
-       });
-      }); 
 
-function createNode(element) {
-      return document.createElement(element);
-  }
+function indexFetch(){
+  console.log("got to index fetch")
+    const url = '/soupkitchens'
+    const headers = new Header({ headers:{'Content-Type': 'application/json'}});
+
+    fetch(url, headers)
+     // {
+    //   headers:{
+    //     'Content-Type': 'application/json'
+    //    }     
+    // })
+     .then(console.log("got to fetch"))
+     .then((resp) => resp.json())
+     .then(data => {
+      let soupkitchens = data.results;
+      soupkitchens.forEach(function(soupkitchen){
+        let entry = `<p> ${soupkitchen.name}<br> ${soupkitchen.address}<br>${soupkitchen.zipcode}<br> ${soupkitchen.notes}<br>`
+      })
+     }
+  //     .then(response => {
+       
+  //       response.forEach(function(param) {
+  //         const soupkitchen = new Soupkitchen(param);
+  //         const soupkitchenHTML = Soupkitchen.formatHtmlForName();
+  //       $('#soupkitchen-data').append(soupkitchenHTML);
+  //     });
+  //   })
+  // console.log('Success:', JSON.stringify(response)))
+      .then(putInDom)
+      .catch(error => console.error('Error:', error));
+    }; 
+ 
+    
+  function putInDom() {
+    const li = `<li>hello</li>`; 
+    $('#soupkitchen-data').html(li);
+  }  
+ }); 
+              // .then(data => {
+      //     let soupkitchens = data;
+      //       return soupkitchens.map(function(soupkitchen){
+      //         let li = createNode('li'), 
+      //             name = soupkitchen[name],
+      //             span = createNode('span');
+      //       let x = span.innerHTML = `${name}`
+      //     })
+      //       $("soupkitchen-data").append(li)
+      //   })
+
+      //  });
+      // }); 
+
+// function createNode(element) {
+//       return document.createElement(element);
+//   }
 
      
   //      fetch('/soupkitchens/')

@@ -1,3 +1,6 @@
+
+$(document).ready(function() {
+
 class Foodpantry {
   constructor() {
     this.name = name 
@@ -12,9 +15,7 @@ class Foodpantry {
   // }
 }
 
-$(document).ready(function() {
-
-    $('#js-foodpantry-button').on("click", 
+  $('#js-foodpantry-button').on("click", 
     getFoodPantries);
   
   function  getFoodPantries(event) {
