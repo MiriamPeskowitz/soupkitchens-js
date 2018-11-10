@@ -23,13 +23,13 @@ $('#js-soupkitchen-button').on("click", indexFetch);
 
 
 function indexFetch(){
-    const request = new Request('/soupkitchens', {
+    const indexRequest = new Request('/soupkitchens', {
        headers: new Headers({
       'Content-Type': 'application/json'
         })
      })
 
-    fetch(request)
+    fetch(indexRequest)
      // .then(console.log("got to fetch"))
      .then((resp) => resp.json())
      .then(data => {
@@ -50,7 +50,7 @@ function indexFetch(){
     .catch(error => console.error('Error:', error));
     }; 
  }); 
-     
+   
 // function button() {
 //   <button class="Reviews">Reviews of ${this.name}</button>
 // }
