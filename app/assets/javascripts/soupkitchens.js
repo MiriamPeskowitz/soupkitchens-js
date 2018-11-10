@@ -15,8 +15,8 @@ class Soupkitchen {
     // } -- can be a formating method 
   }
 
-Soupkitchen.prototype.formatHtmlForName = function() {
-  return `<li>${this.name}</li>`
+Soupkitchen.prototype.formatHtmlForEntry = function() {
+    `<p> ${soupkitchen.name}<br> ${soupkitchen.address}<br>${soupkitchen.zipcode}<br> ${soupkitchen.notes}<br> <button>Review</button> <br>`
 }
 
 // const header = new Header(){
@@ -27,93 +27,62 @@ $('#js-soupkitchen-button').on("click", indexFetch);
 
 
 function indexFetch(){
-  console.log("got to index fetch")
-    const url = '/soupkitchens'
-    const headers = new Header({ headers:{'Content-Type': 'application/json'}});
+  // console.log("got to index fetch")
+    const request = new Request('/soupkitchens', {
+       headers: new Headers({
+      'Content-Type': 'application/json'
+        })
+     })
 
-    fetch(url, headers)
-     // {
-    //   headers:{
-    //     'Content-Type': 'application/json'
-    //    }     
-    // })
-     .then(console.log("got to fetch"))
+    fetch(request)
+     // .then(console.log("got to fetch"))
      .then((resp) => resp.json())
      .then(data => {
-      let soupkitchens = data.results;
+      let soupkitchens = data;
+      let soupkitchenTitle = `<h3> Soupkitchens </h3>`
+      let reviewButton = `<button id="reviewButton">Reviews</button>`
+
       soupkitchens.forEach(function(soupkitchen){
-        let entry = `<p> ${soupkitchen.name}<br> ${soupkitchen.address}<br>${soupkitchen.zipcode}<br> ${soupkitchen.notes}<br>`
+
+        const entry = `<p> ${soupkitchen.name}<br> ${soupkitchen.address}<br>${soupkitchen.zipcode}<br> ${soupkitchen.notes}<br> <button>Review</button> <br>`
+
+        $('#soupkitchen-data').append(entry);
       })
-     }
-  //     .then(response => {
-       
-  //       response.forEach(function(param) {
-  //         const soupkitchen = new Soupkitchen(param);
-  //         const soupkitchenHTML = Soupkitchen.formatHtmlForName();
-  //       $('#soupkitchen-data').append(soupkitchenHTML);
-  //     });
-  //   })
-  // console.log('Success:', JSON.stringify(response)))
-      .then(putInDom)
-      .catch(error => console.error('Error:', error));
+      $('#soupkitchen-data').prepend(soupkitchenTitle);
+     })
+  
+  
+    .catch(error => console.error('Error:', error));
     }; 
- 
-    
-  function putInDom() {
-    const li = `<li>hello</li>`; 
-    $('#soupkitchen-data').html(li);
-  }  
  }); 
-              // .then(data => {
-      //     let soupkitchens = data;
+     
+// function button() {
+//   <button class="Reviews">Reviews of ${this.name}</button>
+// }
+
       //       return soupkitchens.map(function(soupkitchen){
       //         let li = createNode('li'), 
       //             name = soupkitchen[name],
       //             span = createNode('span');
       //       let x = span.innerHTML = `${name}`
       //     })
-      //       $("soupkitchen-data").append(li)
-      //   })
-
-      //  });
-      // }); 
-
 // function createNode(element) {
 //       return document.createElement(element);
 //   }
 
      
-  //      fetch('/soupkitchens/')
-  //         .then(console.log("got here"))
-  //         .then(res => res.json())
-  //         .then(console.log("got to res json"))
-  //         .then(function(data){
-  //            for (var i = 0; i < data.soupkitchens.length; i++) {
   //     var listItem = document.createElement('li');
   //     listItem.innerHTML = '<strong>' + data.soupkitchens[i].Name + '</strong> can be found in ' +
   //                          data.soupkitchens[i].Location +
   //                          '. Cost: <strong>£' + data.soupkitchens[i].Price + '</strong>';
   //     myList.appendChild(listItem);
-  //   }
-  //         })
-  //   });
-  // });
-
+ 
 
   
 //   function getSoupkitchens(event) {
 //     event.preventDefault();
 //             console.log("got to soupkitchens");
 
-//     fetch('/soupkitchens/')
-//          .then(console.log("got to fetch"))
-//     // .then(function(res) {
-//     //   return res.json();
-//     // })
-//     .then(res => res.json())
-//     .then(function(data){   
-//       let result = `<h2>Soupkitchens</h2>`
-//       console.log(result)
 //     data.forEach((soupkitchen) => {
 //       let soupkitchen = data.results;
 //       result +=
