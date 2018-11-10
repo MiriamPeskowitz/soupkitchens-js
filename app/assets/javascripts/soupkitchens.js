@@ -34,14 +34,14 @@ function indexFetch(){
      .then((resp) => resp.json())
      .then(data => {
       const soupkitchens = data;
-      const soupkitchenTitle = `<h4> Soupkitchens </h4>`
-      const reviewButton = `<button id="review-button">Reviews</button>`
+      const soupkitchenTitle = `<h4> Soupkitchens </h4>`;
+      const reviewButton = `<button id="review-button">Reviews</button>`;
 
       soupkitchens.forEach(function(soupkitchen){
 
-        const entry = `<p> ${soupkitchen.name}<br> ${soupkitchen.address}<br>${soupkitchen.zipcode}<br> ${soupkitchen.notes}<br> ${reviewButton} `
+        const soupkitchenEntry = `<p> ${soupkitchen.name}<br> ${soupkitchen.address}<br>${soupkitchen.zipcode}<br> ${soupkitchen.notes}<br> ${reviewButton} `
 
-        $('#soupkitchen-data').append(entry);
+        $('#soupkitchen-data').append(soupkitchenEntry);
       })
       $('#soupkitchen-data').prepend(soupkitchenTitle);
      })
