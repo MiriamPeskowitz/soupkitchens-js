@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
     @soupkitchens = Soupkitchen.all
     @comments = Comment.all
     @users = User.all
-    render json: @comments
+    render json: @comments, status: 200 
     
   end
 
@@ -18,11 +18,13 @@ class CommentsController < ApplicationController
     end 
   end 
 
+
   def create
     if logged_in?
       @soupkitchen = Soupkitchen.find(params[:soupkitchen_id])
       @comment = @soupkitchen.comments.build(comment_params)
       @comment.user_id = current_user.id
+      render json: @soupkitchen, @comment, @comment.user_id, status: 200
 
       if @comment.save 
         flash[:notice] = "Thanks! We added your comment."
@@ -30,11 +32,11 @@ class CommentsController < ApplicationController
         # redirect_to soupkitchen_path(@soupkitchen)
       else 
         flash.now[:notice] = "Something went wrong, try again."  
-        render 'soupkitchens/show'
+        # render 'soupkitchens/show'
       end
     else
       flash[:notice] = "Gotta' log in to leave a review." 
-      redirect_to root_path
+      # redirect_to root_path -- delete, because it's now just the same page? 
     end
   end
 
