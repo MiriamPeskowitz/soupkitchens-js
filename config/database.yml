@@ -82,4 +82,4 @@ production:
   <<: *default
   database: soupkitchens-js_production
   username: soupkitchens-js
-  password: <%= ENV['PROTO-PROJECT-API_DATABASE_PASSWORD'] %>
+  password: <%= ENV['SOUPKITCHENS-JS_DATABASE_PASSWORD'] %>
