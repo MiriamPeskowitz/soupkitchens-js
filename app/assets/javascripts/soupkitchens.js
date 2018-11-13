@@ -23,33 +23,48 @@ $('#js-soupkitchen-button').on("click", indexFetch);
 
 
 function indexFetch(){
+    // titleClear;
+    // $('#soupkitchen-title').empty();
     const indexRequest = new Request('/soupkitchens', {
        headers: new Headers({
       'Content-Type': 'application/json'
         })
      })
+    addTitle();
 
-    fetch(indexRequest)
-     // .then(console.log("got to fetch"))
-     .then((resp) => resp.json())
-     .then(data => {
-      const soupkitchens = data;
-      const soupkitchenTitle = `<h4> Soupkitchens </h4>`;
-      const reviewButton = `<button id="review-button">Reviews</button>`;
+    fetch(indexRequest)     
+      .then((resp) => resp.json())
+      .then(data => {
+          const soupkitchens = data;
+          const soupkitchenTitle = `<h4> Soupkitchens </h4>`;
+          const reviewButton = `<button id="review-button">Reviews</button>`;
 
-      soupkitchens.forEach(function(soupkitchen){
+          addTitle;
 
-        const soupkitchenEntry = `<p> ${soupkitchen.name}<br> ${soupkitchen.address}<br>${soupkitchen.zipcode}<br> ${soupkitchen.notes}<br> ${reviewButton} `
+          soupkitchens.forEach(function(soupkitchen){
 
-        $('#soupkitchen-data').append(soupkitchenEntry);
-      })
-      $('#soupkitchen-data').prepend(soupkitchenTitle);
-     })
-  
-  
-    .catch(error => console.error('Error:', error));
-    }; 
- }); 
+            const soupkitchenEntry = `<p> ${soupkitchen.name}<br> ${soupkitchen.address}<br>${soupkitchen.zipcode}<br> ${soupkitchen.notes}<br> ${reviewButton} `
+
+      
+          $('#soupkitchen-data').append(soupkitchenEntry)
+          })
+        })
+      .catch(error => console.error('Error:', error));
+ }; 
+
+function addTitle() {
+    const soupkitchenTitle = `<h4> Soupkitchens </h4>`;
+    const $title = $('#soupkitchen-title');
+    if ($title.empty() ) {
+    $title.prepend(soupkitchenTitle);
+  } 
+}
+   
+
+});     
+
+
+
    
 // function button() {
 //   <button class="Reviews">Reviews of ${this.name}</button>
