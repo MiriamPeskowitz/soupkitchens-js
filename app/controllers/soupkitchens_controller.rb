@@ -11,9 +11,11 @@ class SoupkitchensController < ApplicationController
       @soupkitchen = Soupkitchen.new
     else
       # flash.now[:notice] = "You must be logged in to add a new soupkitchen." 
-      render json: {errors: @soupkitchen.errors.full_message}, status: 400
+      render json: {errors: @soupkitchen.errors.full_messages}, status: 400
     end 
   end
+
+
 
   def create 
    if logged_in? 

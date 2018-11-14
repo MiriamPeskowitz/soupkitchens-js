@@ -19,10 +19,10 @@ class Soupkitchen {
 //     `<p> ${soupkitchen.name}<br> ${soupkitchen.address}<br>${soupkitchen.zipcode}<br> ${soupkitchen.notes}<br> <button>Review</button> <br>`
 // }
 
-$('#js-soupkitchen-button').on("click", indexFetch);
+$('#js-soupkitchen-button').on("click", soupkitchensFetch);
 
 
-function indexFetch(){
+function soupkitchensFetch(){
 
     const indexRequest = new Request('/soupkitchens', {
        headers: new Headers({
@@ -37,9 +37,8 @@ function indexFetch(){
       .then((res) => res.json())
       .then(data => {
           const soupkitchens = data;
-          const reviewButton = `<button id="review-button">Reviews</button>`;
+          const reviewButton = `<button id="js-review-button">Reviews</button>`;
 
-          addTitle;
 
           soupkitchens.forEach(function(soupkitchen){
 

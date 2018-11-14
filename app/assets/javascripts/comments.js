@@ -10,43 +10,63 @@ $(document).ready(function() {
       // this.created_at = Date.parse(obj.created_at);
       // this.updated_at = Date.parse(obj.updated_at);
     }
-  }
+  
     // Comment.prototype.XXXX = function() {
     //   console.log("XXXX");
     // }
-// $("#review-button").on('click', alert(event.target.value));
+  } 
+$('#js-review-button').on("click", test);
 
-// function commentFetch(event) {
-//   event.preventDefault();
-//   console.log("got to commentFetch");
-//   alert(event.target.value);
+function test() {
+  console.log("got to the click");
+}
+// alert(event.target.value)
+function commentFetch() {
+  // event.preventDefault(); // do I need this? How do I decide? 
+  console.log("got to commentFetch");
+  // alert(event.target.value);
 
-//   const commentRequest = new Request('/soupkitchens/soupkitchens_id/comments/:id', {
-//     headers: new Headers({
-//       'Content-Type': 'application/json'
-//     })
-//   })
+  const commentRequest = new Request('/soupkitchens/soupkitchens_id/comments/:id', {
+    headers: new Headers({
+      'Content-Type': 'application/json'
+    })
+  })
+  
+  addCommentsTitle();
+  
+  fetch(commentRequest)
+  .then(console.log("got to commentRequest"))
+  .then((res) => res.json())
+  .then(console.log("got to res.json"))
+  .then(data => {
+
+    const comments = data;
+    const addComment = `<button id="add-comment-button">Add Comment</button>`
+    console.log(comments);
+
+    
+
+    comments.forEach(comment => {
+
+      const commentEntry = `<p> ${comment.title}<br> ${comment.content}<br>`
+
+
+      $("#comments-data").append(commentEntry); 
+      });
+      $("#comments-data").append(addComment);
+    })
+    .catch(error => console.error('Error:', error));
  
-//   fetch(commentRequest)
-//   .then(console.log("got to commentRequest"))
-//   .then((resp) => resp.json())
-//   .then(console.log("got to resp.json"))
-//   .then(data => {
 
-//     const comments = data;
-//     const commentTitle = `<h4> Comments: </h4>`;
-//     const addComment = `<button id="add-comment-button">Add Comment</button>`
-//     console.log(comments);
-//     comments.forEach(comment => {
+ function addCommentsTitle() {
+     const commentTitle = `<h4> Comments: </h4>`;
+     const $title = $('#comments-title');
+      if ($title.empty() ) {
+      $title.prepend(commentTitle);
+      } 
+    }
 
-//       const commentEntry = `<p> ${comment.title}<br> ${comment.content}<br>`
+  }
+});// final bracket add toggle to close with button. 
 
-
-//       $("#comments-data").append(commentEntry); 
-//     })
-//     $("#comments-data").prepend(commentTitle);
-//     $("#comments-data").append(addComment);
-//   });
-
- // }
-})// final bracket
+// add to fetch request, 

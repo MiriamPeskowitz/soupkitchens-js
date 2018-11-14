@@ -13,8 +13,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new  
     @soupkitchen = Soupkitchen.find(params[:soupkitchen_id])  
     if !logged_in?
-      flash[:notice] = "You must be logged in to leave a comment." 
-      redirect_to soupkitchens_path(@soupkitchen)
+      # flash[:notice] = "You must be logged in"
     end 
   end 
 
