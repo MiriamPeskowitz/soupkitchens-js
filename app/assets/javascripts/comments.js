@@ -1,35 +1,33 @@
 $(document).ready(function() {
 
-
   class Comment {
     constructor(title, content, soupkitchen_id, user_id) {
       this.title = title 
       this.content = content
       this.soupkitchen_id = soupkitchen_id
       this.user_id = user_id
-      // this.created_at = Date.parse(obj.created_at);
-      // this.updated_at = Date.parse(obj.updated_at);
-    }
-  //something like this, except with template literals ${user.name} says ${comment.title} <br> : 
-    // Comment.prototype.renderDisplay = function() {
-    //   var html = "" ;
-    //   html += "<div class="\'well well-white\"' id=\'comment-\' + comment.id + '\'>" +  "<strong>" + this.user.name + "</strong>" + " says: " + this.content + "</div>";
+//     }
+//   something like this, except with template literals ${user.name} says ${comment.title} <br> : 
+//     Comment.prototype.renderDisplay = function() {
+//       var html = "" ;
+//       html += "<div class="\'well well-white\"' id=\'comment-\' + comment.id + '\'>" +  "<strong>" + this.user.name + "</strong>" + " says: " + this.content + "</div>";
 //   $("#submitted-comments").append(html);
 // }
 
-    // Comment.prototype.click = function() {
-    //   console.log("got to the click");
-    // } -- make this the load-reviews, and some formatting 
-  } 
+//     Comment.prototype.click = function() {
+//       console.log("got to the click");
+//     } -- make this the load-reviews, and some formatting 
+//   } 
 
 $('#load-reviews').on('click', function(e) {
+  e.preventDefault();
   // alert(e.target.value)
   console.log("got to the click");
   });
 
-// function test() {
-//   console.log("got to the click");
-// }
+function test() {
+  console.log("got to the click");
+}
 // alert(event.target.value)
 function commentFetch() {
   // event.preventDefault(); // do I need this? How do I decide? 
@@ -64,8 +62,21 @@ function commentFetch() {
  
 
 function addComment() {
-
+  console.log("got here")
 }
+
+
+ function addCommentsTitle() {
+    const commentTitle = `<h4> Comments: </h4>`;
+    const $title = $('#comments-title');
+    if ($title.empty() ) {
+      $title.prepend(commentTitle);
+    } 
+  }
+  }
+  })
+})
+
 
 
 // Comment.prototype.renderDisplay = function() {
@@ -105,17 +116,3 @@ function addComment() {
 //     });
 //     )
 //   });
-
-
- function addCommentsTitle() {
-    const commentTitle = `<h4> Comments: </h4>`;
-    const $title = $('#comments-title');
-    if ($title.empty() ) {
-      $title.prepend(commentTitle);
-    } 
-  }
-
-  }
-});// final bracket add toggle to close with button. 
-
-// add to fetch request, 
