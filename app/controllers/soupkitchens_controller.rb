@@ -10,21 +10,25 @@ class SoupkitchensController < ApplicationController
     if logged_in?
       @soupkitchen = Soupkitchen.new
     else
-      flash.now[:notice] = "You must be logged in to add a new soupkitchen."
+      # flash.now[:notice] = "You must be logged in to add a new soupkitchen." 
+      render json: {errors: @soupkitchen.errors.full_message}, status: 400
     end 
   end
 
   def create 
    if logged_in? 
       @soupkitchen = Soupkitchen.new(soupkitchen_params)
-      render json: @soupkitchen, status: 200
+      
 
       if @soupkitchen.save
-        flash[:notice] = "#{@soupkitchen.name} was successfully added to the soup kitchens list. Will you leave the first review?" 
+        flash[:notice] = "${@soupkitchen.name} was successfully added to the soup kitchens list. Will you leave the first review?" 
+
+        render json: {message: "Soupkitchen added"}, status: 200
         # redirect_to soupkitchen_path(@soupkitchen)
       else
         flash.now[:notice] = "Something went wrong"
-        render :new
+        render json: {error: @soupkitchen.errors.full_messages}, status: 400
+        # or pass it a custom message, like the string from line 23. 
       end 
     end
   end

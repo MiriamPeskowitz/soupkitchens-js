@@ -23,20 +23,20 @@ $('#js-soupkitchen-button').on("click", indexFetch);
 
 
 function indexFetch(){
-    // titleClear;
-    // $('#soupkitchen-title').empty();
+
     const indexRequest = new Request('/soupkitchens', {
        headers: new Headers({
       'Content-Type': 'application/json'
         })
      })
+
     addTitle();
 
-    fetch(indexRequest)     
-      .then((resp) => resp.json())
+    fetch(indexRequest) 
+      // .then(res => handleStatusCode(res))    
+      .then((res) => res.json())
       .then(data => {
           const soupkitchens = data;
-          const soupkitchenTitle = `<h4> Soupkitchens </h4>`;
           const reviewButton = `<button id="review-button">Reviews</button>`;
 
           addTitle;
@@ -52,19 +52,23 @@ function indexFetch(){
       .catch(error => console.error('Error:', error));
  }; 
 
-function addTitle() {
-    const soupkitchenTitle = `<h4> Soupkitchens </h4>`;
-    const $title = $('#soupkitchen-title');
-    if ($title.empty() ) {
-    $title.prepend(soupkitchenTitle);
-  } 
-}
-   
+  function addTitle() {
+      const soupkitchenTitle = `<h4> Soupkitchens </h4>`;
+      const $title = $('#soupkitchen-title');
+      if ($title.empty() ) {
+      $title.prepend(soupkitchenTitle);
+    } 
+  }
+
 
 });     
 
-
-
+// function handleMessages(res) {
+//   if (res.ok) {
+//     throw Message(res.message) 
+//   }  
+//   return res;
+// }
    
 // function button() {
 //   <button class="Reviews">Reviews of ${this.name}</button>
