@@ -8,18 +8,9 @@ find and load foodpantry data
 * code for foodpantry controller, and single page index
 
 RIght Now Tasks 
--- Add a new soupkitchen button. 
-    
-  $(document).ready() {   --- }
-       $("js-get-new-soupkitchen-form").on("click", function() {
-        call the form 
-        fetch(/soupkitchens/new).
-        then(response)  to json
-        then(put form in "js-load-new-soup-kitchen-form"
-        catch(error)
-
-        })
-    }
+-- DONE Add a new soupkitchen button. 
+-- work on Comments button: Why doesn't it work? 
+-- then check the other requirements 
 
 
 

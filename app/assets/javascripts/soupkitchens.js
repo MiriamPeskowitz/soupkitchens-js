@@ -42,7 +42,7 @@ function soupkitchensFetch(){
 
           soupkitchens.forEach(function(soupkitchen){
 
-            const soupkitchenEntry = `<p> ${soupkitchen.name}<br> ${soupkitchen.address}<br>${soupkitchen.zipcode}<br> ${soupkitchen.notes}<br> ${reviewButton} `
+            const soupkitchenEntry = `<p> ${soupkitchen.name}<br> ${soupkitchen.address}<br>${soupkitchen.zipcode}<br> ${soupkitchen.notes}<br> ${reviewButton}</p> `
 
       
           $('#soupkitchen-data').append(soupkitchenEntry)
