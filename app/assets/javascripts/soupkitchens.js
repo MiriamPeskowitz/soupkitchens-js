@@ -36,13 +36,13 @@ function soupkitchensFetch(){
       // .then(res => handleStatusCode(res))    
       .then((res) => res.json())
       .then(data => {
-          const soupkitchens = data;
-          const reviewButton = `<button id="js-review-button">Reviews</button>`;
+        const soupkitchens = data;
+        const reviewButton = `<button id="load-reviews">Read Reviews</button>`;
 
 
-          soupkitchens.forEach(function(soupkitchen){
+        soupkitchens.forEach(function(soupkitchen){
 
-            const soupkitchenEntry = `<p> ${soupkitchen.name}<br> ${soupkitchen.address}<br>${soupkitchen.zipcode}<br> ${soupkitchen.notes}<br> ${reviewButton}</p> `
+        const soupkitchenEntry = `<p> ${soupkitchen.name}<br> ${soupkitchen.address}<br>${soupkitchen.zipcode}<br> ${soupkitchen.notes}<br> ${reviewButton}</p> `
 
       
           $('#soupkitchen-data').append(soupkitchenEntry)
@@ -52,9 +52,9 @@ function soupkitchensFetch(){
  }; 
 
   function addTitle() {
-      const soupkitchenTitle = `<h4> Soupkitchens </h4>`;
-      const $title = $('#soupkitchen-title');
-      if ($title.empty() ) {
+    const soupkitchenTitle = `<h4> Soupkitchens </h4>`;
+    const $title = $('#soupkitchen-title');
+    if ($title.empty() ) {
       $title.prepend(soupkitchenTitle);
     } 
   }

@@ -1,35 +1,29 @@
-<div class="container">
-        <div class="navbar-header">
-          <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-           <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button> -->
+<section class="container">
+  <header class="navbar-header">
+    <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+     <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button> -->
 
-
-          <% if current_user %>  
-            
-                <p class="navbar-brand"> 
-
-                  Welcome <%= current_user.first_name.capitalize %> 
-              
-                  <%= link_to "Your profile", user_path(current_user) %>
-                  <%= link_to "Home", root_path %>
-                  <%= link_to "Logout", logout_path, method: :delete %>
-                   <!-- tried button_to -->
-                </p>
-                
-            <% else %>  
-                <p class="navbar-brand"> 
-                  <!-- how to change these links?  -->
-                   Philly Free Food 
-                    <%= link_to "Home", root_path %>
-                    <%= link_to "Sign Up", signup_path %>
-                    <%= link_to "Sign In", signin_path %>
-                  <!--   <%= link_to "Sign in with Twitter", "/auth/twitter" %> -->
-                   <!--  <%= link_to "Sign in with Github", "/auth/github" %> -->
-               </p>
-            <% end %>
-            </div>
-        </div>
+    <% if current_user %>   
+      <p class="navbar-brand"> Welcome <%= current_user.first_name.capitalize %> 
+        <%= link_to "Your profile", user_path(current_user) %>
+        <%= link_to "Home", root_path %>
+        <%= link_to "Logout", logout_path, method: :delete %>
+      </p>
+          
+      <% else %>  
+        <p class="navbar-brand"> Philly Free Food 
+            <!-- how to change these links?  -->
+          <%= link_to "Home", root_path %>
+          <%= link_to "Sign Up", signup_path %>
+          <%= link_to "Sign In", signin_path %>
+            <!--   <%= link_to "Sign in with Twitter", "/auth/twitter" %> -->
+            <!--  <%= link_to "Sign in with Github", "/auth/github" %> -->
+        
+          <% end %>
+        </p>
+      </header>
+  </section>
