@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+
+
 soupkitchen = Soupkitchen.create(name: 'Philly Restart', address: "19th St and Vine St", zipcode: 19103)
 
 soupkitchen = Soupkitchen.create(name: 'Second Pilgrim Baptist Church', address: "554 N. 15th St", zipcode: 19130)
