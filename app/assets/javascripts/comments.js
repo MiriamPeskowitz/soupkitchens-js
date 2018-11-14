@@ -23,7 +23,7 @@ $(document).ready(function() {
   } 
 
 $('#load-reviews').on('click', function(e) {
-  alert(e.target.value)
+  // alert(e.target.value)
   console.log("got to the click");
   });
 
