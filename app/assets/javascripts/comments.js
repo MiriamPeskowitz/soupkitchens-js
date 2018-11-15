@@ -6,11 +6,14 @@ $(document).ready(function() {
       this.content = content
       this.soupkitchen_id = soupkitchen_id
       this.user_id = user_id
+
+
+
 //     }
 //   something like this, except with template literals ${user.name} says ${comment.title} <br> : 
 //     Comment.prototype.renderDisplay = function() {
 //       var html = "" ;
-//       html += "<div class="\'well well-white\"' id=\'comment-\' + comment.id + '\'>" +  "<strong>" + this.user.name + "</strong>" + " says: " + this.content + "</div>";
+//       html += "<div id=\'comment-\' + comment.id + '\'>" +  "<strong>" + this.user.name + "</strong>" + " says: " + this.content + "</div>";
 //   $("#submitted-comments").append(html);
 // }
 
@@ -18,6 +21,16 @@ $(document).ready(function() {
 //       console.log("got to the click");
 //     } -- make this the load-reviews, and some formatting 
 //   } 
+
+      // this.created_at = Date.parse(obj.created_at);
+      // this.updated_at = Date.parse(obj.updated_at);
+    }
+  
+    // Comment.prototype.click = function() {
+    //   console.log("got to the click");
+    // }
+  } 
+
 
 $('#load-reviews').on('click', function(e) {
   e.preventDefault();
@@ -32,7 +45,6 @@ function test() {
 function commentFetch() {
   // event.preventDefault(); // do I need this? How do I decide? 
   console.log("got to commentFetch");
-
   const commentRequest = new Request('/soupkitchens/soupkitchens_id/comments/:id', {
     headers: new Headers({
       'Content-Type': 'application/json'
@@ -47,34 +59,34 @@ function commentFetch() {
   .then(console.log("got to res.json"))
   .then(data => {
     const comments = data;
-    const addComment = `<button id="add-comment">Add Comment</button>`
+    const addComment = `<button id="add-comment-button">Add Comment</button>`
     console.log(comments);
     comments.forEach(comment => {
 
       const commentEntry = `<p> ${comment.title}<br> ${comment.content}</p><br>` 
       
       $("#comments-data").append(commentEntry); 
-    });
+      });
 
-    $("#comments-data").append(addComment);
-  })
-  .catch(error => console.error('Error:', error));
+      // $("#comments-data").append(addComment);
+    })
+    .catch(error => console.error('Error:', error));
  
+
 
 function addComment() {
   console.log("got here")
-}
-
-
+  }
  function addCommentsTitle() {
     const commentTitle = `<h4> Comments: </h4>`;
     const $title = $('#comments-title');
     if ($title.empty() ) {
       $title.prepend(commentTitle);
-    } 
+    }
   }
+
+
   }
-  })
 })
 
 
@@ -116,3 +128,5 @@ function addComment() {
 //     });
 //     )
 //   });
+// add to fetch request, 
+

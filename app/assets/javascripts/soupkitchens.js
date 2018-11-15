@@ -7,8 +7,6 @@ class Soupkitchen {
       this.address = address;
       this.zipcode = zipcode;
       this.notes = notes;
-      // this.created_at = Date.parse(obj.created_at);
-      // this.updated_at = Date.parse(obj.updated_at);
     }
     // Soupkitchen.prototype.XXXX = function() {
     //   console.log("XXXX");
@@ -19,8 +17,14 @@ class Soupkitchen {
 //     `<p> ${soupkitchen.name}<br> ${soupkitchen.address}<br>${soupkitchen.zipcode}<br> ${soupkitchen.notes}<br> <button>Review</button> <br>`
 // }
 
-$('#js-soupkitchen-button').on("click", soupkitchensFetch);
+  Soupkitchen.prototype.ReviewFormatForButton = function() {
+` <p>
+<a href='/soupkitchen/${soupkitchen.id}/comments >Reviews of ${soupkitchen.name} </a>  
+</p> `
+  }
 
+
+$('#js-soupkitchen-button').on("click", soupkitchensFetch);
 
 function soupkitchensFetch(){
 
@@ -37,7 +41,7 @@ function soupkitchensFetch(){
       .then((res) => res.json())
       .then(data => {
         const soupkitchens = data;
-        const reviewButton = `<button id="load-reviews">Read Reviews</button>`;
+        const reviewButton = `<button data-id="load-reviews">Read Reviews</button>`;
 
 
         soupkitchens.forEach(function(soupkitchen){
