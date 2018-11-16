@@ -1,30 +1,27 @@
-$(document).ready(function() {
+
 
   class Comment {
-    constructor(title, content, soupkitchen_id, user_id) {
-      this.title = title 
-      this.content = content
-      this.soupkitchen_id = soupkitchen_id
-      this.user_id = user_id
-
-
-
-//     }
+    constructor(title, content, soupkitchenId, userId) {
+      this.title = title;
+      this.content = content;
+      this.soupkitchenId = soupkitchenId;
+      this.userId = userId;
+      }
+   }   
 //   something like this, except with template literals ${user.name} says ${comment.title} <br> : 
-//     Comment.prototype.renderDisplay = function() {
+    Comment.prototype.renderCommentHTML = function() {
+      return
+        `<p>
+
+        </p>`
+
 //       var html = "" ;
 //       html += "<div id=\'comment-\' + comment.id + '\'>" +  "<strong>" + this.user.name + "</strong>" + " says: " + this.content + "</div>";
-//   $("#submitted-comments").append(html);
+//   
 // }
+    
 
-//     Comment.prototype.click = function() {
-//       console.log("got to the click");
-//     } -- make this the load-reviews, and some formatting 
-//   } 
-
-      // this.created_at = Date.parse(obj.created_at);
-      // this.updated_at = Date.parse(obj.updated_at);
-    }
+    // $("#submitted-comments").append(html);
   
     // Comment.prototype.click = function() {
     //   console.log("got to the click");
@@ -32,11 +29,6 @@ $(document).ready(function() {
   } 
 
 
-$('#load-reviews').on('click', function(e) {
-  e.preventDefault();
-  // alert(e.target.value)
-  console.log("got to the click");
-  });
 
 function test() {
   console.log("got to the click");
@@ -87,7 +79,6 @@ function addComment() {
 
 
   }
-})
 
 
 

@@ -2,25 +2,32 @@
 $(document).ready(function() {
 
 class Soupkitchen {
-    constructor(name, address, zipcode, notes) {
-      this.name = name; 
-      this.address = address;
-      this.zipcode = zipcode;
-      this.notes = notes;
+    constructor(attr) {
+      this.name = attr.name; 
+      this.address = attr.address;
+      this.zipcode = attr.zipcode;
+      this.notes = attr.notes;
+      this.id = attr.id;
     }
     // Soupkitchen.prototype.XXXX = function() {
     //   console.log("XXXX");
     // } -- can be a formating method 
   }
 
-// Soupkitchen.prototype.formatHtmlForEntry = function() {
-//     `<p> ${soupkitchen.name}<br> ${soupkitchen.address}<br>${soupkitchen.zipcode}<br> ${soupkitchen.notes}<br> <button>Review</button> <br>`
-// }
-
-  Soupkitchen.prototype.ReviewFormatForButton = function() {
-` <p>
-<a href='/soupkitchen/${soupkitchen.id}/comments >Reviews of ${soupkitchen.name} </a>  
-</p> `
+  Soupkitchen.prototype.formatHTML = function() {
+   
+     return `<p> 
+            ${this.name}<br>
+            ${this.address}<br>
+            ${this.zipcode}<br>
+            ${this.notes}<br>
+            <button data-id=${this.id} id="reviews-${this.id}" >
+                Button
+            </button> 
+            </p>`
+  
+ 
+   //create prototype  for soupkitchenenrty Put all the html into one 
   }
 
 
@@ -41,19 +48,38 @@ function soupkitchensFetch(){
       .then((res) => res.json())
       .then(data => {
         const soupkitchens = data;
-        const reviewButton = `<button data-id="load-reviews">Read Reviews</button>`;
+      ;//make this into a prototype method-- and merge into the soupkitchenentry method
 
 
         soupkitchens.forEach(function(soupkitchen){
 
-        const soupkitchenEntry = `<p> ${soupkitchen.name}<br> ${soupkitchen.address}<br>${soupkitchen.zipcode}<br> ${soupkitchen.notes}<br> ${reviewButton}</p>`
+        const kitchen = new Soupkitchen(soupkitchen)
+        //this creates the instance
+  
 
-      
-          $('#soupkitchen-data').append(soupkitchenEntry)
+          $('#soupkitchen-data').append(kitchen.formatHTML())
+          
+            clickReviewButton(kitchen.id);
           })
+
+
         })
+      
       .catch(error => console.error('Error:', error));
- }; 
+    }; 
+
+   function clickReviewButton(id) {
+      $(`#reviews-${id}`).on('click', function(e) {
+        e.preventDefault();
+        // alert(e.target.value)
+    
+        console.log("got to the click");
+
+        // add the formating for the comments 
+        });
+
+    };
+
 
   function addTitle() {
     const soupkitchenTitle = `<h4> Soupkitchens </h4>`;
@@ -73,48 +99,6 @@ function soupkitchensFetch(){
 //   return res;
 // }
    
-// function button() {
-//   <button class="Reviews">Reviews of ${this.name}</button>
-// }
-
-      //       return soupkitchens.map(function(soupkitchen){
-      //         let li = createNode('li'), 
-      //             name = soupkitchen[name],
-      //             span = createNode('span');
-      //       let x = span.innerHTML = `${name}`
-      //     })
-// function createNode(element) {
-//       return document.createElement(element);
-//   }
-
-     
-  //     var listItem = document.createElement('li');
-  //     listItem.innerHTML = '<strong>' + data.soupkitchens[i].Name + '</strong> can be found in ' +
-  //                          data.soupkitchens[i].Location +
-  //                          '. Cost: <strong>£' + data.soupkitchens[i].Price + '</strong>';
-  //     myList.appendChild(listItem);
- 
-
-  
-//   function getSoupkitchens(event) {
-//     event.preventDefault();
-//             console.log("got to soupkitchens");
-
-//     data.forEach((soupkitchen) => {
-//       let soupkitchen = data.results;
-//       result +=
-//       `<div>
-//           <h5> Name: ${name} </h5>
-//           <ul>   
-//               <li>Address: ${address} </li>
-//               <li>Address: Philadelphia, PA ${zipcode} </li>
-//               <li><button id="js-meal-schedule">Meal Schedule/add id thing</button>Goes to ${notes}</li>
-//               <li><button id="js-see-reviews">See Reviews (and login to leave your own)${comments}</li>
-//           </ul>      
-//             <div id="js-load-meal-schedule"></div>
-//             <div id="js-load-reviews"></div>
-//       </div> `
-//     });
 //      $('#soupkitchen-data').innerHTML = result;
 //   })
 //   .catch(err => console.log(`problem at: err`))
