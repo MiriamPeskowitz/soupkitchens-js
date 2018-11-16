@@ -27,7 +27,7 @@ class Soupkitchen {
 $('#js-soupkitchen-button').on("click", soupkitchensFetch);
 $('#js-foodpantry-button').on("click", 
      foodpantriesFetch);
-
+ $("#comments-data").append("hello"); 
 
 function soupkitchensFetch(){
 
@@ -48,11 +48,11 @@ function soupkitchensFetch(){
 
         soupkitchens.forEach(function(soupkitchen){
 
-        const kitchen = new Soupkitchen(soupkitchen)
+        const kitchen = new Soupkitchen(soupkitchen);
         //this creates the instance
   
 
-          $('#soupkitchen-data').append(kitchen.formatHTML())
+          $('#soupkitchen-data').append(kitchen.formatHTML());
           
             clickReviewButton(kitchen.id);
             console.log("reviews-${kitchen.id}");

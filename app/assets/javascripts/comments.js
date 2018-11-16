@@ -21,38 +21,41 @@ class Comment {
 
 
 function commentFetch() {
-  console.log("got to commentFetch");
-  const commentRequest = new Request('/comments', {
-    headers: new Headers({
-      'Content-Type': 'application/json'
-    })
-  })
-  
-  clearSoupKitchenDataAndTitle();
+    console.log("got to commentFetch");
 
-  addCommentsTitle();
-
-  fetch(commentRequest)
-  .then(console.log("got to commentRequest"))
-  .then((res) => res.json())
-  .then(console.log("got to res.json"))
-  .then(data => {
-      const comments = data;
-
-
-     
-      console.log(comments);
-      comments.forEach(comment => {
-
-        renderCommentHTML
-       
-        
-        $("#comments-data").append(commentEntry); 
-        });
-
-        // $("#comments-data").append(addComment);
+    const commentRequest = new Request('/comments', {
+      headers: new Headers({
+        'Content-Type': 'application/json'
       })
-    .catch(error => console.error('Error:', error));
+    })
+    
+    clearSoupKitchenDataAndTitle();
+
+    addCommentsTitle();
+
+    // fetch(commentRequest)
+    // .then(console.log("got to commentRequest"))
+    // .then((res) => res.json())
+    // .then(console.log("got to res.json"))
+    // .then(data => {
+    //     const comments = data;
+
+    //   console.log(comments);
+    //     comments.forEach(function(comment) {
+
+    //       const commentInstance = new Comment(comment);
+
+
+        $("#comments-data").append("hello"); 
+       NEXT: ADD A COMMENTS DIV
+        
+        // $("#comments-data").append(commentInstance.renderCommentHTML()); 
+        // });
+        //clickAddCommentButton(commentInstance.id)
+        // $("#comments-data").append(addComment);
+      // })
+  
+    // .catch(error => console.error('Error:', error));
  
 } //end bracket for commentFetch
 
@@ -64,8 +67,8 @@ function commentFetch() {
     }
   }
 
-
-
+// function clickAddCommentButton() {}
+// <button data-id=${this.soupkitchenId}  id="new-comment-${this.userId}">Add Comment</button>
   
           
 
