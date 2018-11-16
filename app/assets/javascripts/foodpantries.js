@@ -18,7 +18,7 @@ class Foodpantry {
   
 function  foodpantriesFetch() {
     clearSoupKitchenDataAndTitle();
-    
+
     $('#foodpantry-data').append("Coming Soon");
   
     addFoodpantriesTitle();
@@ -30,9 +30,9 @@ function  foodpantriesFetch() {
   }
 function addFoodpantriesTitle() {
     const foodpantriesTitle = `<h4> Food Pantries </h4>`;
-    const $fptitle = $('#foodpantry-title');
-    if ($fptitle.empty() ) {
-      $fptitle.prepend(foodpantriesTitle);
+    const $foodpantryTitleDiv = $('#foodpantry-title');
+    if ($foodpantryTitleDiv.empty() ) {
+      ($foodpantryTitleDiv).prepend(foodpantriesTitle);
     } 
   }
 
