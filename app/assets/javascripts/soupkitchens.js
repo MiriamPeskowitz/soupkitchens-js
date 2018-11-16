@@ -9,9 +9,6 @@ class Soupkitchen {
       this.notes = attr.notes;
       this.id = attr.id;
     }
-    // Soupkitchen.prototype.XXXX = function() {
-    //   console.log("XXXX");
-    // } -- can be a formating method 
   }
 
   Soupkitchen.prototype.formatHTML = function() {
@@ -25,10 +22,7 @@ class Soupkitchen {
                 Button
             </button> 
             </p>`
-  
- 
-   //create prototype  for soupkitchenenrty Put all the html into one 
-  }
+    }
 
 
 $('#js-soupkitchen-button').on("click", soupkitchensFetch);
@@ -41,15 +35,13 @@ function soupkitchensFetch(){
         })
      })
 
-    addTitle();
+    addSoupkitchensTitle();
 
     fetch(indexRequest) 
       // .then(res => handleStatusCode(res))    
       .then((res) => res.json())
       .then(data => {
         const soupkitchens = data;
-      ;//make this into a prototype method-- and merge into the soupkitchenentry method
-
 
         soupkitchens.forEach(function(soupkitchen){
 
@@ -72,16 +64,15 @@ function soupkitchensFetch(){
       $(`#reviews-${id}`).on('click', function(e) {
         e.preventDefault();
         // alert(e.target.value)
-    
+        
         console.log("got to the click");
-
+        
         // add the formating for the comments 
         });
 
     };
 
-
-  function addTitle() {
+  function addSoupkitchensTitle() {
     const soupkitchenTitle = `<h4> Soupkitchens </h4>`;
     const $title = $('#soupkitchen-title');
     if ($title.empty() ) {
@@ -89,8 +80,8 @@ function soupkitchensFetch(){
     } 
   }
 
-
-});     
+ 
+});    
 
 // function handleMessages(res) {
 //   if (res.ok) {
@@ -136,6 +127,6 @@ function soupkitchensFetch(){
   //   });
 
 
-  // $('#soupkitchen-data').innerHTML = result;
+ 
 
 

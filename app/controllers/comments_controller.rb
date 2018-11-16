@@ -6,7 +6,6 @@ class CommentsController < ApplicationController
     @comments = Comment.all
     @users = User.all
     render json: @soupkitchens, status: 200 
-    
   end
 
   def new   
