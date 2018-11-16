@@ -3,6 +3,7 @@ class Comment {
     constructor(attr) {
       this.title = attr.title;
       this.content = attr.content;
+      this.id = attr.id;
       this.soupkitchenId = attr.soupkitchenId;
       this.userId = attr.userId;
     } 
@@ -11,7 +12,8 @@ class Comment {
       return `<section>
                 <p>
                     ${comment.title}<br>
-                    ${comment.content}
+                    ${comment.content}<br>
+                    "no comments yet"
                 </p>
                 <button data-id=${this.soupkitchenId}  id="new-comment-${this.userId}">Add Comment</button>
               </section>`       
@@ -26,6 +28,8 @@ function commentFetch() {
     })
   })
   
+  clearSoupKitchenDataAndTitle();
+
   addCommentsTitle();
 
   fetch(commentRequest)
@@ -53,10 +57,10 @@ function commentFetch() {
 } //end bracket for commentFetch
 
  function addCommentsTitle() {
-    const commentTitle = `<h4> Comments: </h4>`;
-    const $title = $('#comments-title');
-    if ($title.empty() ) {
-      $title.prepend(commentTitle);
+    const commentsTitle = `<h4> Comments </h4>`;
+    const $commentsTitleDiv = $('#comments-title');
+    if ($commentsTitleDiv .empty() ) {
+      $title.prepend(commentsTitle);
     }
   }
 

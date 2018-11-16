@@ -27,3 +27,10 @@ soupkitchen = Soupkitchen.create(name: 'Anchor of Hope', address: '53 E.Wister S
 soupkitchen = Soupkitchen.create(name: 'Bethel Presbyterian', address: '53 E.Wister Street', zipcode: 19144 )
 
 soupkitchen = Soupkitchen.create(name: 'Provision of Grace World Mission Church', address: '1950 W. Rockland St', zipcode: 19141 )
+
+comment = Comment.create(title: "Really Good Breakfast", content: "Hot breakfast, plus some takehome supplies",soupkitchen_id: 1, user_id: 1)
+
+comment = Comment.create(title: Liked the lunch content:  "burgers and good veggies, nice people", soupkitchen_id: 2, user_id: 1)
+
+comment = Comment.create(title: "Saturday lunch" content:  "sandwiches, very clean place", soupkitchen_id: 3, user_id: 1)
+user = User.create(first_name: "SD", last_name: "Rogers", email: "sd@mail.com")

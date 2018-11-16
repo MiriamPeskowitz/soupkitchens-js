@@ -21,7 +21,7 @@ class Foodpantry {
             ${this.zipcode}<br>
             ${this.notes}<br>
             <button data-id=${this.id} id="reviews-${this.id}" >
-                Button
+                Reviews
             </button> 
             </p>`
     }
@@ -36,6 +36,7 @@ function  foodpantriesFetch() {
       'Content-Type': 'application/json'
         })
     })
+
     clearSoupKitchenDataAndTitle();
 
     addFoodpantriesTitle();

@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
 
 class Soupkitchen {
@@ -19,16 +18,16 @@ class Soupkitchen {
             ${this.zipcode}<br>
             ${this.notes}<br>
             <button data-id=${this.id} id="reviews-${this.id}" >
-                Button
+                Reviews
             </button> 
             </p>`
     }
 
 
 $('#js-soupkitchen-button').on("click", soupkitchensFetch);
-
 $('#js-foodpantry-button').on("click", 
      foodpantriesFetch);
+
 
 function soupkitchensFetch(){
 
@@ -67,11 +66,8 @@ function soupkitchensFetch(){
 
    function clickReviewButton(id) {
       $(`#reviews-${id}`).on('click', function(e) {
-        e.preventDefault();
-        // alert(e.target.value)
-        
         console.log("got to the click");
-        console.log("reviews-${this.id}");
+        console.log(this);
         
         // add the formating for the comments 
         });
