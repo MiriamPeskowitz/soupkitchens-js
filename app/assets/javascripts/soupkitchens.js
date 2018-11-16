@@ -27,6 +27,9 @@ class Soupkitchen {
 
 $('#js-soupkitchen-button').on("click", soupkitchensFetch);
 
+$('#js-foodpantry-button').on("click", 
+     foodpantriesFetch);
+
 function soupkitchensFetch(){
 
     const indexRequest = new Request('/soupkitchens', {
@@ -34,7 +37,7 @@ function soupkitchensFetch(){
       'Content-Type': 'application/json'
         })
      })
-
+    // clearFoodpantryDataAndTitle();
     addSoupkitchensTitle();
 
     fetch(indexRequest) 
@@ -52,6 +55,7 @@ function soupkitchensFetch(){
           $('#soupkitchen-data').append(kitchen.formatHTML())
           
             clickReviewButton(kitchen.id);
+            console.log("reviews-${kitchen.id}");
           })
 
 
@@ -66,6 +70,7 @@ function soupkitchensFetch(){
         // alert(e.target.value)
         
         console.log("got to the click");
+        console.log("reviews-${this.id}");
         
         // add the formating for the comments 
         });
@@ -79,9 +84,13 @@ function soupkitchensFetch(){
       $title.prepend(soupkitchenTitle);
     } 
   }
-
  
-});    
+  // function clearFoodpantryDataAndTitle() {
+  //   $('#foodpantry-title').empty;
+  //   $('#foodpantry-data').emtpy;
+  // }
+
+});    //end brackets for document.ready
 
 // function handleMessages(res) {
 //   if (res.ok) {
