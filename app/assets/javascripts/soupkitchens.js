@@ -37,7 +37,8 @@ function soupkitchensFetch(){
       'Content-Type': 'application/json'
         })
      })
-    // clearFoodpantryDataAndTitle();
+    clearFoodpantryDataAndTitle();
+
     addSoupkitchensTitle();
 
     fetch(indexRequest) 
@@ -85,10 +86,10 @@ function soupkitchensFetch(){
     } 
   }
  
-  // function clearFoodpantryDataAndTitle() {
-  //   $('#foodpantry-title').empty;
-  //   $('#foodpantry-data').emtpy;
-  // }
+  function clearFoodpantryDataAndTitle() {
+    $('#foodpantry-title').html("");
+    $('#foodpantry-data').html("");
+  }
 
 });    //end brackets for document.ready
 

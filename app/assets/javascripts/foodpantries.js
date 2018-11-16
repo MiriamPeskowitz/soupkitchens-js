@@ -17,7 +17,6 @@ class Foodpantry {
 //     getFoodPantries);
   
 function  foodpantriesFetch() {
-    console.log("got to foodpantries")
     clearSoupKitchenDataAndTitle();
     
     $('#foodpantry-data').append("Coming Soon");
