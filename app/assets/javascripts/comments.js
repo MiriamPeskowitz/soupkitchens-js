@@ -9,63 +9,65 @@ class Comment {
     } 
  } 
     Comment.prototype.renderCommentHTML = function() {
-      return `<section>
-                <p>
-                    ${comment.title}<br>
-                    ${comment.content}<br>
-                    "no comments yet"
-                </p>
+      return `<section> 
+              <p>${comment.title} -- 
+                ${comment.content}
+                <span>"no comments yet" </span>
                 <button data-id=${this.soupkitchenId}  id="new-comment-${this.userId}">Add Comment</button>
-              </section>`       
-        }  
+              </p>
+              </section>`      
+    }  
+
+// function precommentFetch() {
+//     console.log("got to commentFetch");
+//  $("#comments-title").append("Comments"); 
+// // }
+// function commentFetch() {
+//     console.log("got to commentFetch");
+//   $("#js-comments-data").append("hello"); 
+
+//     const commentRequest = new Request('/comments', {
+//       headers: new Headers({
+//         'Content-Type': 'application/json'
+//       })
+//     })
+//     clearSoupKitchenDataAndTitle();
+
+//     addCommentsTitle();
 
 
-function commentFetch() {
-    console.log("got to commentFetch");
+//     fetch(commentRequest)
+//     .then(console.log("got to commentRequest"))
+//     // .then((res) => res.json())
+//     // .then(console.log("got to res.json"))
+//     // .then(data => {
+//     //     const comments = data;
 
-    const commentRequest = new Request('/comments', {
-      headers: new Headers({
-        'Content-Type': 'application/json'
-      })
-    })
-    
-    clearSoupKitchenDataAndTitle();
+//     //   console.log(comments);
+//     //     comments.forEach(function(comment) {
 
-    addCommentsTitle();
+//     //       const commentInstance = new Comment(comment);
 
-    // fetch(commentRequest)
-    // .then(console.log("got to commentRequest"))
-    // .then((res) => res.json())
-    // .then(console.log("got to res.json"))
-    // .then(data => {
-    //     const comments = data;
-
-    //   console.log(comments);
-    //     comments.forEach(function(comment) {
-
-    //       const commentInstance = new Comment(comment);
-
-
-        $("#comments-data").append("hello"); 
-       NEXT: ADD A COMMENTS DIV
+//         $("#comments-data").append("hello"); 
+//        // NEXT: ADD A COMMENTS DIV
         
-        // $("#comments-data").append(commentInstance.renderCommentHTML()); 
-        // });
-        //clickAddCommentButton(commentInstance.id)
-        // $("#comments-data").append(addComment);
-      // })
+//         // $("#comments-data").append(commentInstance.renderCommentHTML()); 
+//         // });
+//         //clickAddCommentButton(commentInstance.id)
+//         // $("#comments-data").append(addComment);
+//       // })
   
-    // .catch(error => console.error('Error:', error));
+//     // .catch(error => console.error('Error:', error));
  
-} //end bracket for commentFetch
+// } //end bracket for commentFetch
 
- function addCommentsTitle() {
-    const commentsTitle = `<h4> Comments </h4>`;
-    const $commentsTitleDiv = $('#comments-title');
-    if ($commentsTitleDiv .empty() ) {
-      $title.prepend(commentsTitle);
-    }
-  }
+ // function addCommentsTitle() {
+ //    const commentsTitle = `<h4> Comments </h4>`;
+ //    const $commentsTitleDiv = $('#comments-title');
+ //    if ($commentsTitleDiv .empty() ) {
+ //      $title.prepend(commentsTitle);
+ //    }
+ //  }
 
 // function clickAddCommentButton() {}
 // <button data-id=${this.soupkitchenId}  id="new-comment-${this.userId}">Add Comment</button>

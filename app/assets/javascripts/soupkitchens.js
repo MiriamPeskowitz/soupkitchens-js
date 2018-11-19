@@ -12,22 +12,85 @@ class Soupkitchen {
 
   Soupkitchen.prototype.formatHTML = function() {
    
-     return `<p> 
-            ${this.name}<br>
-            ${this.address}<br>
-            ${this.zipcode}<br>
-            ${this.notes}<br>
-            <button data-id=${this.id} id="reviews-${this.id}" >
-                Reviews
-            </button> 
-            </p>`
+     return `<section>
+            <p> ${this.name}</p>
+            <p> ${this.address}</p>
+            <p> ${this.zipcode}</p>
+            <p> ${this.notes}</p>
+            <button class="comments-button" data-id=${this.id}> See Reviews </button> 
+            
+            </section>`
+  }
+  
+ // <button id="comments" data-id=${this.id} id="reviews-${this.id}" > See Reviews </button> 
+
+$('#soupkitchen-button').on('click', soupkitchensFetch);
+  //doesn't need () because it's already part of a callback function
+
+$('#foodpantry-button').on('click', 
+   foodpantriesFetch);
+
+$('.comments-button').on('click', function() {console.log('click')}); 
+
+// $('#comments-button').on('click', commentsFetch); 
+// soupkitchen/:id/comments
+
+
+function commentsFetch() {
+    console.log("got to commentFetch");
+     let result =  $('#comments').data('id')
+     console.log(result);
+    // $("#here").html(result);
+    // var id = $('#comments').data('id');
+    // console.log(id);
+  // $('#js-comments-data').append("hello"); 
+
+  //   const commentRequest = new Request('/comments', {
+  //     headers: new Headers({
+  //       'Content-Type': 'application/json'
+  //     })
+  //   })
+    clearSoupKitchenDataAndTitle();
+
+    addCommentsTitle();
+
+
+
+
+  //   fetch(commentRequest)
+  //   .then(console.log("got to commentRequest"))
+    // .then((res) => res.json())
+    // .then(console.log("got to res.json"))
+    // .then(data => {
+    //     const comments = data;
+
+    //   console.log(comments);
+    //     comments.forEach(function(comment) {
+
+    //       const commentInstance = new Comment(comment);
+
+        // $("#comments-data").append("hello"); 
+       // NEXT: ADD A COMMENTS DIV
+        
+        // $("#comments-data").append(commentInstance.renderCommentHTML()); 
+        // });
+        //clickAddCommentButton(commentInstance.id)
+        // $("#comments-data").append(addComment);
+      // })
+  
+    // .catch(error => console.error('Error:', error));
+ 
+} //end bracket for commentFetch
+
+ function addCommentsTitle() {
+    const commentsTitle = `<h4> Comments </h4>`;
+    const $commentsTitleDiv = $('#comments-title');
+    if ($commentsTitleDiv .empty() ) {
+      $title.prepend(commentsTitle);
     }
-
-
-$('#js-soupkitchen-button').on("click", soupkitchensFetch);
-$('#js-foodpantry-button').on("click", 
-     foodpantriesFetch);
- $("#comments-data").append("hello"); 
+  }
+//where do I want to put it in the dom
+//where do I fetch the data 
 
 function soupkitchensFetch(){
 
@@ -41,6 +104,7 @@ function soupkitchensFetch(){
     addSoupkitchensTitle();
 
     fetch(indexRequest) 
+
       // .then(res => handleStatusCode(res))    
       .then((res) => res.json())
       .then(data => {
@@ -48,41 +112,24 @@ function soupkitchensFetch(){
 
         soupkitchens.forEach(function(soupkitchen){
 
-        const kitchen = new Soupkitchen(soupkitchen);
-        //this creates the instance
-  
-
+          const kitchen = new Soupkitchen(soupkitchen);  //this creates the instance
           $('#soupkitchen-data').append(kitchen.formatHTML());
-          
-            clickReviewButton(kitchen.id);
-            console.log("reviews-${kitchen.id}");
           })
-
-
         })
-      
+
       .catch(error => console.error('Error:', error));
     }; 
 
-   function clickReviewButton(id) {
-      $(`#reviews-${id}`).on('click', function(e) {
-        console.log("got to the click");
-        console.log(this);
-        
-        // add the formating for the comments 
-        });
 
-    };
-
-  function addSoupkitchensTitle() {
-    const soupkitchenTitle = `<h4> Soupkitchens </h4>`;
-    const $title = $('#soupkitchen-title');
-    if ($title.empty() ) {
-      $title.prepend(soupkitchenTitle);
-    } 
-  }
+function addSoupkitchensTitle() {
+  const soupkitchenTitle = `<h4> Soupkitchens </h4>`;
+  const $title = $('#soupkitchen-title');
+  if ($title.empty() ) {
+    $title.prepend(soupkitchenTitle);
+  } 
+}
  
-  function clearFoodpantryDataAndTitle() {
+function clearFoodpantryDataAndTitle() {
     $('#foodpantry-title').html("");
     $('#foodpantry-data').html("");
   }
