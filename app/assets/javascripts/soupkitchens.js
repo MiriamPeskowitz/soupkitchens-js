@@ -1,4 +1,19 @@
 $(document).ready(function() {
+   listenForReviewButtons();
+
+})
+
+const listenForReviewButtons = function() {
+  $('#soupkitchen-button').on('click',
+    soupkitchensFetch)
+  
+
+  $('#foodpantry-button').on('click', 
+    foodpantriesFetch);
+
+
+  $('#comments-button').on('click', commentsFetch);
+}
 
 class Soupkitchen {
     constructor(attr) {
@@ -17,79 +32,25 @@ class Soupkitchen {
             <p> ${this.address}</p>
             <p> ${this.zipcode}</p>
             <p> ${this.notes}</p>
-            <button class="comments" data-id=${this.id}> See Reviews </button> 
-            
+            <button id="comments-button" data-id=${this.id}> See Reviews </button> 
             </section>`
   }
   
  // <button id="comments" data-id=${this.id} id="reviews-${this.id}" > See Reviews </button> 
 
-$('#soupkitchen-button').on('click', soupkitchensFetch);
-  //doesn't need () because it's already part of a callback function
+// $('#soupkitchen-button').on('click', soupkitchensFetch);
+//   //doesn't need () because it's already part of a callback function
 
-$('#foodpantry-button').on('click', 
-   foodpantriesFetch);
+// $('#foodpantry-button').on('click', 
+//    foodpantriesFetch);
 
-$('.comments').on('click', works ); 
+// $('#${this.id}').on('click', works()); 
 
-function works() {
-  console.log('click');
-}
+
 // $('#comments-button').on('click', commentsFetch); 
 // soupkitchen/:id/comments
 
-
-function commentsFetch() {
-    clearSoupKitchenDataAndTitle();
-
-    addCommentsTitle();
-
-    console.log("got to commentFetch");
-     let result =  $('#comments').data('id')
-     console.log(result);
-    // $("#here").html(result);
-    // var id = $('#comments').data('id');
-    // console.log(id);
-  // $('#js-comments-data').append("hello"); 
-
-  //   const commentRequest = new Request('/comments', {
-  //     headers: new Headers({
-  //       'Content-Type': 'application/json'
-  //     })
-  //   })
-    clearSoupKitchenDataAndTitle();
-
-    addCommentsTitle();
-
-
-
-
-  //   fetch(commentRequest)
-  //   .then(console.log("got to commentRequest"))
-    // .then((res) => res.json())
-    // .then(console.log("got to res.json"))
-    // .then(data => {
-    //     const comments = data;
-
-    //   console.log(comments);
-    //     comments.forEach(function(comment) {
-
-    //       const commentInstance = new Comment(comment);
-
-        // $("#comments-data").append("hello"); 
-       // NEXT: ADD A COMMENTS DIV
-        
-        // $("#comments-data").append(commentInstance.renderCommentHTML()); 
-        // });
-        //clickAddCommentButton(commentInstance.id)
-        // $("#comments-data").append(addComment);
-      // })
-  
-    // .catch(error => console.error('Error:', error));
- 
-} //end bracket for commentFetch
-
- function addCommentsTitle() {
+function addCommentsTitle() {
     const commentsTitle = `<h4> Comments </h4>`;
     const $commentsTitleDiv = $('#comments-title');
     if ($commentsTitleDiv .empty() ) {
@@ -100,7 +61,6 @@ function commentsFetch() {
 //where do I fetch the data 
 
 function soupkitchensFetch(){
-
     const indexRequest = new Request('/soupkitchens', {
        headers: new Headers({
       'Content-Type': 'application/json'
@@ -122,7 +82,11 @@ function soupkitchensFetch(){
           const kitchen = new Soupkitchen(soupkitchen);  //this creates the instance
           $('#soupkitchen-data').append(kitchen.formatHTML());
           })
+        listenForReviewButtons();
+
         })
+      .then($('#comments-button').on('click', commentsFetch)) 
+      // try this 
 
       .catch(error => console.error('Error:', error));
     }; 
@@ -140,8 +104,6 @@ function clearFoodpantryDataAndTitle() {
     $('#foodpantry-title').html("");
     $('#foodpantry-data').html("");
   }
-
-});    //end brackets for document.ready
 
 // function handleMessages(res) {
 //   if (res.ok) {
