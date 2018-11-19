@@ -19,55 +19,43 @@ class Comment {
     }  
 
 function commentsFetch() {
-  console.log("got to commentsFetch")
-   let id =  $('#comments').data('id')
+    console.log("got to commentsFetch")
+     addCommentsTitle();
+
+    let id =  $('#comments-button').data('id')
+
     const commentRequest = new Request('/soupkitchens/id/comments.json', {
       headers: new Headers({
         'Content-Type': 'application/json'
       })
     })
 
-"/universes/1" + "/characters/" + charID + ".json",
-
     clearSoupKitchenDataAndTitle();
-
     addCommentsTitle();
-
-    let result =  $('#comments').data('id')
-     console.log(result);
-    // $("#here").html(result);
-    // var id = $('#comments').data('id');
-    // console.log(id);
   // $('#js-comments-data').append("hello"); 
-
-
-// what is my request: 
-    
-  
 
     fetch(commentRequest)
     .then((res) => res.json())  
     .then(data => {
         const comments = data;
+        console.log(comments);
 
-      console.log(comments);
-      // get the comments -- for each soupkitchen -- do this in the fetch -- don't need to 
         comments.forEach(function(comment) {
 
-          const displayComment = new Comment(comment);
-          console.log("got to display comment")
-          $('#comments-data').append(displayComment.renderCommentHTML)
-    });     
-  }); 
+            const eachComment = new Comment(comment);
+            console.log("got to display comment")
+            $('#comments-data').append(eachComment.renderCommentHTML)
+            });     
+    }); 
 }
 
 function addCommentsTitle() {
     const commentsTitle = `<h4> Comments </h4>`;
-    const $commentsTitleDiv = $('#comments-title');
-    if ($commentsTitleDiv .empty() ) {
-      $title.prepend(commentsTitle);
+    const $titleDiv = $('#comments-title');
+    if ($commentsTitleDiv.empty() ) {
+      $titleDiv.prepend(commentsTitle);
     }
-  }
+}
        // NEXT: ADD A COMMENTS DIV
         
         // $("#comments-data").append(commentInstance.renderCommentHTML()); 
