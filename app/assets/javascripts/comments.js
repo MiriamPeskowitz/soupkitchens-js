@@ -51,13 +51,13 @@ function commentsFetch() {
 
 function addCommentsTitle() {
     const commentsTitle = `<h4> Comments </h4>`;
+        console.log("got to commentsTitle");
     const $titleDiv = $('#comments-title');
-    if ($commentsTitleDiv.empty() ) {
+    if ($titleDiv.empty() ) {
       $titleDiv.prepend(commentsTitle);
     }
 }
-       // NEXT: ADD A COMMENTS DIV
-        
+     
         // $("#comments-data").append(commentInstance.renderCommentHTML()); 
         // });
         //clickAddCommentButton(commentInstance.id)

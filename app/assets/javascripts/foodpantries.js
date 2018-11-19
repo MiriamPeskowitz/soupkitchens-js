@@ -38,6 +38,7 @@ function  foodpantriesFetch() {
     })
 
     clearSoupKitchenDataAndTitle();
+    clearFoodpantryDataAndTitle();
 
     addFoodpantriesTitle();
 
