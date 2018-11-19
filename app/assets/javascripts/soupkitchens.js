@@ -17,7 +17,7 @@ class Soupkitchen {
             <p> ${this.address}</p>
             <p> ${this.zipcode}</p>
             <p> ${this.notes}</p>
-            <button class="comments-button" data-id=${this.id}> See Reviews </button> 
+            <button class="comments" data-id=${this.id}> See Reviews </button> 
             
             </section>`
   }
@@ -30,13 +30,20 @@ $('#soupkitchen-button').on('click', soupkitchensFetch);
 $('#foodpantry-button').on('click', 
    foodpantriesFetch);
 
-$('.comments-button').on('click', function() {console.log('click')}); 
+$('.comments').on('click', works ); 
 
+function works() {
+  console.log('click');
+}
 // $('#comments-button').on('click', commentsFetch); 
 // soupkitchen/:id/comments
 
 
 function commentsFetch() {
+    clearSoupKitchenDataAndTitle();
+
+    addCommentsTitle();
+
     console.log("got to commentFetch");
      let result =  $('#comments').data('id')
      console.log(result);
