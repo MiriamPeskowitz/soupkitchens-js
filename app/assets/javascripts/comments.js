@@ -27,8 +27,8 @@ function commentsFetch() {
       })
     })
 
-    // clearSoupKitchenDataAndTitle();
-    addCommentsTitle();
+    clearSoupKitchenDataAndTitle();
+    
 
     fetch(commentRequest)
     .then((res) => res.json())  
@@ -38,13 +38,14 @@ function commentsFetch() {
           // console.log(commentData.comments);
         // console.log("SKid:" ${this.soupkitchenId});
         // console.log("userId:" ${this.userId});
-         console.log("got to forEach")
-
+         console.log("got past res.json and commentData = data, ready to take apart the object with forEach")
+        addCommentsTitle();
         commentData.forEach(function(comment) {
+// should be just the comments for that soupkitchen: 
 
             const eachComment = new Comment(comment);
-              //this creates the index 
-
+              //this creates the index of all comments
+console.log(eachComment)
             // const title = eachComment[title];
             // const content = eachComment[content]; 
             //  console.log(title - content)
@@ -59,6 +60,7 @@ function commentsFetch() {
              // if (comments.comment == 0) {
              //    $('#comments-data').append("Leave the first comment.");
              // } else {
+             
                 $('#comments-data').append(eachComment.renderCommentHTML);
               
             }); 
@@ -72,16 +74,14 @@ function commentsFetch() {
 
 function addCommentsTitle() {
     const name = $('#comments-button').data('name');
-    const commentsTitle = `<h4> Reviews of ${name}</h4>`;
+    const title = `<h4> Reviews of ${name}</h4>`;
     const $titleDiv = $('#comments-title');
-    alert(name);
-   
     if ($titleDiv.empty() ) {
-      $titleDiv.prepend(commentsTitle);
+      $titleDiv.append(title);
     }
 }
    
-//NEXT  build out this functionality     
+//NEXT  build out this functionality  fetch GET, send data -- POST     
 function newCommentFormFetch() {
   console.log("got to newCommentFormFetch")
 }  
