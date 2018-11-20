@@ -9,21 +9,22 @@ class Comment {
     } 
  } 
     Comment.prototype.renderCommentHTML = function() {
-      return `<section> 
-              <p>${comment.title} -- 
-                ${comment.content}
+          return `<section> 
+              <p>${this.title} -- 
+                ${this.content}
+                Id: ${this.id} -- 
+                soupkitchenId:${this.content}
                 <span>"no comments yet" </span>
-                <button data-id=${this.soupkitchenId}  id="new-comment-by-${this.userId}">Add Comment</button>
+                <button id="new-comment" data-id=${this.soupkitchenId}  data-userId="${this.userId}">Add Comment</button>
+                // how do I get data-id in here? 
               </p>
               </section>`      
     }  
 
+// .data(userId)
+
 function commentsFetch() {
-    console.log("got to commentsFetch")
-     addCommentsTitle();
-
-    let id =  $('#comments-button').data('id')
-
+ 
     const commentRequest = new Request('/soupkitchens/id/comments.json', {
       headers: new Headers({
         'Content-Type': 'application/json'
@@ -32,37 +33,48 @@ function commentsFetch() {
 
     clearSoupKitchenDataAndTitle();
     addCommentsTitle();
-  // $('#js-comments-data').append("hello"); 
 
     fetch(commentRequest)
+
     .then((res) => res.json())  
     .then(data => {
         const comments = data;
-        console.log(comments);
-
+        //console.log("data:" data)
+        console.log('id: ${comments.id}');
+        // console.log("SKid:" ${this.soupkitchenId});
+        // console.log("userId:" ${this.userId});
         comments.forEach(function(comment) {
 
             const eachComment = new Comment(comment);
+            
             console.log("got to display comment")
-            $('#comments-data').append(eachComment.renderCommentHTML)
-            });     
-    }); 
-}
+
+             //alert($('#comments-data').data('id'));
+    //const id =  $('#comments-button').data('id')
+    // const id = $('button[data-id=${this.id}]')
+
+             console.log(comment);
+            $('#comments-data').append(eachComment.renderCommentHTML);
+            }); 
+
+          listenForReviewButtons();    
+        }); 
+    // .catch(error => console.error('Error:', error))
+};
 
 function addCommentsTitle() {
-    const commentsTitle = `<h4> Comments </h4>`;
+   alert( $('#comments-button').data('name'));
+    const name = $('#comments-button').data('name')
+    const commentsTitle = `<h4> Reviews of ${name}</h4>`;
+    
         console.log("got to commentsTitle");
+    
     const $titleDiv = $('#comments-title');
     if ($titleDiv.empty() ) {
       $titleDiv.prepend(commentsTitle);
     }
 }
      
-        // $("#comments-data").append(commentInstance.renderCommentHTML()); 
-        // });
-        //clickAddCommentButton(commentInstance.id)
-        // $("#comments-data").append(addComment);
-      // })
   
     // .catch(error => console.error('Error:', error));
  

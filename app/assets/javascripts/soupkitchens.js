@@ -32,7 +32,8 @@ Soupkitchen.prototype.formatHTML = function() {
           <p> ${this.address}</p>
           <p> ${this.zipcode}</p>
           <p> ${this.notes}</p>
-          <button id="comments-button" data-id=${this.id}> See Reviews </button> 
+          <button id="comments-button" data-id=${this.id} data-name=${this.name}> See Reviews </button> 
+          <div id="comments-data"></div>
           </section>`
   }
 
