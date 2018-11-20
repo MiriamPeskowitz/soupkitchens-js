@@ -13,6 +13,8 @@ const listenForReviewButtons = function() {
 
 
   $('#comments-button').on('click', commentsFetch);
+
+  $('#new-comment-form').on('click', newCommentFormFetch)
 }
 
 class Soupkitchen {
@@ -34,6 +36,7 @@ Soupkitchen.prototype.formatHTML = function() {
           <p> ${this.notes}</p>
           <button id="comments-button" data-id=${this.id} data-name=${this.name}> See Reviews </button> 
           <div id="comments-data"></div>
+          <div id="toggle-comments-data"></div>
           </section>`
   }
 

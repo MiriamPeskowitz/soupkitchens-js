@@ -15,8 +15,7 @@ class Comment {
                 Id: ${this.id} -- 
                 soupkitchenId:${this.content}
                 <span>"no comments yet" </span>
-                <button id="new-comment" data-id=${this.soupkitchenId}  data-userId="${this.userId}">Add Comment</button>
-                // how do I get data-id in here? 
+                <button id="new-comment-form" data-id=${this.soupkitchenId}  data-userId="${this.userId}">Add Comment--this gets the form</button>
               </p>
               </section>`      
     }  
@@ -35,26 +34,30 @@ function commentsFetch() {
     addCommentsTitle();
 
     fetch(commentRequest)
-
     .then((res) => res.json())  
     .then(data => {
-        const comments = data;
-        //console.log("data:" data)
-        console.log('id: ${comments.id}');
+        const commentData = data;
+        
+        console.log(commentData.comments);
         // console.log("SKid:" ${this.soupkitchenId});
         // console.log("userId:" ${this.userId});
-        comments.forEach(function(comment) {
+        commentData.forEach(function(comment) {
 
             const eachComment = new Comment(comment);
             
             console.log("got to display comment")
-
+//NEXT -- get the id loading 
              //alert($('#comments-data').data('id'));
     //const id =  $('#comments-button').data('id')
     // const id = $('button[data-id=${this.id}]')
 
-             console.log(comment);
-            $('#comments-data').append(eachComment.renderCommentHTML);
+             console.log(comment.id, comment.comments.title, comment.comments.body);
+
+             // if (comments.comment == 0) {
+             //    $('#comments-data').append("Leave the first comment.");
+             // } else {
+                $('#comments-data').append(eachComment.renderCommentHTML);
+              
             }); 
 
           listenForReviewButtons();    
@@ -63,7 +66,7 @@ function commentsFetch() {
 };
 
 function addCommentsTitle() {
-   alert( $('#comments-button').data('name'));
+   // alert( $('#comments-button').data('name'));
     const name = $('#comments-button').data('name')
     const commentsTitle = `<h4> Reviews of ${name}</h4>`;
     
@@ -74,7 +77,11 @@ function addCommentsTitle() {
       $titleDiv.prepend(commentsTitle);
     }
 }
-     
+   
+//NEXT  build out this functionality     
+function newCommentFormFetch() {
+  console.log("got to newCommentFormFetch")
+}  
   
     // .catch(error => console.error('Error:', error));
  
