@@ -30,7 +30,7 @@ function commentsFetch() {
       })
     })
 
-    clearSoupKitchenDataAndTitle();
+    // clearSoupKitchenDataAndTitle();
     addCommentsTitle();
 
     fetch(commentRequest)
@@ -55,6 +55,7 @@ function commentsFetch() {
 
              console.log(comment.id, comment.comments.title, comment.comments.body);
 
+             console.log(`"eachComment.soupkitchenId:" ${eachComment.soupkitchenId}`);
              // if (comments.comment == 0) {
              //    $('#comments-data').append("Leave the first comment.");
              // } else {
@@ -66,14 +67,15 @@ function commentsFetch() {
         }); 
     // .catch(error => console.error('Error:', error))
 };
+//comment.id -- holds the soupkitchen id 
+//eachComment.id -- holds the id!!!
 
 function addCommentsTitle() {
    // alert( $('#comments-button').data('name'));
     const name = $('#comments-button').data('name')
     const commentsTitle = `<h4> Reviews of ${name}</h4>`;
-    
-        console.log("got to commentsTitle");
-    
+    console.log(`Title ${name}`);
+
     const $titleDiv = $('#comments-title');
     if ($titleDiv.empty() ) {
       $titleDiv.prepend(commentsTitle);
