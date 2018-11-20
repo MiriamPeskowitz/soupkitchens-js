@@ -37,15 +37,17 @@ function commentsFetch() {
     .then((res) => res.json())  
     .then(data => {
         const commentData = data;
-        
-        console.log(commentData.comments);
+          console.log(commentData);
+          console.log(commentData.comments);
         // console.log("SKid:" ${this.soupkitchenId});
         // console.log("userId:" ${this.userId});
+         console.log("got to forEach")
+
         commentData.forEach(function(comment) {
 
             const eachComment = new Comment(comment);
             
-            console.log("got to display comment")
+           
 //NEXT -- get the id loading 
              //alert($('#comments-data').data('id'));
     //const id =  $('#comments-button').data('id')
