@@ -97,12 +97,3 @@ function clearFoodpantryDataAndTitle() {
    
 // 
 //   .catch(err => console.log(`problem at: err`))
-
-  
-
-
-
-
- 
-
-

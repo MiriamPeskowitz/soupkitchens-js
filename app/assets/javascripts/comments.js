@@ -10,13 +10,10 @@ class Comment {
  } 
     Comment.prototype.renderCommentHTML = function() {
           return `<section> 
-              <p>${this.title} -- 
-                ${this.content}
-                Id: ${this.id} -- 
-                soupkitchenId:${this.content}
-                <span>"no comments yet" </span>
-                <button id="new-comment-form" data-id=${this.soupkitchenId}  data-userId="${this.userId}">Add Comment--this gets the form</button>
+              <p>Title: ${this.title} -- 
+                Content: ${this.content}
               </p>
+              <button id="new-comment-form" data-id=${this.soupkitchenId}  data-userId="${this.userId}">Add a Review</button>
               </section>`      
     }  
 
@@ -37,8 +34,8 @@ function commentsFetch() {
     .then((res) => res.json())  
     .then(data => {
         const commentData = data;
-          console.log(commentData);
-          console.log(commentData.comments);
+          // console.log(commentData);
+          // console.log(commentData.comments);
         // console.log("SKid:" ${this.soupkitchenId});
         // console.log("userId:" ${this.userId});
          console.log("got to forEach")
@@ -46,16 +43,19 @@ function commentsFetch() {
         commentData.forEach(function(comment) {
 
             const eachComment = new Comment(comment);
-            
-           
+              //this creates the index 
+
+            // const title = eachComment[title];
+            // const content = eachComment[content]; 
+            //  console.log(title - content)
 //NEXT -- get the id loading 
              //alert($('#comments-data').data('id'));
     //const id =  $('#comments-button').data('id')
     // const id = $('button[data-id=${this.id}]')
 
-             console.log(comment.id, comment.comments.title, comment.comments.body);
+             // console.log(comment.id, comment.comments.title, comment.comments.body);
 
-             console.log(`"eachComment.soupkitchenId:" ${eachComment.soupkitchenId}`);
+  
              // if (comments.comment == 0) {
              //    $('#comments-data').append("Leave the first comment.");
              // } else {
@@ -71,12 +71,11 @@ function commentsFetch() {
 //eachComment.id -- holds the id!!!
 
 function addCommentsTitle() {
-   // alert( $('#comments-button').data('name'));
-    const name = $('#comments-button').data('name')
+    const name = $('#comments-button').data('name');
     const commentsTitle = `<h4> Reviews of ${name}</h4>`;
-    console.log(`Title ${name}`);
-
     const $titleDiv = $('#comments-title');
+    alert(name);
+   
     if ($titleDiv.empty() ) {
       $titleDiv.prepend(commentsTitle);
     }
