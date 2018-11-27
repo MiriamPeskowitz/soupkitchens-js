@@ -80,12 +80,10 @@ function commentsFetch(soupkitchen) {
 
 
 function addCommentsTitle() {
-  // const name = this.name; -- add ${name} to title 
- 
-    // const name = $('#comments-button').data('name');
+  //feature: add name to comments-title 
     // const name=$(this).data("name");
-
-    const commentsTitle = `<h4 id="comments-title"> Reviews</h4>`;
+    // const commentsTitle = `<h4 id="comments-title"> Reviews of ${name}</h4>`;
+    const commentsTitle = `<h4 id="comments-title"> Reviews </h4>`;
     const $titleDiv = $('#comments-data');
     if ($titleDiv.empty() ) {
       $titleDiv.prepend(commentsTitle);
