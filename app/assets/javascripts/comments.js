@@ -4,7 +4,7 @@ class Comment {
       this.title = attr.title;
       this.content = attr.content;
       this.id = attr.id;
-      this.soupkitchenId = attr.soupkitchenId;
+      this.soupkitchen = attr.soupkitchenId;
       this.userId = attr.userId;
     } 
  } 
@@ -16,6 +16,8 @@ class Comment {
               <button id="new-comment-form" data-id=${this.soupkitchenId}  data-userId="${this.userId}">Add a Review</button>
               </section>`      
     }  
+
+
 
 // .data(userId)
 
@@ -34,7 +36,7 @@ function commentsFetch() {
     .then((res) => res.json())  
     .then(data => {
         const commentData = data;
-          // console.log(commentData);
+        console.log(commentData);
           // console.log(commentData.comments);
         // console.log("SKid:" ${this.soupkitchenId});
         // console.log("userId:" ${this.userId});
@@ -45,7 +47,9 @@ function commentsFetch() {
 
             const eachComment = new Comment(comment);
               //this creates the index of all comments
-console.log(eachComment)
+        console.log(eachComment.id)
+        console.log(eachComment.soupkitchenId)
+        // see if these get what I need  
             // const title = eachComment[title];
             // const content = eachComment[content]; 
             //  console.log(title - content)
@@ -65,7 +69,7 @@ console.log(eachComment)
               
             }); 
 
-          listenForReviewButtons();    
+          attachEventListeners();    
         }); 
     // .catch(error => console.error('Error:', error))
 };
@@ -73,7 +77,9 @@ console.log(eachComment)
 //eachComment.id -- holds the id!!!
 
 function addCommentsTitle() {
-    const name = $('#comments-button').data('name');
+  const name = this.name;
+  // how do i fix this? 
+    // const name = $('#comments-button').data('name');
     const title = `<h4> Reviews of ${name}</h4>`;
     const $titleDiv = $('#comments-title');
     if ($titleDiv.empty() ) {
@@ -82,12 +88,38 @@ function addCommentsTitle() {
 }
    
 //NEXT  build out this functionality  fetch GET, send data -- POST     
-function newCommentFormFetch() {
+function newCommentFormFetch(e) {
   console.log("got to newCommentFormFetch")
-}  
-  
-    // .catch(error => console.error('Error:', error));
+  // $(form).submit(function(event) {
+  //     event.preventDefault();
+  //     var values = $(this).serialize();
+  //     // .serialize == takes form data and serializes it. jquery method 
+  //     var posting = $.post('soupkitchens/:id/comments.new', values);
+  //     // jquery .post -- pass n url and values
+  //     posting.done(function(data) {
+  //       // handle response
+  //       console.log(data)
+  //       var post = data;
+  //       $("#commentTitle").text(comment["title"]);
+  //       $("#commentBody").text(comment["content"]);
+  //     });
+  // })
+  e.preventDefault(); 
+   let title = $('title').value;
+   let content = $('content').value;
+
+   fetch (//soupkitchen/:id/comments/new, 
+   {
+    method: 'POST',
+    headers:  new Headers(),
+    body: JSON.stringify({title:title, content:content})
+   }).then((res) => res.json)
+   .then((data) => console.log(data))
+   .catch((error) => console.log(error))
+ };
  
+  
+   
 //end bracket for commentFetch
 
 

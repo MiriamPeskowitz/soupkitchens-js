@@ -1,9 +1,9 @@
 $(document).ready(function() {
-   listenForReviewButtons();
+   attachEventListeners();
 
 })
 
-const listenForReviewButtons = function() {
+const attachEventListeners = function() {
   $('#soupkitchen-button').on('click',
     soupkitchensFetch)
   
@@ -14,7 +14,8 @@ const listenForReviewButtons = function() {
 
   $('#comments-button').on('click', commentsFetch);
 
-  $('#new-comment-form').on('click', newCommentFormFetch)
+  $('#new-comment-form').on('click', newCommentFormFetch);
+  // loads new comment form -- gets to  /soupkitchens/:id/comments/new
 }
 
 class Soupkitchen {
@@ -65,7 +66,7 @@ function soupkitchensFetch(){
           const kitchen = new Soupkitchen(soupkitchen);  //this creates the instance
           $('#soupkitchen-data').append(kitchen.formatHTML());
           })
-        listenForReviewButtons();
+        attachEventListeners();
 
         })
       .then($('#comments-button').on('click', commentsFetch)) 
@@ -76,8 +77,8 @@ function soupkitchensFetch(){
 
 
 function addSoupkitchensTitle() {
-  const soupkitchenTitle = `<h4> Soupkitchens </h4>`;
-  const $title = $('#soupkitchen-title');
+  const soupkitchenTitle = `<h4 id="soupkitchen-title"> Soupkitchens </h4>`;
+  const $title = $('#soupkitchen-data');
   if ($title.empty() ) {
     $title.prepend(soupkitchenTitle);
   } 
