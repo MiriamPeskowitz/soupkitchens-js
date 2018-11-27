@@ -18,17 +18,37 @@ class Comment {
     }  
 
     Comment.prototype.renderNewCommentForm = function() {
-      //how do I make the form here? 
-    }
+      //Ask BRAD -- not sure about pattern == how do I make the form here? or use erb? 
+        return `<form>
+            <p>
+                <label for="title">Title: </label>
+                <input type="text" name="title" id="title"> 
+            </p>
+            <p>
+                <label for="content">Content: </label>
+                <input type="text" name="content" id=content"> 
+            </p> 
+              <button type="submit">  
+        </form>`
+  
+  }
+  //from here - what is the path back to the database? when the comments controller pulls it into create? 
 
-//ask Brad:having trouble with the associations, moving data-id through the browser so a comment knows which soupkitchen it belongs to. 
+// ask Brad:having trouble with the associations, moving data-id through the browser so a comment knows which soupkitchen it belongs to. 
 
 // .data(userId)
 
 function commentsFetch(soupkitchen) {
  
-    const id=$(this).data("id");
+    const id=$(this).data("soupkitchen-id");
     const name=$(this).data("name");
+    console.log(id, name) 
+//fix this url Problem: I don't know how to test this
+
+// ' "/soupkitchens/"id"/comments/"', 
+
+    clearSoupKitchenDataAndTitle();
+    addCommentsTitle();
 
     const commentRequest = new Request(' "/soupkitchens/"id"/comments/"', {
       headers: new Headers({
@@ -36,8 +56,7 @@ function commentsFetch(soupkitchen) {
       })
     })
 
-    clearSoupKitchenDataAndTitle();
-    addCommentsTitle();
+   
 
     fetch(commentRequest)
     .then((res) => res.json())  
@@ -52,7 +71,7 @@ function commentsFetch(soupkitchen) {
         
         commentData.forEach(function(comment) {
       // should be just the comments for that soupkitchen: 
-
+ console.log("gets here?")
         const eachComment = new Comment(comment);
             
         console.log(eachComment.id)
@@ -86,8 +105,9 @@ function commentsFetch(soupkitchen) {
 function addCommentsTitle() {
   //feature: add name to comments-title 
     // const name=$(this).data("name");
-    // const commentsTitle = `<h4 id="comments-title"> Reviews of ${name}</h4>`;
-    const commentsTitle = `<h4 id="comments-title"> Reviews </h4>`;
+    const name=$(this).data("name");
+    const commentsTitle = `<h4 id="comments-title"> Reviews of ${name}</h4>`;
+    // const commentsTitle = `<h4 id="comments-title"> Reviews </h4>`;
     const $titleDiv = $('#comments-data');
     if ($titleDiv.empty() ) {
       $titleDiv.prepend(commentsTitle);
@@ -106,21 +126,21 @@ function newCommentFormFetch(e) {
 
    // let title = $('title').value;
    // let content = $('content').value;
-    const url = 'soupkitchen/:id/comments/new'
-    const newCommentForm = new Request('url', {
+   
+    const formForNewComment = new Request('soupkitchen/:id/comments/new', {
       headers: new Headers({
         'Content-Type': 'application/json'
       })
     })
-    
+
    fetch(formForNewComment) 
    .then((res) => res.json())
    .then((data) => console.log(data))
    .then(data => {
       const newCommentForm = data;
-      const form = new Comment(soupkitchen)
+      const form = new Comment(newCommentForm)
   
-      $('#new-comment-form').append(newCommentForm);
+      $('#new-comment-form').append(form.renderNewCommentForm);
    
       attachEventListeners(); 
     })
