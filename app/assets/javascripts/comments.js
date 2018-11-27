@@ -1,4 +1,10 @@
 
+//does three things
+//1 loads all comments -- commentsFetch
+//2 loads form for new comment -- newCommentFormFetch
+//3 sends new comment to database -- postComment
+
+
 class Comment {
     constructor(attr) {
       this.title = attr.title;
@@ -36,27 +42,25 @@ class Comment {
 
 // ask Brad:having trouble with the associations, moving data-id through the browser so a comment knows which soupkitchen it belongs to. 
 
-// .data(userId)
 
+//1
 function commentsFetch(soupkitchen) {
  
     const id=$(this).data("soupkitchen-id");
     const name=$(this).data("name");
     console.log(id, name) 
-//fix this url Problem: I don't know how to test this
 
-// ' "/soupkitchens/"id"/comments/"', 
 
     clearSoupKitchenDataAndTitle();
     addCommentsTitle();
+//fix this url Problem: I don't know how to test this
 
-    const commentRequest = new Request(' "/soupkitchens/"id"/comments/"', {
+// ' "/soupkitchens/:id/comments/"', 
+    const commentRequest = new Request(`"/soupkitchens/" + ${id} + "/comments"`, {
       headers: new Headers({
         'Content-Type': 'application/json'
       })
     })
-
-   
 
     fetch(commentRequest)
     .then((res) => res.json())  
@@ -71,26 +75,12 @@ function commentsFetch(soupkitchen) {
         
         commentData.forEach(function(comment) {
       // should be just the comments for that soupkitchen: 
- console.log("gets here?")
+        console.log("gets here?")
         const eachComment = new Comment(comment);
             
         console.log(eachComment.id)
         console.log(eachComment.soupkitchenId)
-        // see if these get what I need  
-            // const title = eachComment[title];
-            // const content = eachComment[content]; 
-            //  console.log(title - content)
-        //NEXT -- get the id loading 
-             //alert($('#comments-data').data('id'));
-    //const id =  $('#comments-button').data('id')
-    // const id = $('button[data-id=${this.id}]')
-
-             // console.log(comment.id, comment.comments.title, comment.comments.body);
-
-  
-             // if (comments.comment == 0) {
-             //    $('#comments-data').append("Leave the first comment.");
-             // } else {
+       
              
                 $('#comments-data').append(eachComment.renderCommentHTML);
               
@@ -105,6 +95,7 @@ function commentsFetch(soupkitchen) {
 function addCommentsTitle() {
   //feature: add name to comments-title 
     // const name=$(this).data("name");
+    //ASK BRAD -- working on this feature -- 
     const name=$(this).data("name");
     const commentsTitle = `<h4 id="comments-title"> Reviews of ${name}</h4>`;
     // const commentsTitle = `<h4 id="comments-title"> Reviews </h4>`;
@@ -114,20 +105,17 @@ function addCommentsTitle() {
     };
 }
    
-//NEXT  build out this functionality  fetch GET, send data -- POST     
-function newCommentFormFetch(e) {
-    e.preventDefault(); 
+//2. Getting the new comments form     
+
+function newCommentFormFetch() {
     console.log("got to newCommentFormFetch")
 //goal: put the form on the page. include button to submit to send postNewComment()
 
-  // new comment form -- Comment. new 
-  
    //  let values = $(this).serialize();
 
-   // let title = $('title').value;
-   // let content = $('content').value;
-   
-    const formForNewComment = new Request('soupkitchen/:id/comments/new', {
+   //what is the correct url? Having trouble figuring that out. 
+
+    const formForNewComment = new Request('soupkitchens/:id/comments/new', {
       headers: new Headers({
         'Content-Type': 'application/json'
       })
@@ -146,6 +134,13 @@ function newCommentFormFetch(e) {
     })
    .catch((error) => console.log(`Error:`, error));
  };
+
+//POST NEW COMMENT 
+function postComment() {
+
+
+}
+
 
 
    // $(form).submit(function(event) {
@@ -182,6 +177,22 @@ function submitNewComment() {
   .catch(error => console.error('Error:', error));
 }
   
+
+   // see if these get what I need  
+            // const title = eachComment[title];
+            // const content = eachComment[content]; 
+            //  console.log(title - content)
+        //NEXT -- get the id loading 
+             //alert($('#comments-data').data('id'));
+    //const id =  $('#comments-button').data('id')
+    // const id = $('button[data-id=${this.id}]')
+
+             // console.log(comment.id, comment.comments.title, comment.comments.body);
+
+  
+             // if (comments.comment == 0) {
+             //    $('#comments-data').append("Leave the first comment.");
+             // } else {
         // comments.forEach(function(comment) {
 
         //   const commentInstance = new Comment(comment);

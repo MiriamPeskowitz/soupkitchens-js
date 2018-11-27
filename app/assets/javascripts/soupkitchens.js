@@ -11,7 +11,8 @@ const attachEventListeners = function() {
 
   $('#comments-button').on('click', commentsFetch);
 
-  $('#new-comment-form').on('submit', newCommentFormFetch);
+  $('#new-comment-form').on('click', newCommentFormFetch);
+  
   // loads new comment form -- gets to  /soupkitchens/:id/comments/new
 }
 
@@ -33,6 +34,7 @@ Soupkitchen.prototype.formatHTML = function() {
           <p> ${this.zipcode}</p>
           <p> Hours: ${this.notes}</p>
           <button id="comments-button" data-soupkitchen-id=${this.id} data-name=${this.name}> See Reviews </button> 
+           <button id="new-comment-form" data-id=${this.id}">Add a Review</button> 
           <div id="comments-data"></div>
           <div id="toggle-comments-data"></div>
           </section>`

@@ -74,6 +74,7 @@ function addFoodpantriesTitle() {
 function clearSoupKitchenDataAndTitle() {
     $('#soupkitchen-title').html("");
     $('#soupkitchen-data').html("");
+    $('#comments-title').html("");
 }
 
 
