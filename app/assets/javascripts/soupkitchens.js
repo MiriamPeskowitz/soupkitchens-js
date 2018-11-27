@@ -34,7 +34,7 @@ Soupkitchen.prototype.formatHTML = function() {
           <p> ${this.name}</p>
           <p> ${this.address}</p>
           <p> ${this.zipcode}</p>
-          <p> ${this.notes}</p>
+          <p> Hours: ${this.notes}</p>
           <button id="comments-button" data-id=${this.id} data-name=${this.name}> See Reviews </button> 
           <div id="comments-data"></div>
           <div id="toggle-comments-data"></div>
@@ -54,8 +54,7 @@ function soupkitchensFetch(){
 
     addSoupkitchensTitle();
 
-    fetch(indexRequest) 
-
+    fetch(indexRequest)
       // .then(res => handleStatusCode(res))    
       .then((res) => res.json())
       .then(data => {

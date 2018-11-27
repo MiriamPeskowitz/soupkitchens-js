@@ -13,7 +13,7 @@ class Comment {
               <p>Title: ${this.title} -- 
                 Content: ${this.content}
               </p>
-              <button id="new-comment-form" data-id=${this.soupkitchenId}  data-userId="${this.userId}">Add a Review</button>
+              <button id="new-comment-form" data-id=${this.soupkitchen}  data-userId="${this.userId}">Add a Review</button>
               </section>`      
     }  
 
@@ -21,27 +21,31 @@ class Comment {
 
 // .data(userId)
 
-function commentsFetch() {
+function commentsFetch(soupkitchen) {
  
-    const commentRequest = new Request('/soupkitchens/id/comments.json', {
+    const id=$(this).data("id");
+    const name=$(this).data("name");
+
+    const commentRequest = new Request(' "/soupkitchens/"id"/comments/"', {
       headers: new Headers({
         'Content-Type': 'application/json'
       })
     })
 
     clearSoupKitchenDataAndTitle();
-    
+    addCommentsTitle();
 
     fetch(commentRequest)
     .then((res) => res.json())  
     .then(data => {
         const commentData = data;
-        console.log(commentData);
+
+        // console.log(commentData);
           // console.log(commentData.comments);
         // console.log("SKid:" ${this.soupkitchenId});
         // console.log("userId:" ${this.userId});
-         console.log("got past res.json and commentData = data, ready to take apart the object with forEach")
-        addCommentsTitle();
+        console.log("got past res.json and commentData = data, ready to take apart the object with forEach");
+        
         commentData.forEach(function(comment) {
 // should be just the comments for that soupkitchen: 
 
@@ -73,18 +77,19 @@ function commentsFetch() {
         }); 
     // .catch(error => console.error('Error:', error))
 };
-//comment.id -- holds the soupkitchen id 
-//eachComment.id -- holds the id!!!
+
 
 function addCommentsTitle() {
-  const name = this.name;
-  // how do i fix this? 
+  // const name = this.name; -- add ${name} to title 
+ 
     // const name = $('#comments-button').data('name');
-    const title = `<h4> Reviews of ${name}</h4>`;
-    const $titleDiv = $('#comments-title');
+    // const name=$(this).data("name");
+
+    const commentsTitle = `<h4 id="comments-title"> Reviews</h4>`;
+    const $titleDiv = $('#comments-data');
     if ($titleDiv.empty() ) {
-      $titleDiv.append(title);
-    }
+      $titleDiv.prepend(commentsTitle);
+    };
 }
    
 //NEXT  build out this functionality  fetch GET, send data -- POST     

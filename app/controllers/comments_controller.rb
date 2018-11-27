@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new  
     @soupkitchen = Soupkitchen.find(params[:soupkitchen_id])  
     if !logged_in?
-      # flash[:notice] = "You must be logged in"
+      flash[:notice] = "You must be logged in"
     end 
   end 
 
@@ -27,7 +27,7 @@ class CommentsController < ApplicationController
 
       if @comment.save 
         flash[:notice] = "Thanks! We added your comment."
-        render json: @comment status: 201
+        render json: @comment, status: 201
         # redirect_to soupkitchen_path(@soupkitchen)
       else 
         flash.now[:notice] = "Something went wrong, try again."  
@@ -40,9 +40,10 @@ class CommentsController < ApplicationController
   end
 
 
-  # def show
-  # Show all comments (with their soupkitchen), for admin use 
-  # end 
+  def show
+    @comments = Comment.all
+    render json: @comments, status: 201
+  end 
 
   private 
   def comment_params
