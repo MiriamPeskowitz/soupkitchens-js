@@ -1,20 +1,17 @@
 $(document).ready(function() {
    attachEventListeners();
-
 })
 
 const attachEventListeners = function() {
   $('#soupkitchen-button').on('click',
     soupkitchensFetch)
   
-
   $('#foodpantry-button').on('click', 
     foodpantriesFetch);
 
-
   $('#comments-button').on('click', commentsFetch);
 
-  $('#new-comment-form').on('click', newCommentFormFetch);
+  $('#new-comment-form').on('submit', newCommentFormFetch);
   // loads new comment form -- gets to  /soupkitchens/:id/comments/new
 }
 
@@ -66,11 +63,8 @@ function soupkitchensFetch(){
           $('#soupkitchen-data').append(kitchen.formatHTML());
           })
         attachEventListeners();
-
         })
       .then($('#comments-button').on('click', commentsFetch)) 
-      // try this 
-
       .catch(error => console.error('Error:', error));
     }; 
 
@@ -80,7 +74,7 @@ function addSoupkitchensTitle() {
   const $title = $('#soupkitchen-data');
   if ($title.empty() ) {
     $title.prepend(soupkitchenTitle);
-  } 
+  };
 }
  
 function clearFoodpantryDataAndTitle() {
@@ -92,8 +86,4 @@ function clearFoodpantryDataAndTitle() {
 //   if (res.ok) {
 //     throw Message(res.message) 
 //   }  
-//   return res;
-// }
-   
-// 
-//   .catch(err => console.log(`problem at: err`))
+//   return res;}

@@ -11,6 +11,7 @@ class CommentsController < ApplicationController
   def new   
     @comment = Comment.new  
     @soupkitchen = Soupkitchen.find(params[:soupkitchen_id])  
+    render json: @comment, status: 201
     if !logged_in?
       flash[:notice] = "You must be logged in"
     end 

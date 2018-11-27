@@ -17,7 +17,11 @@ class Comment {
               </section>`      
     }  
 
+    Comment.prototype.renderNewCommentForm = function() {
+      //how do I make the form here? 
+    }
 
+//ask Brad:having trouble with the associations, moving data-id through the browser so a comment knows which soupkitchen it belongs to. 
 
 // .data(userId)
 
@@ -44,20 +48,20 @@ function commentsFetch(soupkitchen) {
           // console.log(commentData.comments);
         // console.log("SKid:" ${this.soupkitchenId});
         // console.log("userId:" ${this.userId});
-        console.log("got past res.json and commentData = data, ready to take apart the object with forEach");
+        // console.log("got past res.json and commentData = data, ready to take apart the object with forEach");
         
         commentData.forEach(function(comment) {
-// should be just the comments for that soupkitchen: 
+      // should be just the comments for that soupkitchen: 
 
-            const eachComment = new Comment(comment);
-              //this creates the index of all comments
+        const eachComment = new Comment(comment);
+            
         console.log(eachComment.id)
         console.log(eachComment.soupkitchenId)
         // see if these get what I need  
             // const title = eachComment[title];
             // const content = eachComment[content]; 
             //  console.log(title - content)
-//NEXT -- get the id loading 
+        //NEXT -- get the id loading 
              //alert($('#comments-data').data('id'));
     //const id =  $('#comments-button').data('id')
     // const id = $('button[data-id=${this.id}]')
@@ -92,8 +96,39 @@ function addCommentsTitle() {
    
 //NEXT  build out this functionality  fetch GET, send data -- POST     
 function newCommentFormFetch(e) {
-  console.log("got to newCommentFormFetch")
-  // $(form).submit(function(event) {
+    e.preventDefault(); 
+    console.log("got to newCommentFormFetch")
+//goal: put the form on the page. include button to submit to send postNewComment()
+
+  // new comment form -- Comment. new 
+  
+   //  let values = $(this).serialize();
+
+   // let title = $('title').value;
+   // let content = $('content').value;
+    const url = 'soupkitchen/:id/comments/new'
+    const newCommentForm = new Request('url', {
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    })
+    
+   fetch(formForNewComment) 
+   .then((res) => res.json())
+   .then((data) => console.log(data))
+   .then(data => {
+      const newCommentForm = data;
+      const form = new Comment(soupkitchen)
+  
+      $('#new-comment-form').append(newCommentForm);
+   
+      attachEventListeners(); 
+    })
+   .catch((error) => console.log(`Error:`, error));
+ };
+
+
+   // $(form).submit(function(event) {
   //     event.preventDefault();
   //     var values = $(this).serialize();
   //     // .serialize == takes form data and serializes it. jquery method 
@@ -107,54 +142,29 @@ function newCommentFormFetch(e) {
   //       $("#commentBody").text(comment["content"]);
   //     });
   // })
-  e.preventDefault(); 
-   let title = $('title').value;
-   let content = $('content').value;
-
-   fetch (//soupkitchen/:id/comments/new, 
-   {
-    method: 'POST',
-    headers:  new Headers(),
-    body: JSON.stringify({title:title, content:content})
-   }).then((res) => res.json)
-   .then((data) => console.log(data))
-   .catch((error) => console.log(error))
- };
  
+
+function submitNewComment() {
+  // const url = soupkitchens/:id/comments/ ??
   
-   
-//end bracket for commentFetch
+  const postNewComment = new Request(url, {
+      method: 'POST',
+      headers:  {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({title:title, content:content})
+   });
 
+  fetch(postNewComment)
+  .then((res) => res.json())
+  .then()
+  .catch(error => console.error('Error:', error));
+}
+  
+        // comments.forEach(function(comment) {
 
-// function precommentFetch() {
-//     console.log("got to commentFetch");
-//  $("#comments-title").append("Comments"); 
-// // }
-// function commentFetch() {
-//     console.log("got to commentFetch");
-//   $("#js-comments-data").append("hello"); 
-
-//     const commentRequest = new Request('/comments', {
-//       headers: new Headers({
-//         'Content-Type': 'application/json'
-//       })
-//     })
-//     clearSoupKitchenDataAndTitle();
-
-//     addCommentsTitle();
-
-
-//     fetch(commentRequest)
-//     .then(console.log("got to commentRequest"))
-//     // .then((res) => res.json())
-//     // .then(console.log("got to res.json"))
-//     // .then(data => {
-//     //     const comments = data;
-
-//     //   console.log(comments);
-//     //     comments.forEach(function(comment) {
-
-//     //       const commentInstance = new Comment(comment);
+        //   const commentInstance = new Comment(comment);
 
 //         $("#comments-data").append("hello"); 
 //        // NEXT: ADD A COMMENTS DIV
