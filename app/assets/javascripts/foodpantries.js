@@ -64,8 +64,8 @@ function  foodpantriesFetch() {
 
   } //end bracket for fetch function 
 function addFoodpantriesTitle() {
-    const foodpantriesTitle = `<h4> Food Pantries </h4>`;
-    const $foodpantryTitleDiv = $('#foodpantry-title');
+    const foodpantriesTitle = `<h4 id="foodpantry-title"> Food Pantries </h4>`;
+    const $foodpantryTitleDiv = $('#foodpantry-data');
     if ($foodpantryTitleDiv.empty() ) {
       ($foodpantryTitleDiv).prepend(foodpantriesTitle);
     } 
