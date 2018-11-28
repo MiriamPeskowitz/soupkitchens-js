@@ -13,10 +13,9 @@ class CommentsController < ApplicationController
     @comment = Comment.new  
     @soupkitchen = Soupkitchen.find(params[:soupkitchen_id]) 
     # render json: @comment, status: 200 
-    response_to do |format|
-    # fix this 
+    respond_to do |format|
       format.html {render :new}
-      format.json {render json: @comment, status: 200}
+      format.json {render json: @comment}
     end 
     if !logged_in?
       flash[:notice] = "You must be logged in"

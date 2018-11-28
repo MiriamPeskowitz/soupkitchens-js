@@ -27,7 +27,7 @@ class Comment {
     Comment.prototype.renderNewCommentForm = function() {
       //Ask BRAD -- not sure about pattern == how do I make the form here? or use erb? 
         return `
-            <form id="render-form" data-id=${this.soupkitchenId}>
+            <form id="render-form" data-soupkitchen-id=${this.soupkitchenId}>
                 <p>
                     <label for="title">Title: </label>
                     <input type="text" name="title" id="title"> 
@@ -78,77 +78,39 @@ function commentsFetch(soupkitchenId) {
     })     
     .catch(error => console.error('Error:', error))
 };
-
-// $(this).attr('data-name');
-
-// var fruitCount = plant.getAttribute('data-fruit'); // fruitCount = '12'
-
-// as a separate function, the name variable wasn't in scope, so I moved this inside of comments Fetch 
-// function addCommentsTitle() {
-//   //feature: add name to comments-title 
-//     // const name=$(this).data("name");
-//     
-//     // const name=$(this).data("name");
-    
-//     const commentsTitle = `<h4 id="comments-title"> Reviews of ${name}</h4>`;
-//     // const commentsTitle = `<h4 id="comments-title"> Reviews </h4>`;
-//     const $titleDiv = $('#comments-data');
-//     if ($titleDiv.empty() ) {
-//       $titleDiv.prepend(commentsTitle);
-//     };
-// }
    
-//2. Getting the new comments form     
-//if rendered as a 
+//2. Getting the new comments form   
+//challenge: do it as rails form, or as js form
 //goal: put the form on the page. include button to submit to send postNewComment()
 
-//next -- pull in rails form -- 
 function newCommentFormFetch(event) {
     event.preventDefault();
-    // event.stopImmediatePropagation();
+    event.stopPropagation();
     console.log("got to newCommentFormFetch");
 
+//grab values for soupkitchen id
     const id = event.target.attributes[1].value;
-    console.log(id);
-   // If rails route, use this: 
-    // const form = `
-    //         <form id="miriams-form" data-id=${id}>
-    //         <p>
-    //             <label for="title">Title: </label>
-    //             <input type="text" name="title" id="title"> 
-    //         </p>
-    //         <p>
-    //             <label for="content">Content: </label>
-    //             <input type="text" name="content" id="content"> 
-    //         </p> 
-    //           <button type="submit" id="comment-submit">  
-    //         </form>
-    //         `
-    // clearSoupKitchenDataAndTitle();
-    // // attachEventListeners();
-    // $('#new-comment-form').html(form);
-   //  let values = $(this).serialize();
+    console.log(id)
 
-   //what is the correct url? Having trouble figuring that out. 
-//get rails form, add hidden field for soupkitchen id ? 
-// /soupkitchens/${id}/comments/new`,
-    const formForNewComment = new Request(`/soupkitchens/${id}/comments/new`, {
+//create request and header 
+    const newCommentForm = new Request(`/soupkitchens/${id}/comments/new.json`, {
       headers: new Headers({
         'Content-Type': 'application/json'
       })
     })
+//fetch and render
     clearSoupKitchenDataAndTitle(); 
-    fetch(formForNewComment) 
+
+    fetch(newCommentForm) 
     .then((res) => res.json())
     .then(data => {
-    
       const form = new Comment(data);
-  
-      $('#new-comment-form').html("hello");
-  // form.renderNewCommentForm
-      attachEventListeners();
+  console.log(form)
+      $('#new-comment-form').html(form.renderNewCommentForm());
+      })
+    attachEventListeners();
 
-    })
+    
    // .catch((error) => console.log(`Error:`, error));
  };
 
@@ -179,6 +141,29 @@ function submitNewComment(event) {
   .catch(error => console.error('Error:', error));
 }
   
+
+   // If rails route, use this: 
+    // const form = `
+    //         <form id="miriams-form" data-id=${id}>
+    //         <p>
+    //             <label for="title">Title: </label>
+    //             <input type="text" name="title" id="title"> 
+    //         </p>
+    //         <p>
+    //             <label for="content">Content: </label>
+    //             <input type="text" name="content" id="content"> 
+    //         </p> 
+    //           <button type="submit" id="comment-submit">  
+    //         </form>
+    //         `
+    // clearSoupKitchenDataAndTitle();
+    // // attachEventListeners();
+    // $('#new-comment-form').html(form);
+   //  let values = $(this).serialize();
+
+   //what is the correct url? Having trouble figuring that out. 
+//get rails form, add hidden field for soupkitchen id ? 
+// /soupkitchens/${id}/comments/new`,
    // $(form).submit(function(event) {
   //     event.preventDefault();
   //     var values = $(this).serialize();
