@@ -115,29 +115,38 @@ function newCommentFormFetch(event) {
 
 //3 post new comments data from form, plus listener 
 
+//problem -- getting data from params -- how does json/js/rails connect? 
 function submitNewComment(event) {
   event.preventDefault();
+  event.stopPropagation();
+  debugger
   
   let title = $("input#title").val()
   let content = $("input#content").val()
   // let soupkitchenId = 1;
   var id = this.dataset.id;
  
-  const url = `/soupkitchens/:id/comments/:id`
-  //how do we find the :id
+  const url = `/soupkitchens/${id}/comments/:id`
+  //how do we find the :id? what url: comments/create? 
   const postNewComment = new Request(url, {
       method: 'POST',
+      body: JSON.stringify({title:title, content:content}),
       headers:  {
-        'Accept': 'application/json',
+        // 'Accept': 'application/json',
         'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({title:title, content:content})
-   });
+      }
+   })
 
   fetch(postNewComment)
   .then((res) => res.json())
-  .then()
+  // .then()
+  .then(data => console.log('Success:', JSON.stringify(data)))
   .catch(error => console.error('Error:', error));
+  
+
+ //empty the div 
+  $('#new-comment-form').html('')
+  attachEventListeners();
 }
   
 

@@ -9,7 +9,6 @@ class CommentsController < ApplicationController
   end
 
   def new 
-
     @comment = Comment.new  
     @soupkitchen = Soupkitchen.find(params[:soupkitchen_id]) 
     # render json: @comment, status: 200 
