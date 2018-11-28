@@ -36,7 +36,7 @@ class Comment {
                     <label for="content">Content: </label>
                     <input type="text" name="content" id="content"> 
                 </p> 
-                  <button type="submit" id="comment-submit">  
+                  <button type="submit" id="comment-submit">Submit</button> 
             </form>
           `
   }
@@ -105,8 +105,7 @@ function newCommentFormFetch(event) {
     .then((res) => res.json())
     .then(data => {
       const form = new Comment(data);
-  console.log(form)
-      $('#new-comment-form').html(form.renderNewCommentForm());
+      $('#new-comment-form').append(form.renderNewCommentForm());
       })
     attachEventListeners();
 
