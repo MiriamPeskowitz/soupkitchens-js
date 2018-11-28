@@ -48,47 +48,55 @@ class Comment {
 
 //1
 function commentsFetch(soupkitchenId) {
-  //2 ways to pull data along
+//2 ways to pull data along
     const name=$(this).data("name"); //will this be available to addCommentsTitle? 
     const id= soupkitchenId.target.attributes[1].value
-    console.log(id, name); //checking values in console
+//checking values in console
+    console.log(id, name); 
 
     clearSoupKitchenDataAndTitle();
-    addCommentsTitle();
-
+   
+//adds soupkitchen name to comments title/was separate function, moved to be in scope
+    const commentsTitle = `<h4 id="comments-title"> Reviews of ${name}</h4>`;
+    const $titleDiv = $('#comments-data');
+    if ($titleDiv.empty() ) {
+      $titleDiv.prepend(commentsTitle);
+    };
+//create request and headers
     const commentRequest = new Request(`/soupkitchens/${id}/comments`, {
       headers: new Headers({
         'Content-Type': 'application/json'
       })
     })
-
+//fetcb
     fetch(commentRequest)
     .then((res) => res.json())  
     .then(data => {
         const commentData = data;
         $('#comments-data').append(commentData.renderCommentHTML); 
         attachEventListeners();      
-    });      
-    // .catch(error => console.error('Error:', error))
+    })     
+    .catch(error => console.error('Error:', error))
 };
 
 // $(this).attr('data-name');
 
 // var fruitCount = plant.getAttribute('data-fruit'); // fruitCount = '12'
 
-function addCommentsTitle() {
-  //feature: add name to comments-title 
-    // const name=$(this).data("name");
-    //ASK BRAD -- working on this feature -- 
-    // const name=$(this).data("name");
+// as a separate function, the name variable wasn't in scope, so I moved this inside of comments Fetch 
+// function addCommentsTitle() {
+//   //feature: add name to comments-title 
+//     // const name=$(this).data("name");
+//     
+//     // const name=$(this).data("name");
     
-    const commentsTitle = `<h4 id="comments-title"> Reviews of ${name}</h4>`;
-    // const commentsTitle = `<h4 id="comments-title"> Reviews </h4>`;
-    const $titleDiv = $('#comments-data');
-    if ($titleDiv.empty() ) {
-      $titleDiv.prepend(commentsTitle);
-    };
-}
+//     const commentsTitle = `<h4 id="comments-title"> Reviews of ${name}</h4>`;
+//     // const commentsTitle = `<h4 id="comments-title"> Reviews </h4>`;
+//     const $titleDiv = $('#comments-data');
+//     if ($titleDiv.empty() ) {
+//       $titleDiv.prepend(commentsTitle);
+//     };
+// }
    
 //2. Getting the new comments form     
 //if rendered as a 
