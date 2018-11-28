@@ -83,6 +83,10 @@ function clearFoodpantryDataAndTitle() {
     $('#foodpantry-data').html("");
 }
 
+function clearCommentData() {
+  $('#comments-title').html("");
+  $('#comments-data').html("");
+}
 // function handleMessages(res) {
 //   if (res.ok) {
 //     throw Message(res.message) 

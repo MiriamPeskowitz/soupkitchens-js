@@ -14,32 +14,32 @@ class Comment {
       this.userId = attr.userId;
     } 
  } 
-    Comment.prototype.renderCommentHTML = function() {
-        return `
-            <section> 
-              <p>Title: ${this.title}</p>
-              <p>Content: ${this.content}</p>
-              <button id="new-comment-form" data-id=${this.soupkitchenId}  data-user-id=${this.userId}>Add a Review</button>
-            </section>
-            `      
-    }  
+Comment.prototype.renderCommentHTML = function() {
+    return `
+        <section> 
+          <p>Title: ${this.title}</p>
+          <p>Content: ${this.content}</p>
+          <button id="new-comment-form" data-id=${this.soupkitchenId}  data-user-id=${this.userId}>Add a Review</button>
+        </section>
+        `      
+}  
 
-    Comment.prototype.renderNewCommentForm = function() {
-      //Ask BRAD -- not sure about pattern == how do I make the form here? or use erb? 
-        return `
-            <form id="render-form" data-soupkitchen-id=${this.soupkitchenId}>
-                <p>
-                    <label for="title">Title: </label>
-                    <input type="text" name="title" id="title"> 
-                </p>
-                <p>
-                    <label for="content">Content: </label>
-                    <input type="text" name="content" id="content"> 
-                </p> 
-                  <button type="submit" id="comment-submit">Submit</button> 
-            </form>
-          `
-  }
+Comment.prototype.renderNewCommentForm = function() { 
+    return `
+        <form id="render-form" data-soupkitchen-id=${this.soupkitchenId}>
+            <p>
+                <label for="title">Title: </label>
+                <input type="text" name="title" id="title"> 
+            </p>
+            <p>
+                <label for="content">Content: </label>
+                <input type="text" name="content" id="content"> 
+            </p> 
+              <button type="submit" id="comment-submit">Submit</button> 
+        </form>
+      `
+}
+
 
   //from here - what is the path back to the database? when the comments controller pulls it into create? 
 
@@ -48,10 +48,10 @@ class Comment {
 
 //1
 function commentsFetch(soupkitchenId) {
-//2 ways to pull data along
+//2 ways to pull data along, dataset and event.target
     const name=$(this).data("name"); //will this be available to addCommentsTitle? 
     const id= soupkitchenId.target.attributes[1].value
-//checking values in console
+//checks values in console
     console.log(id, name); 
 
     clearSoupKitchenDataAndTitle();
@@ -62,13 +62,13 @@ function commentsFetch(soupkitchenId) {
     if ($titleDiv.empty() ) {
       $titleDiv.prepend(commentsTitle);
     };
-//create request and headers
+//creates request and headers
     const commentRequest = new Request(`/soupkitchens/${id}/comments`, {
       headers: new Headers({
         'Content-Type': 'application/json'
       })
     })
-//fetcb
+//fetcbes data and renders to DOm
     fetch(commentRequest)
     .then((res) => res.json())  
     .then(data => {
@@ -81,26 +81,26 @@ function commentsFetch(soupkitchenId) {
    
 //2. Getting the new comments form   
 //challenge: do it as rails form, or as js form
-//goal: put the form on the page. include button to submit to send postNewComment()
 
 function newCommentFormFetch(event) {
     event.preventDefault();
     event.stopPropagation();
     console.log("got to newCommentFormFetch");
 
-//grab values for soupkitchen id
+//grabs values for soupkitchen id
     const id = event.target.attributes[1].value;
     console.log(id)
 
-//create request and header 
+//creates request and header 
     const newCommentForm = new Request(`/soupkitchens/${id}/comments/new.json`, {
       headers: new Headers({
         'Content-Type': 'application/json'
       })
     })
-//fetch and render
+//fetches and renders
     clearSoupKitchenDataAndTitle(); 
-
+    clearCommentData();
+//feature to add : comments-form-title: Review ${name}
     fetch(newCommentForm) 
     .then((res) => res.json())
     .then(data => {
