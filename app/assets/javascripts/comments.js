@@ -19,7 +19,7 @@ class Comment {
             <section> 
               <p>Title: ${this.title}</p>
               <p>Content: ${this.content}</p>
-              <button id="new-comment-form" data-id=${this.soupkitchenId}  data-userId=${this.userId}>Add a Review</button>
+              <button id="new-comment-form" data-id=${this.soupkitchenId}  data-user-id=${this.userId}>Add a Review</button>
             </section>
             `      
     }  
@@ -48,11 +48,10 @@ class Comment {
 
 //1
 function commentsFetch(soupkitchenId) {
-    // const id=$(this).data("soupkitchen-id");
-    // const name=$(this).data("name");
-    // console.log(id, name) 
-    const id = soupkitchenId.target.attributes[1].value
-
+  //2 ways to pull data along
+    const name=$(this).data("name"); //will this be available to addCommentsTitle? 
+    const id= soupkitchenId.target.attributes[1].value
+    console.log(id, name); //checking values in console
 
     clearSoupKitchenDataAndTitle();
     addCommentsTitle();
@@ -67,20 +66,22 @@ function commentsFetch(soupkitchenId) {
     .then((res) => res.json())  
     .then(data => {
         const commentData = data;
-        $('#comments-data').append(commentData.renderCommentHTML);       
-        }); 
-
-          attachEventListeners();    
-        
+        $('#comments-data').append(commentData.renderCommentHTML); 
+        attachEventListeners();      
+    });      
     // .catch(error => console.error('Error:', error))
 };
 
+// $(this).attr('data-name');
 
-function addCommentsTitle(event) {
+// var fruitCount = plant.getAttribute('data-fruit'); // fruitCount = '12'
+
+function addCommentsTitle() {
   //feature: add name to comments-title 
     // const name=$(this).data("name");
     //ASK BRAD -- working on this feature -- 
-    const name=$(this).data("name");
+    // const name=$(this).data("name");
+    
     const commentsTitle = `<h4 id="comments-title"> Reviews of ${name}</h4>`;
     // const commentsTitle = `<h4 id="comments-title"> Reviews </h4>`;
     const $titleDiv = $('#comments-data');

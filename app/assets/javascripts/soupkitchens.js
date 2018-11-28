@@ -6,15 +6,14 @@ const attachEventListeners = function() {
   $('#soupkitchen-button').on('click',
     soupkitchensFetch)
   
-  $('#foodpantry-button').on('click', 
-    foodpantriesFetch);
-
   $('#comments-button').on('click', commentsFetch);
 
   $('#new-comment-form').on('click', newCommentFormFetch);
 
   $('#render-form').on('submit', submitNewComment)
   
+  $('#foodpantry-button').on('click', 
+    foodpantriesFetch);
   // loads new comment form -- gets to  /soupkitchens/:id/comments/new
 }
 
@@ -30,17 +29,16 @@ class Soupkitchen {
 
 Soupkitchen.prototype.formatHTML = function() {
  
-   return `<section>
-          <p> ${this.name}</p>
-          <p> ${this.address}</p>
-          <p> ${this.zipcode}</p>
-          <p> Hours: ${this.notes}</p>
-          <button id="comments-button" data-id=${this.id} data-name=${this.name}> See Reviews </button> 
-           <button id="new-comment-form" data-id=${this.id}>Add a Review</button> 
-          <div id="comments-data"></div>
-          <div id="toggle-comments-data"></div>
+   return `
+          <section>
+              <p> ${this.name}</p>
+              <p> ${this.address}</p>
+              <p> ${this.zipcode}</p>
+              <p> Hours: ${this.notes}</p>
+              <button id="comments-button" data-id=${this.id} data-name=${this.name}> See Reviews </button> 
+               <button id="new-comment-form" data-id=${this.id}>Add a Review</button> 
           </section>`
-  }
+}
 
 //where do I want to put it in the dom
 //where do I fetch the data 
@@ -52,7 +50,6 @@ function soupkitchensFetch(){
         })
      })
     clearFoodpantryDataAndTitle();
-
     addSoupkitchensTitle();
 
     fetch(indexRequest)
@@ -63,9 +60,9 @@ function soupkitchensFetch(){
 
         soupkitchens.forEach(function(soupkitchen){
 
-          const kitchen = new Soupkitchen(soupkitchen);  //this creates the instance
-          $('#soupkitchen-data').append(kitchen.formatHTML());
-          })
+            const kitchen = new Soupkitchen(soupkitchen);  //this creates the instance
+            $('#soupkitchen-data').append(kitchen.formatHTML());
+        })
         attachEventListeners();
         })
       .then($('#comments-button').on('click', commentsFetch)) 
@@ -74,17 +71,17 @@ function soupkitchensFetch(){
 
 
 function addSoupkitchensTitle() {
-  const soupkitchenTitle = `<h4 id="soupkitchen-title"> Soupkitchens </h4>`;
-  const $title = $('#soupkitchen-data');
-  if ($title.empty() ) {
-    $title.prepend(soupkitchenTitle);
-  };
+    const soupkitchenTitle = `<h4 id="soupkitchen-title"> Soupkitchens </h4>`;
+    const $title = $('#soupkitchen-data');
+        if ($title.empty() ) {
+        $title.prepend(soupkitchenTitle);
+    };
 }
  
 function clearFoodpantryDataAndTitle() {
     $('#foodpantry-title').html("");
     $('#foodpantry-data').html("");
-  }
+}
 
 // function handleMessages(res) {
 //   if (res.ok) {
