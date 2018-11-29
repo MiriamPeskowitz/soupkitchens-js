@@ -15,18 +15,20 @@ class Comment {
     } 
  } 
 Comment.prototype.renderCommentHTML = function() {
-    return `
+       return 
+       `
         <section> 
           <p>Title: ${this.title}</p>
           <p>Content: ${this.content}</p>
-          <button id="new-comment-form" data-id=${this.soupkitchenId}  data-user-id=${this.userId}>Add a Review</button>
+          <button id="new-comment-form" data-id=${this.soupkitchenId}  data-user-id=${this.userId}>Submit</button>
         </section>
         `      
 }  
 
 Comment.prototype.renderNewCommentForm = function() {
     return `
-        <form id="comment-form" data-soupkitchenId=${this.soupkitchenId} >
+
+        <form data-soupkitchenId=${this.soupkitchenId} >
             <p>
                 <label for="title">Title: </label>
                 <input type="text" name="title" id="title"> 
@@ -112,11 +114,13 @@ function newCommentFormFetch(event) {
     .then((res) => res.json())
     .then(data => {
       const form = new Comment(data);
-      $('#new-comment-form').append(form.renderNewCommentForm());
+      $('#load-comment-form').append(form.renderNewCommentForm());
       })
-   
-    // attachEventListeners();
-// why does it keep fetching forms?  
+    .then( $('#new-comment-form').hide())
+    .catch(error => console.error('Error:', error))
+    attachEventListeners();
+// why does it keep fetching forms? FIXED --duplicate id names 
+//after you send a form, go back to index.  
  };
 
 
@@ -161,7 +165,8 @@ function submitNewComment(event) {
 
     let title = $("input#title").val()
     let content = $("input#content").val()
-    // let soupkitchenId = 1;
+    console.log(`${title}, ${content}`);
+   
     // data-soupkitchenId=${this.soupkitchenId}
     let id = this.dataset.id;
    
