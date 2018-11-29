@@ -24,15 +24,15 @@ Comment.prototype.renderCommentHTML = function() {
         `      
 }  
 
-Comment.prototype.renderNewCommentForm = function() { 
+Comment.prototype.renderNewCommentForm = function() {
     return `
-        <form id="render-form" data-soupkitchen-id=${this.soupkitchenId}>
+        <form id="comment-form" data-soupkitchenId=${this.soupkitchenId} >
             <p>
                 <label for="title">Title: </label>
                 <input type="text" name="title" id="title"> 
             </p>
             <p>
-                <label for="content">Content: </label>
+                <label for="content">Comment: </label>
                 <input type="text" name="content" id="content"> 
             </p> 
               <button type="submit" id="comment-submit">Submit</button> 
@@ -76,75 +76,115 @@ function commentsFetch(soupkitchenId) {
         $('#comments-data').append(commentData.renderCommentHTML); 
         attachEventListeners();      
     })     
+    .then(checkForComments())
     .catch(error => console.error('Error:', error))
 };
    
+function checkForComments() {
+  const noComments = 
+    `
+    <h3>No comments yet. Would you like to leave the first one?</h3>
+    <button id="new-comment-form" data-id=${this.id}>Add a Review</button> 
+    `
+  if($('#comments-data').empty()) {
+    $('#comments-data').html(noComments);
+  }
+}   
 //2. Render the new comments form   
-//challenge: do it as rails form, or as js form
+//challenge: do it as rails form, or as js form pull up rails text on soupkitchens.js? or go to new page? 
 
 function newCommentFormFetch(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    console.log("got to newCommentFormFetch");
+  event.preventDefault();
+  event.stopPropagation();
+  
+    // console.log("got to newCommentFormFetch");
+    // console.log(this);
+    // console.log(`data-id: ${this.dataset.id}`);
+    
+//Problem --id is still undefined, can't pull the data through. 
+    // const id = $(this).data('soupkitchenId');
 
-//grabs values for soupkitchen id
-    const id = event.target.attributes[1].value;
-    console.log(id)
-
-//creates request and header 
-    const newCommentForm = new Request(`/soupkitchens/${id}/comments/new.json`, {
-      headers: new Headers({
-        'Content-Type': 'application/json'
-      })
-    })
-//fetches and renders
-    clearSoupKitchenDataAndTitle(); 
-    clearCommentData();
-//feature to add : comments-form-title: Review ${name}
-    fetch(newCommentForm) 
+    const id = `${this.dataset.id}`
+    const url= `/soupkitchens/${id}/comments/new`
+    console.log(`got to const id and url: ${id}, ${url}`);
+    // do I need to create the class of the form? to include the data as it moves to submit? 
+    fetch(url) 
     .then((res) => res.json())
     .then(data => {
       const form = new Comment(data);
       $('#new-comment-form').append(form.renderNewCommentForm());
       })
-    attachEventListeners();
+   
+    // attachEventListeners();
+// why does it keep fetching forms?  
+ };
+
+
+function clear() {
+    clearSoupKitchenDataAndTitle(); 
+    clearCommentData();
+ }
+
+// //another way to grab values for soupkitchen id
+//     const id = event.target.attributes[1].value;
+//     console.log(id)
+
+// //creates request and header 
+//     const newCommentForm = new Request(`/soupkitchens/${id}/comments/new.json`, {
+//       headers: new Headers({
+//         'Content-Type': 'application/json'
+//       })
+//     })
+// //fetches and renders
+//     clearSoupKitchenDataAndTitle(); 
+//     clearCommentData();
+// //feature to add : comments-form-title: Review ${name}
+//     fetch(newCommentForm) 
+//     .then((res) => res.json())
+//     .then(data => {
+//       const form = new Comment(data);
+//       $('#new-comment-form').append(form.renderNewCommentForm());
+//       })
+    // attachEventListeners();
 
     
    // .catch((error) => console.log(`Error:`, error));
- };
+
 
 //3 post new comments data from form, plus listener 
 
 //problem -- getting data from params -- how does json/js/rails connect? 
+
 function submitNewComment(event) {
-  event.preventDefault();
-  event.stopPropagation();
+    event.preventDefault();
+    event.stopPropagation();
 
-  let title = $("input#title").val()
-  let content = $("input#content").val()
-  // let soupkitchenId = 1;
-  var id = this.dataset.id;
- 
-  const url = `/soupkitchens/${id}/comments/:id`
-  //how do we find the :id? what url: comments/create? 
-  const postNewComment = new Request(url, {
-      method: 'POST',
-      body: JSON.stringify({title:title, content:content}),
-      headers:  {
-        // 'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-   })
+    let title = $("input#title").val()
+    let content = $("input#content").val()
+    // let soupkitchenId = 1;
+    // data-soupkitchenId=${this.soupkitchenId}
+    let id = this.dataset.id;
+   
+    const url = `/soupkitchens/${id}/comments/:id`
+    //how do we find the :id? what url: comments/create? 
+    const postNewComment = new Request(url, {
+        method: 'POST',
+        body: JSON.stringify({title:title, content:content}),
+        headers:  {
+          // 'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+     })
+    fetch(postNewComment)
+    .then((res) => res.json())
+    // .then()
+    .then(data => console.log('Success:', JSON.stringify(data)))
+    .catch(error => console.error('Error:', error));
+    
+   //empty the div 
+    $('#new-comment-form').html('')
 
-  fetch(postNewComment)
-  .then((res) => res.json())
-  // .then()
-  .then(data => console.log('Success:', JSON.stringify(data)))
-  .catch(error => console.error('Error:', error));
-  
- //empty the div 
-  $('#new-comment-form').html('')
-  attachEventListeners();
+    attachEventListeners();
 }
   
 

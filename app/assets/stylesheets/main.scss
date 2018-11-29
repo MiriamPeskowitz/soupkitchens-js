@@ -1,6 +1,4 @@
- 
-
-body {
+ body {
   background-color: white;
   padding-top: 70px;
   padding-bottom: 50px;
@@ -17,33 +15,31 @@ main {
 footer {
   background-color: #F0E68C;
 }  
+
 button {
   color: gray;
+  padding: 5px;
 }
 
-.navbar {
-  background-color: #F0E68C;
-  color: black;
-} 
+// .navbar .navbar-inverse {
+//   background-color: #F0E68C;
+//   color: black;
+// } 
 
-.navbar-inverse {
-  background-color: #F0E68C;
-  color: black;
-}
 
-.theme-dropdown .dropdown-menu {
-  position: static;
-  display: block;
-  margin-bottom: 20px;
-}
+// .theme-dropdown .dropdown-menu {
+//   position: static;
+//   display: block;
+//   margin-bottom: 20px;
+// }
 
-.theme-showcase > p > .btn {
-  margin: 5px 0;
-}
+// .theme-showcase > p > .btn {
+//   margin: 5px 0;
+// }
 
-.center {
-  text-align: center;
-}
+// .center {
+//   text-align: center;
+// }
 
 .field_with_errors {
   font-size: 12px;
@@ -52,5 +48,9 @@ button {
   display: table;
 }
 
-// to SASS -- background-color: #F0E68C; color: black ;
+#new-comment-form {
+  margin: 20px;
+  text-align: right;
+}
+
 

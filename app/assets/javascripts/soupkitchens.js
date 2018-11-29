@@ -34,12 +34,15 @@ Soupkitchen.prototype.formatHTML = function(){
         <p> ${this.address}</p>
         <p> ${this.zipcode}</p>
         <p> Hours: ${this.notes}</p>
-        <button id="comments-button" data-id=${this.id} data-name=${this.name}> See Reviews </button> 
-         <button id="new-comment-form" data-id=${this.id}>Add a Review</button> 
+        <button id="comments-button" data-id=${this.id} data-name=${this.name}> See Reviews </button>   
+        <button id="new-comment-form" data-id=${this.id}>Add a Review</button> 
     </section>
     `
 }
-
+// <button id="new-comment-form" data-id=${this.id}>Add a Review</button> 
+// data-id="<%= post.id %> add this instead of ${this.id?}
+// <button id="new-comment-form" data-id="<%= soupkitchen.id %>">Add a Review/erb</button> 
+//
 //where do I want to put it in the dom
 //where do I fetch the data 
 
