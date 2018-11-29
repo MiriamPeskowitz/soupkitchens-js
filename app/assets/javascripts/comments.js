@@ -20,15 +20,16 @@ Comment.prototype.renderCommentHTML = function() {
         <section> 
           <p>Title: ${this.title}</p>
           <p>Content: ${this.content}</p>
- <button id="new-comment-form" data-id=${this.soupkitchenId}  data-user-id=${this.userId}>Submit</button>
+          <button id="new-comment-form" data-id=${this.soupkitchenId}  data-user-id=${this.userId}>Submit</button>
         </section>
         `      
 }  
 
 Comment.prototype.renderNewCommentForm = function() {
     return `
+      <div id="new-comment-form">
+        <form data-id=${this.soupkitchenId} >should be .id
 
-        <form data-soupkitchenId=${this.soupkitchenId} >
             <p>
                 <label for="title">Title: </label>
                 <input type="text" name="title" id="title"> 
@@ -37,8 +38,9 @@ Comment.prototype.renderNewCommentForm = function() {
                 <label for="content">Comment: </label>
                 <input type="text" name="content" id="content"> 
             </p> 
-              <button type="submit" id="comment-submit">Submit</button> 
+              <button type="submit" id="submit-comment-button">Submit</button> 
         </form>
+      </div>  
       `
 }
 
@@ -57,6 +59,7 @@ function commentsFetch(soupkitchenId) {
     console.log(id, name); 
 
     clearSoupKitchenDataAndTitle();
+    //*** is it here -- because I'm clearing the data??? 
    
 //adds soupkitchen name to comments title/was separate function, moved to be in scope
     const commentsTitle = `<h4 id="comments-title"> Reviews of ${name}</h4>`;
@@ -70,7 +73,7 @@ function commentsFetch(soupkitchenId) {
         'Content-Type': 'application/json'
       })
     })
-//fetcbes data and renders to DOm
+//fetches data and renders to DOM
     fetch(commentRequest)
     .then((res) => res.json())  
     .then(data => {
@@ -86,7 +89,7 @@ function checkForComments() {
   const noComments = 
     `
     <h3>No comments yet. Would you like to leave the first one?</h3>
-    <button id="new-comment-form" data-id=${this.id}>Add a Review</button> 
+    <button id="add-review-button" data-id=${this.id}>Add a Review</button> 
     `
   if($('#comments-data').empty()) {
     $('#comments-data').html(noComments);
@@ -101,15 +104,21 @@ function newCommentFormFetch(event) {
   event.preventDefault();
   event.stopPropagation();
   
-    // console.log("got to newCommentFormFetch");
+    console.log("got to newCommentFormFetch");
     // console.log(this);
-    // console.log(`data-id: ${this.dataset.id}`);
+    // console.log(`data-id: ${this.dataset.soupkitchenId}`);
     
+    //*****
 //Problem --id is still undefined, can't pull the data through. FIXED
     // const id = $(this).data('soupkitchenId');
 //New problem-- when add a review button is a way in (button on right) -- it doesn't have a data-id
-    const id = `${this.dataset.id}`
-    const url= `/soupkitchens/${id}/comments/new`
+   // --different ways in have different results 
+    // const id = event.target.attributes[1].value;
+     // id = $(this).data('id');
+     let id = this.dataset.id;
+     // const name=$(this).data("name")
+    let url= `/soupkitchens/${id}/comments/new`
+    
     console.log(`got to const id and url: ${id}, ${url}`);
     // do I need to create the class of the form? to include the data as it moves to submit? 
     const formRequest = new Request(url, {
@@ -117,39 +126,37 @@ function newCommentFormFetch(event) {
       'Content-Type': 'application/json'
         })
      })
-
-    fetch(formRequest) 
+   
+    fetch(`/soupkitchens/${id}/comments/new`) 
     .then((res) => res.json())
     .then(data => {
-    
-      const form = new Comment(data);
-      console.log('got to const form')
+       const form = new Comment(data);
       // $('#load-comment-form').append(tempform);
-      $('#load-comment-form').append(form.renderNewCommentForm());
+      $('#load-comment-form').append(form);
       })
-    .then( $('#new-comment-form').hide())
     .catch(error => console.error('Error:', error))
+   
     attachEventListeners();
 // why does it keep fetching forms? FIXED --duplicate id names 
 //after you send a form, go back to index.  
  };
 
-const tempform = 
-`
-
-        <form data-soupkitchenId=${this.soupkitchenId} >
-            <p>
-                <label for="title">Title: </label>
-                <input type="text" name="title" id="title"> 
-            </p>
-            <p>
-                <label for="content">Comment: </label>
-                <input type="text" name="content" id="content"> 
-            </p> 
+function tempform() {
+  ` <div>
+      <form data-soupkitchenId=${this.soupkitchenId} >
+          <p>
+              <label for="title">Title: </label>
+              <input type="text" name="title" id="title"> 
+          </p>
+          <p>
+              <label for="content">Comment: </label>
+              <input type="text" name="content" id="content"> 
+          </p> 
               <button type="submit" id="comment-submit">Submit</button> 
-        </form>
-      `
-      ;
+      </form>
+   </div> ` 
+};
+
 function clear() {
     clearSoupKitchenDataAndTitle(); 
     clearCommentData();
@@ -208,12 +215,11 @@ function submitNewComment(event) {
      })
     fetch(postNewComment)
     .then((res) => res.json())
-    // .then()
     .then(data => console.log('Success:', JSON.stringify(data)))
     .catch(error => console.error('Error:', error));
     
    //empty the div 
-    $('#new-comment-form').html('')
+    clearNewCommentsForm();
 
     attachEventListeners();
 }
