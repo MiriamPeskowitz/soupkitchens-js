@@ -20,7 +20,7 @@ Comment.prototype.renderCommentHTML = function() {
         <section> 
           <p>Title: ${this.title}</p>
           <p>Content: ${this.content}</p>
-          <button id="new-comment-form" data-id=${this.soupkitchenId}  data-user-id=${this.userId}>Submit</button>
+ <button id="new-comment-form" data-id=${this.soupkitchenId}  data-user-id=${this.userId}>Submit</button>
         </section>
         `      
 }  
@@ -91,10 +91,12 @@ function checkForComments() {
   if($('#comments-data').empty()) {
     $('#comments-data').html(noComments);
   }
-}   
+} 
+
+
+
 //2. Render the new comments form   
 //challenge: do it as rails form, or as js form pull up rails text on soupkitchens.js? or go to new page? 
-
 function newCommentFormFetch(event) {
   event.preventDefault();
   event.stopPropagation();
@@ -103,17 +105,26 @@ function newCommentFormFetch(event) {
     // console.log(this);
     // console.log(`data-id: ${this.dataset.id}`);
     
-//Problem --id is still undefined, can't pull the data through. 
+//Problem --id is still undefined, can't pull the data through. FIXED
     // const id = $(this).data('soupkitchenId');
-
+//New problem-- when add a review button is a way in (button on right) -- it doesn't have a data-id
     const id = `${this.dataset.id}`
     const url= `/soupkitchens/${id}/comments/new`
     console.log(`got to const id and url: ${id}, ${url}`);
     // do I need to create the class of the form? to include the data as it moves to submit? 
-    fetch(url) 
+    const formRequest = new Request(url, {
+       headers: new Headers({
+      'Content-Type': 'application/json'
+        })
+     })
+
+    fetch(formRequest) 
     .then((res) => res.json())
     .then(data => {
+    
       const form = new Comment(data);
+      console.log('got to const form')
+      // $('#load-comment-form').append(tempform);
       $('#load-comment-form').append(form.renderNewCommentForm());
       })
     .then( $('#new-comment-form').hide())
@@ -123,7 +134,22 @@ function newCommentFormFetch(event) {
 //after you send a form, go back to index.  
  };
 
+const tempform = 
+`
 
+        <form data-soupkitchenId=${this.soupkitchenId} >
+            <p>
+                <label for="title">Title: </label>
+                <input type="text" name="title" id="title"> 
+            </p>
+            <p>
+                <label for="content">Comment: </label>
+                <input type="text" name="content" id="content"> 
+            </p> 
+              <button type="submit" id="comment-submit">Submit</button> 
+        </form>
+      `
+      ;
 function clear() {
     clearSoupKitchenDataAndTitle(); 
     clearCommentData();

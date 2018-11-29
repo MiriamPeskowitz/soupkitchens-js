@@ -12,9 +12,8 @@ const attachEventListeners = function() {
 
   $('#render-form').on('submit', submitNewComment)
   
-  $('#foodpantry-button').on('click', 
-    foodpantriesFetch);
-  // loads new comment form -- gets to  /soupkitchens/:id/comments/new
+  $('#foodpantry-button').on('click', foodpantriesFetch);
+
 }
 
 class Soupkitchen {
@@ -54,6 +53,7 @@ function soupkitchensFetch(){
      })
     clearFoodpantryDataAndTitle();
     addSoupkitchensTitle();
+    clearNewCommentsForm();
 
     fetch(indexRequest)
       // .then(res => handleStatusCode(res))    
@@ -89,6 +89,10 @@ function clearFoodpantryDataAndTitle() {
 function clearCommentData() {
   $('#comments-title').html("");
   $('#comments-data').html("");
+}
+
+function clearNewCommentsForm() {
+  $("load-comment-form").html("");
 }
 // function handleMessages(res) {
 //   if (res.ok) {

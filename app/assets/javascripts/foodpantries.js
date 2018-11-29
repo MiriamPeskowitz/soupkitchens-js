@@ -30,7 +30,7 @@ class Foodpantry {
 //     getFoodPantries);
   
 function  foodpantriesFetch() {
-
+  
     const indexRequest = new Request('/foodpantries', {
        headers: new Headers({
       'Content-Type': 'application/json'
