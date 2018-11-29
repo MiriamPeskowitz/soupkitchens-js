@@ -7,7 +7,7 @@ $(document).ready(function() {
    attachEventListeners();
 })
 
-const attachEventListeners = function() {
+function attachEventListeners() {
   $('#soupkitchen-button').on('click',
     soupkitchensFetch)
   
@@ -18,6 +18,7 @@ const attachEventListeners = function() {
   $('.submit-comment-button').on('submit', submitNewComment)
   
   $('#foodpantry-button').on('click', foodpantriesFetch);
+  $('#load-comment-form2').hide()
 
 }
 
@@ -41,7 +42,7 @@ Soupkitchen.prototype.formatHTML = function(){
         <button class="comments-button" data-id=${this.id} data-name=${this.name}> See Reviews </button>   
         
         <button class="add-review-button" data-id=${this.id}>Add a Review</button> 
-        
+
         <div class="comments-data2">
         <div>  
         <div class="load-comment-form">
