@@ -28,7 +28,8 @@ Comment.prototype.renderCommentHTML = function() {
 Comment.prototype.renderNewCommentForm = function() {
     return `
       <div id="new-comment-form">
-        <form data-id=${this.soupkitchenId} >should be .id
+      <div id="load-comment-form"><!-- comment form /  div#new-comment-form --><div>
+        <form data-id=${this.soupkitchenId} >
 
             <p>
                 <label for="title">Title: </label>
@@ -58,7 +59,7 @@ function commentsFetch(soupkitchenId) {
 //checks values in console
     console.log(id, name); 
 
-    clearSoupKitchenDataAndTitle();
+    // clearSoupKitchenDataAndTitle();
     //*** is it here -- because I'm clearing the data??? 
    
 //adds soupkitchen name to comments title/was separate function, moved to be in scope
@@ -78,23 +79,25 @@ function commentsFetch(soupkitchenId) {
     .then((res) => res.json())  
     .then(data => {
         const commentData = data;
-        $('#comments-data').append(commentData.renderCommentHTML); 
+        $('.comments-data2').append(commentData.renderCommentHTML); 
         attachEventListeners();      
     })     
-    .then(checkForComments())
     .catch(error => console.error('Error:', error))
-};
    
-function checkForComments() {
-  const noComments = 
-    `
-    <h3>No comments yet. Would you like to leave the first one?</h3>
-    <button id="add-review-button" data-id=${this.id}>Add a Review</button> 
-    `
-  if($('#comments-data').empty()) {
-    $('#comments-data').html(noComments);
-  }
-} 
+    // .then(checkForComments())
+
+};
+  //div in dhow page -- by default -- if there are comments, it would overwrite this.  
+// function checkForComments() {
+//    if($('#comments-data').empty()) {
+//     $('#comments-data').html(noComments);
+//   }
+//   const noComments = 
+//     `
+//     <h3>No comments yet. Would you like to leave the first one?</h3>
+//     <button class="add-review-button" data-id=${this.id}>Add a Review</button> 
+//     `
+// } 
 
 
 
@@ -104,15 +107,10 @@ function newCommentFormFetch(event) {
   event.preventDefault();
   event.stopPropagation();
   
-    console.log("got to newCommentFormFetch");
+    // console.log("got to newCommentFormFetch");
     // console.log(this);
     // console.log(`data-id: ${this.dataset.soupkitchenId}`);
-    
-    //*****
-//Problem --id is still undefined, can't pull the data through. FIXED
-    // const id = $(this).data('soupkitchenId');
-//New problem-- when add a review button is a way in (button on right) -- it doesn't have a data-id
-   // --different ways in have different results 
+    // --different ways in have different results 
     // const id = event.target.attributes[1].value;
      // id = $(this).data('id');
      let id = this.dataset.id;
@@ -120,30 +118,27 @@ function newCommentFormFetch(event) {
     let url= `/soupkitchens/${id}/comments/new`
     
     console.log(`got to const id and url: ${id}, ${url}`);
+  
+  $('#load-comment-form').append(tempform(id))
     // do I need to create the class of the form? to include the data as it moves to submit? 
-    const formRequest = new Request(url, {
-       headers: new Headers({
-      'Content-Type': 'application/json'
-        })
-     })
-   
-    fetch(`/soupkitchens/${id}/comments/new`) 
-    .then((res) => res.json())
-    .then(data => {
-       const form = new Comment(data);
-      // $('#load-comment-form').append(tempform);
-      $('#load-comment-form').append(form);
-      })
-    .catch(error => console.error('Error:', error))
-   
+    // const formRequest = new Request(url, {
+    //    headers: new Headers({
+    //   'Content-Type': 'application/json'
+    //     })
+    //  })
+
+
+clearNewCommentsForm()
+  
+  
     attachEventListeners();
 // why does it keep fetching forms? FIXED --duplicate id names 
 //after you send a form, go back to index.  
  };
 
-function tempform() {
-  ` <div>
-      <form data-soupkitchenId=${this.soupkitchenId} >
+function tempform(id) {
+  return ` <div>
+      <form data-id=${id} >
           <p>
               <label for="title">Title: </label>
               <input type="text" name="title" id="title"> 
@@ -223,7 +218,15 @@ function submitNewComment(event) {
 
     attachEventListeners();
 }
-  
+    // fetch(`/soupkitchens/${id}/comments/new`) 
+    // .then((res) => res.json())
+    // .then(data => {
+    //    const form = new Comment(data);
+      // $('#load-comment-form').append(tempform);
+     
+
+    // .catch(error => console.error('Error:', error))
+   
 
    // If rails route, use this: 
     // const form = `

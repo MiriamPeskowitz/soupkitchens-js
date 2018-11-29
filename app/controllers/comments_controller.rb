@@ -8,16 +8,17 @@ class CommentsController < ApplicationController
     render json: @soupkitchens, status: 200 
   end
 
-  def new 
-    @comment = Comment.new  
+  def new        
+    
     @soupkitchen = Soupkitchen.find(params[:soupkitchen_id]) 
+    @comment = @soupkitchen.comments.build
     # render :new
-    render json: @comment, status: 200 
-    # respond_to do |format|
-    #   format.html {render :new}
-    #   format.json {render json: @comment}
-    #   # format.json {render json: @soupkitchen}
-    # end 
+    # render json: @comment, status: 200 
+    respond_to do |format|
+      format.html {render :new}
+      format.json {render json: @comment}
+      # format.json {render json: @soupkitchen}
+    end 
     if !logged_in?
       flash[:notice] = "You must be logged in"
     end 
@@ -50,7 +51,7 @@ class CommentsController < ApplicationController
 
 
   def show
-    @comments = Comment.all
+    @comment = Comment.all
     render json: @comments, status: 201
   end 
 

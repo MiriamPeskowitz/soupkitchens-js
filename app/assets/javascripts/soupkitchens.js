@@ -11,11 +11,11 @@ const attachEventListeners = function() {
   $('#soupkitchen-button').on('click',
     soupkitchensFetch)
   
-  $('#comments-button').on('click', commentsFetch);
+  $('.comments-button').on('click', commentsFetch);
 
-  $('#add-review-button').on('click', newCommentFormFetch);
+  $('.add-review-button').on('click', newCommentFormFetch);
 
-  $('#submit-comment-button').on('submit', submitNewComment)
+  $('.submit-comment-button').on('submit', submitNewComment)
   
   $('#foodpantry-button').on('click', foodpantriesFetch);
 
@@ -38,8 +38,15 @@ Soupkitchen.prototype.formatHTML = function(){
         <p> ${this.address}</p>
         <p> ${this.zipcode}</p>
         <p> Hours: ${this.notes}</p>
-        <button id="comments-button" data-id=${this.id} data-name=${this.name}> See Reviews </button>   
-        <button id="add-review-button" data-id=${this.id}>Add a Review</button> 
+        <button class="comments-button" data-id=${this.id} data-name=${this.name}> See Reviews </button>   
+        
+        <button class="add-review-button" data-id=${this.id}>Add a Review</button> 
+        
+        <div class="comments-data2">
+        <div>  
+        <div class="load-comment-form">
+        <div>
+
     </section>
     `
 }
@@ -57,11 +64,11 @@ function soupkitchensFetch(){
     clearFoodpantryDataAndTitle();
     addSoupkitchensTitle();
     clearNewCommentsForm();
-
+   
     fetch(indexRequest)
       // .then(res => handleStatusCode(res))    
-      .then((res) => res.json())
-      .then(data => {
+    .then((res) => res.json())
+    .then(data => {
         const soupkitchens = data;
 
         soupkitchens.forEach(function(soupkitchen){
@@ -71,7 +78,7 @@ function soupkitchensFetch(){
         })
         attachEventListeners();
         })
-      .then($('#comments-button').on('click', commentsFetch)) 
+      .then($('.comments-button').on('click', commentsFetch)) 
       .catch(error => console.error('Error:', error));
     }; 
 
@@ -90,8 +97,8 @@ function clearFoodpantryDataAndTitle() {
 }
 
 function clearCommentData() {
-    $('#comments-title').html("");
-    $('#comments-data').html("");
+    $('.comments-title').html("");
+    $('.comments-data').html("");
 }
 
 //in case user opens form, but doesn't submit
