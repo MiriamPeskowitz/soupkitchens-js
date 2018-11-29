@@ -79,7 +79,7 @@ function commentsFetch(soupkitchenId) {
     .catch(error => console.error('Error:', error))
 };
    
-//2. Getting the new comments form   
+//2. Render the new comments form   
 //challenge: do it as rails form, or as js form
 
 function newCommentFormFetch(event) {
@@ -119,8 +119,7 @@ function newCommentFormFetch(event) {
 function submitNewComment(event) {
   event.preventDefault();
   event.stopPropagation();
-  debugger
-  
+
   let title = $("input#title").val()
   let content = $("input#content").val()
   // let soupkitchenId = 1;
@@ -143,7 +142,6 @@ function submitNewComment(event) {
   .then(data => console.log('Success:', JSON.stringify(data)))
   .catch(error => console.error('Error:', error));
   
-
  //empty the div 
   $('#new-comment-form').html('')
   attachEventListeners();

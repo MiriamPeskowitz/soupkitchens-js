@@ -27,17 +27,17 @@ class Soupkitchen {
     }
 }
 
-Soupkitchen.prototype.formatHTML = function() {
- 
-   return `
-          <section>
-              <p> ${this.name}</p>
-              <p> ${this.address}</p>
-              <p> ${this.zipcode}</p>
-              <p> Hours: ${this.notes}</p>
-              <button id="comments-button" data-id=${this.id} data-name=${this.name}> See Reviews </button> 
-               <button id="new-comment-form" data-id=${this.id}>Add a Review</button> 
-          </section>`
+Soupkitchen.prototype.formatHTML = function(){
+  return `
+    <section>
+        <p> ${this.name}</p>
+        <p> ${this.address}</p>
+        <p> ${this.zipcode}</p>
+        <p> Hours: ${this.notes}</p>
+        <button id="comments-button" data-id=${this.id} data-name=${this.name}> See Reviews </button> 
+         <button id="new-comment-form" data-id=${this.id}>Add a Review</button> 
+    </section>
+    `
 }
 
 //where do I want to put it in the dom
