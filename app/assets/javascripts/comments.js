@@ -20,6 +20,7 @@ Comment.prototype.renderCommentHTML = function() {
           <p>Title: ${this.title}</p>
           <p>Content: ${this.content}</p>
           <button id="new-comment-form" data-id=${this.soupkitchenId}  data-user-id=${this.userId}>Submit</button>
+
         </section>
         `      
 }  
@@ -28,6 +29,7 @@ Comment.prototype.renderNewCommentForm = function() {
     return `
       <div id="comment-form"><div>
         <form data-id=${this.soupkitchenId} >
+
             <p>
                 <label for="title">Title: </label>
                 <input type="text" name="title" id="title"> 
@@ -91,7 +93,9 @@ function newCommentFormFetch(event) {
   event.preventDefault();
   event.stopPropagation();
   let id = this.dataset.id;
-  $('.comment-form').append(tempform(id))
+  console.log(`${id}`);
+  $('.comment-form').html(form(id))
+  
 
     // console.log("got to newCommentFormFetch");
     // console.log(this);
@@ -99,28 +103,21 @@ function newCommentFormFetch(event) {
     // --different ways in have different results 
     // const id = event.target.attributes[1].value;
      // id = $(this).data('id');
-     let id = this.dataset.id;
+     // let id = this.dataset.id;
      // const name=$(this).data("name")
-    let url= `/soupkitchens/${id}/comments/new`
+    // let url= `/soupkitchens/${id}/comments/new`
     
-    console.log(`got to const id and url: ${id}, ${url}`);
+    // console.log(`got to const id and url: ${id}, ${url}`);
   
   
-    // do I need to create the class of the form? to include the data as it moves to submit? 
-    // const formRequest = new Request(url, {
-    //    headers: new Headers({
-    //   'Content-Type': 'application/json'
-    //     })
-    //  })
-
-
-    clearNewCommentsForm()
+    // clearNewCommentsForm()
   
     attachEventListeners(); 
  };
 
-function tempform(id) {
-  return ` <div>
+function form(id) {
+  $(".soupkitchen-data").hide();
+  return `
       <form data-id=${id} >
           <p>
               <label for="title">Title: </label>
@@ -132,13 +129,23 @@ function tempform(id) {
           </p> 
               <button type="submit" id="comment-submit">Submit</button> 
       </form>
-   </div> ` 
-};
+   ` 
+}
 
 function clear() {
     clearSoupKitchenDataAndTitle(); 
     clearCommentData();
  }
+
+
+
+    // do I need to create the class of the form? to include the data as it moves to submit? 
+    // const formRequest = new Request(url, {
+    //    headers: new Headers({
+    //   'Content-Type': 'application/json'
+    //     })
+    //  })
+
 
 // //another way to grab values for soupkitchen id
 //     const id = event.target.attributes[1].value;

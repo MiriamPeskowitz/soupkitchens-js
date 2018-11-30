@@ -13,7 +13,9 @@ main {
 }
 
 footer {
-  background-color: #F0E68C;
+  background-color: black;
+  color: gray;
+  width: 100%;
 }  
 
 .navbar2-button {
@@ -50,7 +52,7 @@ footer {
   display: table;
 }
 
-#load-comment-form {
+.comment-form {
   margin: 20px;
   text-align: right;
 }
