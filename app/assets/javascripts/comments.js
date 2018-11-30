@@ -54,6 +54,7 @@ function commentsFetch(event) {
     event.preventDefault();  
     // event.stopPropagation();
     clearSoupKitchenDataAndTitle();
+    clearCommentsTitleAndButton()
 
     const id= $(this).data("id");
     const name=$(this).data("name");
@@ -65,7 +66,7 @@ function commentsFetch(event) {
 // add review button    
     const addReviewButton = `<div id="css-review-button">
     <button class="add-review-button" data-id=${id} data-name=${name}>Add a Review</button></div>`;
-    
+
     console.log(id, name, comments, commentsTitle, addReviewButton);
 
 //   console.log(` 2d: ${id}, ${name}`);

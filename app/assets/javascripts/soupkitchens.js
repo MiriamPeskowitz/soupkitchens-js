@@ -34,7 +34,7 @@ class Soupkitchen {
 
 Soupkitchen.prototype.formatHTML = function(){
   return `
-    <section>
+    <section class="review-data-div">
         <div id="skdata">
           <p> ${this.name}</p>
           <p> ${this.address}</p>
@@ -59,8 +59,8 @@ function soupkitchensFetch(){
     clearFoodpantryDataAndTitle();
     clearNewCommentsForm();
     addSoupkitchensTitle();
+    clearCommentData()
 
-   
     fetch(indexRequest)
       // .then(res => handleStatusCode(res))    
     .then((res) => res.json())
@@ -97,8 +97,14 @@ function clearSoupKitchenDataAndTitle() {
 }
 
 function clearCommentData() {
-    $('.comments-title').hide();
-    $('.comments-data').hide();
+   if (!$(".comments-data").empty()) { $('.comments-data').hide();
+      }
+}
+
+function clearCommentsTitleAndButton() {
+   $("#comments-title").hide();
+    $(".add-review-button").hide();
+
 }
 
 //in case user opens form, but doesn't submit
