@@ -35,7 +35,7 @@ class Soupkitchen {
 Soupkitchen.prototype.formatHTML = function(){
   return `
     <section>
-        <div id=skdata>
+        <div id="skdata">
           <p> ${this.name}</p>
           <p> ${this.address}</p>
           <p> ${this.zipcode}</p>
@@ -43,13 +43,11 @@ Soupkitchen.prototype.formatHTML = function(){
       </div>
         <button class="comments-button" data-id=${this.id} data-name=${this.name}> See Reviews </button>   
         
-        <button class="add-review-button" data-id=${this.id}>Add a Review</button> 
+        <button class="add-review-button" data-id=${this.id} data-id=${this.name}>Add a Review</button> 
 
     </section>
     `
 }
-
-
 
 function soupkitchensFetch(){
   $(".soupkitchen-data").show();

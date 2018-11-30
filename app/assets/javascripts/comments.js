@@ -47,8 +47,8 @@ Comment.prototype.renderNewCommentForm = function() {
 
 //1  (2 ways to pull data along, dataset and event.target)
 function commentsFetch(event) {
-  event.preventDefault();
-  event.stopPropagation();
+    event.preventDefault();
+    event.stopPropagation();
     const id= $(this).data("id");
     // event.target.attributes[1].value;
     const name=$(this).data("name");
@@ -82,7 +82,6 @@ function commentsFetch(event) {
 };
    
 function checkForComments(id) {
-
   const noComments = 
     `
     <h3>No reviews yet.</h3>
@@ -99,17 +98,21 @@ function newCommentFormFetch(event) {
     clearSoupKitchenDataAndTitle();
 
     let id = this.dataset.id;
-    console.log(`${id}`);
+    // let name = this.dataset.name
+    // const name=$(this).data("name");
+//FIGURE THIS OUT-- value of name     
+    let name = event.target.attributes[2].nodeName.value
+    console.log(`${id} name: ${name}`);
 //GET THIS OPENING 
     $('.comments-form').html(form(id));
-    console.log(`got`);
-   
     attachEventListeners(); 
  };
 
-function form(id) {
+function form(id, name) {
+
   return `
       <form data-id=${id} >
+        <h3>Leave a Review of ${name}.</h3>
           <p>
               <label for="title">Title: </label>
               <input type="text" name="title" id="title"> 
