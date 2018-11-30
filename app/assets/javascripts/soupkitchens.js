@@ -107,7 +107,6 @@ function clearCommentsTitleAndButton() {
 
 }
 
-//in case user opens form, but doesn't submit
 function clearNewCommentsForm() {
     $(".new-comment-form").hide();
 }

@@ -54,7 +54,7 @@ function commentsFetch(event) {
     event.preventDefault();  
     // event.stopPropagation();
     clearSoupKitchenDataAndTitle();
-    clearCommentsTitleAndButton()
+    clearCommentData()
 
     const id= $(this).data("id");
     const name=$(this).data("name");
@@ -69,81 +69,35 @@ function commentsFetch(event) {
 
     console.log(id, name, comments, commentsTitle, addReviewButton);
 
-//   console.log(` 2d: ${id}, ${name}`);
-
-    $('.comments-data').append(comments);
     $('.comments-data').prepend(commentsTitle);
+    $('.comments-data').append(comments);
     $('.comments-data').append(addReviewButton);
 
     attachEventListeners();
-    
     // checkForComments();
 };
 
-// function checkForComments(id) {
-//   const noComments = 
-//     `
-//     <h3>No reviews yet.</h3>
-//     `
-//     if($('.comments-data').empty()) {
-//     $('.comments-data').append(noComments);
-//   }
-// } 
-
-    // const $titleDiv = $('.comments-data');
-    // if ($titleDiv.empty() ) {
-    //   $titleDiv.prepend(commentsTitle);
-    // };
-//creates request and headers
-     
-    // const commentRequest = new Request(`/soupkitchens/${this.soupkitchenId}/comments`, {
-    //   headers: new Headers({
-    //     'Content-Type': 'application/json'
-    //   })
-    // })
-//fetches data and renders to DOM
-    // fetch(`/soupkitchens/${id}/comments`)
-    // //   , {
-    // //   headers: new Headers({
-    // //     'Content-Type': 'application/json'
-    // //   })
-    // // })
-    // .then((res) => res.json())  
-    // .then(data => {
-    //     const commentData = data;
-    //     $('.comments-data').append(commentData.renderCommentHTML);         
-    //     }) 
-    // .catch(error => console.error('Error:', error))
-   
- 
- 
-
-    // const commentRequest = new Request(`/soupkitchens/${id}/comments`, {
-    //   headers: new Headers({
-    //     'Content-Type': 'application/json'
-    //   })
-    // })
-
-//2. Render the new comments form   
 function newCommentFormFetch(event) {
     event.preventDefault();
     event.stopPropagation();
     
     clearSoupKitchenDataAndTitle();
+    clearCommentData();
+    $(".new-comment-form").toggle();
+ // const addReviewButton = `<div id="css-review-button">
+ //    <button class="add-review-button" data-id=${id} data-name=${name}>Add a Review</button></div>`;
 
-    // const id = this.dataset.id;
-    // // let name = this.dataset.name
-    // const name=$(this).data("name");
-//FIGURE THIS OUT-- value of name     
+    const id = $(this).data("id");
+   
+    const name = this.dataset.name;
+     console.log(`got here  ${id} ${name}`);   
     // const name = event.target.attributes[2].nodeName.value
-    // console.log(`${id} name: ${name}`);
-//GET THIS OPENING 
-    $('.new-comment-form').html(form(id));
+    $('.new-comment-form').html(form);
+    console.log(form)
     attachEventListeners(); 
  };
 
 function form(id, name) {
-
   return `
       <form data-id=${id} >
         <h3>Leave a Review of ${name}.</h3>
@@ -194,6 +148,51 @@ function submitNewComment(event) {
 }
 
 
+// function checkForComments(id) {
+//   const noComments = 
+//     `
+//     <h3>No reviews yet.</h3>
+//     `
+//     if($('.comments-data').empty()) {
+//     $('.comments-data').append(noComments);
+//   }
+// } 
+
+    // const $titleDiv = $('.comments-data');
+    // if ($titleDiv.empty() ) {
+    //   $titleDiv.prepend(commentsTitle);
+    // };
+//creates request and headers
+     
+    // const commentRequest = new Request(`/soupkitchens/${this.soupkitchenId}/comments`, {
+    //   headers: new Headers({
+    //     'Content-Type': 'application/json'
+    //   })
+    // })
+//fetches data and renders to DOM
+    // fetch(`/soupkitchens/${id}/comments`)
+    // //   , {
+    // //   headers: new Headers({
+    // //     'Content-Type': 'application/json'
+    // //   })
+    // // })
+    // .then((res) => res.json())  
+    // .then(data => {
+    //     const commentData = data;
+    //     $('.comments-data').append(commentData.renderCommentHTML);         
+    //     }) 
+    // .catch(error => console.error('Error:', error))
+   
+ 
+ 
+
+    // const commentRequest = new Request(`/soupkitchens/${id}/comments`, {
+    //   headers: new Headers({
+    //     'Content-Type': 'application/json'
+    //   })
+    // })
+
+//2. Render the new comments form 
 
 
 
