@@ -15,8 +15,7 @@ class Comment {
     } 
  } 
 Comment.prototype.renderCommentHTML = function() {
-       return 
-       `
+       return `
         <section> 
           <p>Title: ${this.title}</p>
           <p>Content: ${this.content}</p>
@@ -27,10 +26,8 @@ Comment.prototype.renderCommentHTML = function() {
 
 Comment.prototype.renderNewCommentForm = function() {
     return `
-      <div id="new-comment-form">
-      <div id="load-comment-form"><!-- comment form /  div#new-comment-form --><div>
+      <div id="comment-form"><div>
         <form data-id=${this.soupkitchenId} >
-
             <p>
                 <label for="title">Title: </label>
                 <input type="text" name="title" id="title"> 
@@ -44,27 +41,19 @@ Comment.prototype.renderNewCommentForm = function() {
       </div>  
       `
 }
-
-
   //from here - what is the path back to the database? when the comments controller pulls it into create? 
 
-// ask Brad:having trouble with the associations, moving data-id through the browser so a comment knows which soupkitchen it belongs to. 
-
-
-//1
+//1  (2 ways to pull data along, dataset and event.target)
 function commentsFetch(soupkitchenId) {
-//2 ways to pull data along, dataset and event.target
-    const name=$(this).data("name"); //will this be available to addCommentsTitle? 
-    const id= soupkitchenId.target.attributes[1].value
-//checks values in console
+    const id= soupkitchenId.target.attributes[1].value;
+    const name=$(this).data("name");
     console.log(id, name); 
 
-    // clearSoupKitchenDataAndTitle();
-    //*** is it here -- because I'm clearing the data??? 
-   
-//adds soupkitchen name to comments title/was separate function, moved to be in scope
+    clearSoupKitchenDataAndTitle();
+
+//adds title  
     const commentsTitle = `<h4 id="comments-title"> Reviews of ${name}</h4>`;
-    const $titleDiv = $('#comments-data');
+    const $titleDiv = $('.comments-data');
     if ($titleDiv.empty() ) {
       $titleDiv.prepend(commentsTitle);
     };
@@ -79,34 +68,31 @@ function commentsFetch(soupkitchenId) {
     .then((res) => res.json())  
     .then(data => {
         const commentData = data;
-        $('.comments-data2').append(commentData.renderCommentHTML); 
-        attachEventListeners();      
-    })     
+        $('.comments-data').append(commentData.renderCommentHTML);         
+        }) 
     .catch(error => console.error('Error:', error))
-   
-    // .then(checkForComments())
-
+    attachEventListeners();
+    // checkForComments();
 };
-  //div in dhow page -- by default -- if there are comments, it would overwrite this.  
-// function checkForComments() {
-//    if($('#comments-data').empty()) {
-//     $('#comments-data').html(noComments);
-//   }
-//   const noComments = 
-//     `
-//     <h3>No comments yet. Would you like to leave the first one?</h3>
-//     <button class="add-review-button" data-id=${this.id}>Add a Review</button> 
-//     `
-// } 
-
-
-
+   
+function checkForComments(id) {
+  const noComments = 
+    `
+    <h3>No reviews yet. Would you like to leave the first one?</h3>
+    <button class="add-review-button" data-id=${this.id}>Add a Review</button> 
+    `
+   if($('.comments-data').empty()) {
+    $('.comments-data').html(noComments);
+  }
+} 
 //2. Render the new comments form   
 //challenge: do it as rails form, or as js form pull up rails text on soupkitchens.js? or go to new page? 
 function newCommentFormFetch(event) {
   event.preventDefault();
   event.stopPropagation();
-  
+  let id = this.dataset.id;
+  $('.comment-form').append(tempform(id))
+
     // console.log("got to newCommentFormFetch");
     // console.log(this);
     // console.log(`data-id: ${this.dataset.soupkitchenId}`);
@@ -119,7 +105,7 @@ function newCommentFormFetch(event) {
     
     console.log(`got to const id and url: ${id}, ${url}`);
   
-  $('#load-comment-form').append(tempform(id))
+  
     // do I need to create the class of the form? to include the data as it moves to submit? 
     // const formRequest = new Request(url, {
     //    headers: new Headers({
@@ -128,12 +114,9 @@ function newCommentFormFetch(event) {
     //  })
 
 
-clearNewCommentsForm()
+    clearNewCommentsForm()
   
-  
-    attachEventListeners();
-// why does it keep fetching forms? FIXED --duplicate id names 
-//after you send a form, go back to index.  
+    attachEventListeners(); 
  };
 
 function tempform(id) {

@@ -17,8 +17,9 @@ function attachEventListeners() {
 
   $('.submit-comment-button').on('submit', submitNewComment)
   
-  $('#foodpantry-button').on('click', foodpantriesFetch);
-  $('#load-comment-form2').hide()
+  $('.foodpantry-button').on('click', foodpantriesFetch);
+
+  $('.load-comment-form2').hide()
 
 }
 
@@ -29,34 +30,39 @@ class Soupkitchen {
       this.zipcode = attr.zipcode;
       this.notes = attr.notes;
       this.id = attr.id;
+      this.comments = attr.comments;
+      this.users = attr.users;
     }
 }
 
 Soupkitchen.prototype.formatHTML = function(){
   return `
     <section>
-        <p> ${this.name}</p>
-        <p> ${this.address}</p>
-        <p> ${this.zipcode}</p>
-        <p> Hours: ${this.notes}</p>
+        <div id=skdata>
+          <p> ${this.name}</p>
+          <p> ${this.address}</p>
+          <p> ${this.zipcode}</p>
+          <p> Hours: ${this.notes}</p>
+      </div>
         <button class="comments-button" data-id=${this.id} data-name=${this.name}> See Reviews </button>   
         
         <button class="add-review-button" data-id=${this.id}>Add a Review</button> 
 
-        <div class="comments-data2">
-        <div>  
-        <div class="load-comment-form">
-        <div>
-
     </section>
     `
 }
+
+
+        // <div class="comments-data">Comments go here <div>
+         
+        // <div class="comment-form">FORM GOES HERE<div>
 // <button id="new-comment-form" data-id=${this.id}>Add a Review</button> 
 // data-id="<%= post.id %> add this instead of ${this.id?}
 // <button id="new-comment-form" data-id="<%= soupkitchen.id %>">Add a Review/erb</button> 
 
 
 function soupkitchensFetch(){
+  $(".soupkitchen-data").show();
     const indexRequest = new Request('/soupkitchens', {
        headers: new Headers({
       'Content-Type': 'application/json'
@@ -64,7 +70,7 @@ function soupkitchensFetch(){
      })
     clearFoodpantryDataAndTitle();
     addSoupkitchensTitle();
-    clearNewCommentsForm();
+    // clearNewCommentsForm();
    
     fetch(indexRequest)
       // .then(res => handleStatusCode(res))    
@@ -75,7 +81,7 @@ function soupkitchensFetch(){
         soupkitchens.forEach(function(soupkitchen){
 
             const kitchen = new Soupkitchen(soupkitchen);  //this creates the instance
-            $('#soupkitchen-data').append(kitchen.formatHTML());
+            $('.soupkitchen-data').append(kitchen.formatHTML());
         })
         attachEventListeners();
         })
@@ -86,6 +92,7 @@ function soupkitchensFetch(){
 //add title
 function addSoupkitchensTitle() {
     const soupkitchenTitle = `<h4 id="soupkitchen-title"> Soupkitchens </h4>`;
+    
     const $title = $('#soupkitchen-data');
         if ($title.empty() ) {
         $title.prepend(soupkitchenTitle);
@@ -93,8 +100,11 @@ function addSoupkitchensTitle() {
 }
  //clear functions
 function clearFoodpantryDataAndTitle() {
-    $('#foodpantry-title').html("");
-    $('#foodpantry-data').html("");
+    $('.foodpantry-data').html("");
+}
+
+function clearSoupKitchenDataAndTitle() {
+  $(".soupkitchen-data").hide();
 }
 
 function clearCommentData() {
