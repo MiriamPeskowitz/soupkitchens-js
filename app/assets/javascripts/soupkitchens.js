@@ -15,7 +15,7 @@ function attachEventListeners() {
 
   $('.add-review-button').on('click', newCommentFormFetch);
 
-  $('.submit-comment-button').on('submit', submitNewComment)
+  $('.submit-comment-button').on('submit', submitNewComment);
   
   $('#foodpantry-button').on('click', foodpantriesFetch);
 }
@@ -117,11 +117,4 @@ function clearNewCommentsForm() {
 //   return res;}
 
 
-
-        // <div class="comments-data">Comments go here <div>
-         
-        // <div class="comment-form">FORM GOES HERE<div>
-// <button id="new-comment-form" data-id=${this.id}>Add a Review</button> 
-// data-id="<%= post.id %> add this instead of ${this.id?}
-// <button id="new-comment-form" data-id="<%= soupkitchen.id %>">Add a Review/erb</button> 
 

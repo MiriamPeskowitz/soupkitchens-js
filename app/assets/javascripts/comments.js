@@ -1,4 +1,3 @@
-
 //does three things
 //1 loads all comments -- commentsFetch
 //2 loads form for new comment -- newCommentFormFetch
@@ -52,14 +51,15 @@ Comment.prototype.renderNewCommentForm = function() {
 //1  (2 ways to pull data along, dataset and event.target)event.target.attributes[1].value;
 function commentsFetch(event) {
     event.preventDefault();  
-    // event.stopPropagation();
+    event.stopPropagation();
+console.log("got here")
     clearSoupKitchenDataAndTitle();
-    clearCommentData()
+    clearCommentData();
 
     const id= $(this).data("id");
     const name=$(this).data("name");
     const comments=$(this).data("comments");
-     
+     //this will need work to format the comments on the page, sort into title/content, etc. 
 //adds title  
     const commentsTitle = `<h4 id="comments-title"> Reviews of ${name}</h4>`;
 
@@ -80,25 +80,15 @@ function commentsFetch(event) {
 function newCommentFormFetch(event) {
     event.preventDefault();
     event.stopPropagation();
-    
+//clear fields
     clearSoupKitchenDataAndTitle();
     clearCommentData();
     $(".new-comment-form").toggle();
- // const addReviewButton = `<div id="css-review-button">
- //    <button class="add-review-button" data-id=${id} data-name=${name}>Add a Review</button></div>`;
 
+//pull data from <button datasets and create html form (was separate function; this was it has immediate access to const id and name, which is will need to transfer this data to the form submit function >
     const id = $(this).data("id");
-   
     const name = this.dataset.name;
-     console.log(`got here  ${id} ${name}`);   
-    // const name = event.target.attributes[2].nodeName.value
-    $('.new-comment-form').html(form);
-    console.log(form)
-    attachEventListeners(); 
- };
-
-function form(id, name) {
-  return `
+    const form =  `
       <form data-id=${id} >
         <h3>Leave a Review of ${name}.</h3>
           <p>
@@ -109,43 +99,76 @@ function form(id, name) {
               <label for="content">Comment: </label>
               <input type="text" name="content" id="content"> 
           </p> 
-              <button type="submit" id="comment-submit">Submit</button> 
+              <button type="submit" class="submit-comment-button" data-id=${id} id="submit-form">Submit</button> 
       </form> 
-   ` 
+      ` ;  
+   
+    $('.new-comment-form').html(form); 
+    console.log(`got to end of form ${id} ${name}`); 
+    attachEventListeners(); 
+ };
+
+//what happens next -- post to 
+function submitNewComment() {
+  console.log("hello")
 }
+// function submitNewComment(event) {
+//   console.log("clicked")
+//     event.preventDefault();
+//     event.stopPropagation();
+// console.log('got to submit');
 
-
-function submitNewComment(event) {
-    event.preventDefault();
-    event.stopPropagation();
-
-    let title = $("input#title").val()
-    let content = $("input#content").val()
-    console.log(`${title}, ${content}`);
-   
-    // data-soupkitchenId=${this.soupkitchenId}
-    let id = this.dataset.id;
-   
-    const url = `/soupkitchens/${id}/comments/:id`
-    //how do we find the :id? what url: comments/create? 
-    const postNewComment = new Request(url, {
-        method: 'POST',
-        body: JSON.stringify({title:title, content:content}),
-        headers:  {
-          // 'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-     })
-    fetch(postNewComment)
-    .then((res) => res.json())
-    .then(data => console.log('Success:', JSON.stringify(data)))
-    .catch(error => console.error('Error:', error));
+//     const title = $("input#title").val()
+//     const content = $("input#content").val()
     
-   //empty the div 
-    clearNewCommentsForm();
+//     const comment = ` New comment: ${title} -- ${content}`;
 
-    attachEventListeners();
-}
+//     // data-soupkitchenId=${this.soupkitchenId}
+//     const id = this.dataset.id;
+//     console.log(`${id}new comment ${title}, ${content}`);
+  
+//     const url = `/soupkitchens/${id}/comments/:id`
+//     //how do we find the :id? THAT"s what rails does/backend. what url: comments/create? 
+//     const postNewComment = new Request(url, {
+//         method: 'POST',
+//         body: JSON.stringify({title:title, content:content}),
+//         headers:  {
+//           // 'Accept': 'application/json',
+//           'Content-Type': 'application/json'
+//         }
+//      })
+//     fetch(postNewComment)
+//     console.log('got to fetch')
+//     .then((res) => res.json())
+//     .then(data => console.log('Success:', JSON.stringify(data)))
+//     .catch(error => console.error('Error:', error));
+    
+//     $()
+//    // //empty the div 
+//    //  clearNewCommentsForm();
+
+//     attachEventListeners();
+// }
+
+
+ // const name = event.target.attributes[2].nodeName.value
+// function form(id, name) {
+ 
+//   return `
+//       <form data-id=${id} >
+//         <h3>Leave a Review of ${name}.</h3>
+//           <p>
+//               <label for="title">Title: </label>
+//               <input type="text" name="title" id="title"> 
+//           </p>
+//           <p>
+//               <label for="content">Comment: </label>
+//               <input type="text" name="content" id="content"> 
+//           </p> 
+//               <button type="submit" id="comment-submit">Submit</button> 
+//       </form> 
+//    ` 
+// }
 
 
 // function checkForComments(id) {
