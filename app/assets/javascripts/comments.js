@@ -46,12 +46,16 @@ Comment.prototype.renderNewCommentForm = function() {
   //from here - what is the path back to the database? when the comments controller pulls it into create? 
 
 //1  (2 ways to pull data along, dataset and event.target)
-function commentsFetch(soupkitchenId) {
-    const id= soupkitchenId.target.attributes[1].value;
+function commentsFetch(event) {
+  event.preventDefault();
+  event.stopPropagation();
+    const id= $(this).data("id");
+    // event.target.attributes[1].value;
     const name=$(this).data("name");
     console.log(id, name); 
 
     clearSoupKitchenDataAndTitle();
+    clearNewCommentsForm();
   
 //adds title  
     const commentsTitle = `<h4 id="comments-title"> Reviews of ${name}</h4>`;
@@ -78,28 +82,33 @@ function commentsFetch(soupkitchenId) {
 };
    
 function checkForComments(id) {
+
   const noComments = 
     `
-    <h3>No reviews yet. Would you like to leave the first one?</h3>
-    <button class="add-review-button" data-id=${this.id}>Add a Review</button> 
+    <h3>No reviews yet.</h3>
     `
-   if($('.comments-data').empty()) {
-    $('.comments-data').html(noComments);
+    if($('.comments-data').empty()) {
+    $('.comments-data').append(noComments);
   }
 } 
 //2. Render the new comments form   
 function newCommentFormFetch(event) {
-  event.preventDefault();
-  event.stopPropagation();
-  let id = this.dataset.id;
-  console.log(`${id}`);
-  $('.comment-form').html(form(id));
-  $('#comments-title').hide();
-  attachEventListeners(); 
+    event.preventDefault();
+    event.stopPropagation();
+    clearCommentData()
+
+    let id = this.dataset.id;
+    console.log(`${id}`);
+
+    $('.comment-form').html(form(id));
+    console.log(`got`);
+    $(".soupkitchen-data").hide();
+    
+  
+    // attachEventListeners(); 
  };
 
 function form(id) {
-  $(".soupkitchen-data").hide();
   return `
       <form data-id=${id} >
           <p>
@@ -111,7 +120,7 @@ function form(id) {
               <input type="text" name="content" id="content"> 
           </p> 
               <button type="submit" id="comment-submit">Submit</button> 
-      </form>
+      </form> 
    ` 
 }
 

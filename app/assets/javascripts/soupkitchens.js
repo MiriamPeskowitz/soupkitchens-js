@@ -53,13 +53,6 @@ Soupkitchen.prototype.formatHTML = function(){
 }
 
 
-        // <div class="comments-data">Comments go here <div>
-         
-        // <div class="comment-form">FORM GOES HERE<div>
-// <button id="new-comment-form" data-id=${this.id}>Add a Review</button> 
-// data-id="<%= post.id %> add this instead of ${this.id?}
-// <button id="new-comment-form" data-id="<%= soupkitchen.id %>">Add a Review/erb</button> 
-
 
 function soupkitchensFetch(){
   $(".soupkitchen-data").show();
@@ -93,7 +86,7 @@ function soupkitchensFetch(){
 function addSoupkitchensTitle() {
     const soupkitchenTitle = `<h4 id="soupkitchen-title"> Soupkitchens </h4>`;
     
-    const $title = $('#soupkitchen-data');
+    const $title = $('.soupkitchen-data');
         if ($title.empty() ) {
         $title.prepend(soupkitchenTitle);
     };
@@ -121,3 +114,13 @@ function clearNewCommentsForm() {
 //     throw Message(res.message) 
 //   }  
 //   return res;}
+
+
+
+        // <div class="comments-data">Comments go here <div>
+         
+        // <div class="comment-form">FORM GOES HERE<div>
+// <button id="new-comment-form" data-id=${this.id}>Add a Review</button> 
+// data-id="<%= post.id %> add this instead of ${this.id?}
+// <button id="new-comment-form" data-id="<%= soupkitchen.id %>">Add a Review/erb</button> 
+
