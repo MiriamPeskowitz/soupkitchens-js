@@ -15,19 +15,25 @@ class Comment {
     } 
  } 
 Comment.prototype.renderCommentHTML = function() {
-       return `
-        <section> 
-          <p>Title: ${this.title}</p>
-          <p>Content: ${this.content}</p>
-          <button id="new-comment-form" data-id=${this.soupkitchenId}  data-user-id=${this.userId}>Submit</button>
+      return `
+      <section> 
+        <p>Title: ${this.title}</p>
+        <p>Content: ${this.content}</p>
+        <button class="new-comment-form" data-id=${this.soupkitchenId}  data-user-id=${this.userId}>Submit</button>
 
-        </section>
-        `      
-}  
+      </section>
+      `      
+}   
+
+// Comment.prototype.renderAddAReviewButton = function() {
+//       return `
+//           <button class="add-review-button" data-id=${this.id} data-id=${this.name}>Add a Review</button>
+//       `
+// }
 
 Comment.prototype.renderNewCommentForm = function() {
     return `
-      <div id="comment-form"><div>
+      <div id="new-comment-form"><div>
         <form data-id=${this.soupkitchenId} >
 
             <p>
@@ -35,7 +41,7 @@ Comment.prototype.renderNewCommentForm = function() {
                 <input type="text" name="title" id="title"> 
             </p>
             <p>
-                <label for="content">Comment: </label>
+                <label for="content">Review: </label>
                 <input type="text" name="content" id="content"> 
             </p> 
               <button type="submit" id="submit-comment-button">Submit</button> 
@@ -43,68 +49,95 @@ Comment.prototype.renderNewCommentForm = function() {
       </div>  
       `
 }
-  //from here - what is the path back to the database? when the comments controller pulls it into create? 
-
-//1  (2 ways to pull data along, dataset and event.target)
+//1  (2 ways to pull data along, dataset and event.target)event.target.attributes[1].value;
 function commentsFetch(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    const id= $(this).data("id");
-    // event.target.attributes[1].value;
-    const name=$(this).data("name");
-    console.log(id, name); 
-
+    event.preventDefault();  
+    // event.stopPropagation();
     clearSoupKitchenDataAndTitle();
-    clearNewCommentsForm();
-  
+
+    const id= $(this).data("id");
+    const name=$(this).data("name");
+    const comments=$(this).data("comments");
+     
 //adds title  
     const commentsTitle = `<h4 id="comments-title"> Reviews of ${name}</h4>`;
-    const $titleDiv = $('.comments-data');
-    if ($titleDiv.empty() ) {
-      $titleDiv.prepend(commentsTitle);
-    };
-//creates request and headers
-    const commentRequest = new Request(`/soupkitchens/${id}/comments`, {
-      headers: new Headers({
-        'Content-Type': 'application/json'
-      })
-    })
-//fetches data and renders to DOM
-    fetch(commentRequest)
-    .then((res) => res.json())  
-    .then(data => {
-        const commentData = data;
-        $('.comments-data').append(commentData.renderCommentHTML);         
-        }) 
-    .catch(error => console.error('Error:', error))
+
+// add review button    
+    const addReviewButton = `<div id="css-review-button">
+    <button class="add-review-button" data-id=${id} data-name=${name}>Add a Review</button></div>`;
+    
+    console.log(id, name, comments, commentsTitle, addReviewButton);
+
+//   console.log(` 2d: ${id}, ${name}`);
+
+    $('.comments-data').append(comments);
+    $('.comments-data').prepend(commentsTitle);
+    $('.comments-data').append(addReviewButton);
+
     attachEventListeners();
-    checkForComments();
+    
+    // checkForComments();
 };
+
+// function checkForComments(id) {
+//   const noComments = 
+//     `
+//     <h3>No reviews yet.</h3>
+//     `
+//     if($('.comments-data').empty()) {
+//     $('.comments-data').append(noComments);
+//   }
+// } 
+
+    // const $titleDiv = $('.comments-data');
+    // if ($titleDiv.empty() ) {
+    //   $titleDiv.prepend(commentsTitle);
+    // };
+//creates request and headers
+     
+    // const commentRequest = new Request(`/soupkitchens/${this.soupkitchenId}/comments`, {
+    //   headers: new Headers({
+    //     'Content-Type': 'application/json'
+    //   })
+    // })
+//fetches data and renders to DOM
+    // fetch(`/soupkitchens/${id}/comments`)
+    // //   , {
+    // //   headers: new Headers({
+    // //     'Content-Type': 'application/json'
+    // //   })
+    // // })
+    // .then((res) => res.json())  
+    // .then(data => {
+    //     const commentData = data;
+    //     $('.comments-data').append(commentData.renderCommentHTML);         
+    //     }) 
+    // .catch(error => console.error('Error:', error))
    
-function checkForComments(id) {
-  const noComments = 
-    `
-    <h3>No reviews yet.</h3>
-    `
-    if($('.comments-data').empty()) {
-    $('.comments-data').append(noComments);
-  }
-} 
+ 
+ 
+
+    // const commentRequest = new Request(`/soupkitchens/${id}/comments`, {
+    //   headers: new Headers({
+    //     'Content-Type': 'application/json'
+    //   })
+    // })
+
 //2. Render the new comments form   
 function newCommentFormFetch(event) {
     event.preventDefault();
     event.stopPropagation();
-    clearCommentData();
+    
     clearSoupKitchenDataAndTitle();
 
-    let id = this.dataset.id;
-    // let name = this.dataset.name
+    // const id = this.dataset.id;
+    // // let name = this.dataset.name
     // const name=$(this).data("name");
 //FIGURE THIS OUT-- value of name     
-    let name = event.target.attributes[2].nodeName.value
-    console.log(`${id} name: ${name}`);
+    // const name = event.target.attributes[2].nodeName.value
+    // console.log(`${id} name: ${name}`);
 //GET THIS OPENING 
-    $('.comments-form').html(form(id));
+    $('.new-comment-form').html(form(id));
     attachEventListeners(); 
  };
 
@@ -125,6 +158,41 @@ function form(id, name) {
       </form> 
    ` 
 }
+
+
+function submitNewComment(event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    let title = $("input#title").val()
+    let content = $("input#content").val()
+    console.log(`${title}, ${content}`);
+   
+    // data-soupkitchenId=${this.soupkitchenId}
+    let id = this.dataset.id;
+   
+    const url = `/soupkitchens/${id}/comments/:id`
+    //how do we find the :id? what url: comments/create? 
+    const postNewComment = new Request(url, {
+        method: 'POST',
+        body: JSON.stringify({title:title, content:content}),
+        headers:  {
+          // 'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+     })
+    fetch(postNewComment)
+    .then((res) => res.json())
+    .then(data => console.log('Success:', JSON.stringify(data)))
+    .catch(error => console.error('Error:', error));
+    
+   //empty the div 
+    clearNewCommentsForm();
+
+    attachEventListeners();
+}
+
+
 
 
 
@@ -181,37 +249,6 @@ function form(id, name) {
 
 //problem -- getting data from params -- how does json/js/rails connect? 
 
-function submitNewComment(event) {
-    event.preventDefault();
-    event.stopPropagation();
-
-    let title = $("input#title").val()
-    let content = $("input#content").val()
-    console.log(`${title}, ${content}`);
-   
-    // data-soupkitchenId=${this.soupkitchenId}
-    let id = this.dataset.id;
-   
-    const url = `/soupkitchens/${id}/comments/:id`
-    //how do we find the :id? what url: comments/create? 
-    const postNewComment = new Request(url, {
-        method: 'POST',
-        body: JSON.stringify({title:title, content:content}),
-        headers:  {
-          // 'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-     })
-    fetch(postNewComment)
-    .then((res) => res.json())
-    .then(data => console.log('Success:', JSON.stringify(data)))
-    .catch(error => console.error('Error:', error));
-    
-   //empty the div 
-    clearNewCommentsForm();
-
-    attachEventListeners();
-}
     // fetch(`/soupkitchens/${id}/comments/new`) 
     // .then((res) => res.json())
     // .then(data => {

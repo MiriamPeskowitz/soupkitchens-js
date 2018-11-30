@@ -41,13 +41,13 @@ Soupkitchen.prototype.formatHTML = function(){
           <p> ${this.zipcode}</p>
           <p> Hours: ${this.notes}</p>
       </div>
-        <button class="comments-button" data-id=${this.id} data-name=${this.name}> See Reviews </button>   
-        
-        <button class="add-review-button" data-id=${this.id} data-id=${this.name}>Add a Review</button> 
-
+        <button class="comments-button" data-id=${this.id} data-name=${this.name} data-comments=${this.comments}> See Reviews</button> 
     </section>
     `
 }
+
+
+ // <button class="add-review-button" data-id=${this.id} data-id=${this.name}>Add a Review</button> 
 
 function soupkitchensFetch(){
   $(".soupkitchen-data").show();
@@ -57,8 +57,9 @@ function soupkitchensFetch(){
         })
      })
     clearFoodpantryDataAndTitle();
-    addSoupkitchensTitle();
     clearNewCommentsForm();
+    addSoupkitchensTitle();
+
    
     fetch(indexRequest)
       // .then(res => handleStatusCode(res))    
@@ -70,10 +71,10 @@ function soupkitchensFetch(){
 
             const kitchen = new Soupkitchen(soupkitchen);  //this creates the instance
             $('.soupkitchen-data').append(kitchen.formatHTML());
-        })
+        })      
         attachEventListeners();
         })
-      .then($('.comments-button').on('click', commentsFetch)) 
+        // .then($('.comments-button').on('click', commentsFetch)) 
       .catch(error => console.error('Error:', error));
     }; 
 
@@ -102,7 +103,7 @@ function clearCommentData() {
 
 //in case user opens form, but doesn't submit
 function clearNewCommentsForm() {
-    $(".comment-form").hide();
+    $(".new-comment-form").hide();
 }
 // function handleMessages(res) {
 //   if (res.ok) {
