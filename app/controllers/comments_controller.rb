@@ -49,9 +49,8 @@ class CommentsController < ApplicationController
     end
   end
 
-
   def show
-    @comment = Comment.all
+    @comment = Comment.find(params[:id])
     render json: @comments, status: 201
   end 
 

@@ -18,9 +18,6 @@ function attachEventListeners() {
   $('.submit-comment-button').on('submit', submitNewComment)
   
   $('#foodpantry-button').on('click', foodpantriesFetch);
-
-  $('.load-comment-form2').hide()
-
 }
 
 class Soupkitchen {
@@ -63,7 +60,7 @@ function soupkitchensFetch(){
      })
     clearFoodpantryDataAndTitle();
     addSoupkitchensTitle();
-    // clearNewCommentsForm();
+    clearNewCommentsForm();
    
     fetch(indexRequest)
       // .then(res => handleStatusCode(res))    
@@ -107,7 +104,7 @@ function clearCommentData() {
 
 //in case user opens form, but doesn't submit
 function clearNewCommentsForm() {
-    $("#new-comment-form").hide();
+    $(".comment-form").hide();
 }
 // function handleMessages(res) {
 //   if (res.ok) {

@@ -95,17 +95,16 @@ function checkForComments(id) {
 function newCommentFormFetch(event) {
     event.preventDefault();
     event.stopPropagation();
-    clearCommentData()
+    clearCommentData();
+    clearSoupKitchenDataAndTitle();
 
     let id = this.dataset.id;
     console.log(`${id}`);
-
-    $('.comment-form').html(form(id));
+//GET THIS OPENING 
+    $('.comments-form').html(form(id));
     console.log(`got`);
-    $(".soupkitchen-data").hide();
-    
-  
-    // attachEventListeners(); 
+   
+    attachEventListeners(); 
  };
 
 function form(id) {
