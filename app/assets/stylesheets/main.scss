@@ -18,6 +18,11 @@ footer {
   width: 100%;
 }  
 
+.navbar2 {
+  display: inline-block;
+  width: 100%;
+}
+
 .navbar2-button {
   color: gray;
   padding: 5px;
@@ -25,25 +30,13 @@ footer {
   border: 1px solid gray;
 }
 
-// .navbar .navbar-inverse {
-//   background-color: #F0E68C;
-//   color: black;
-// } 
+#soupkitchen-button {
+  float: left;
+}
 
-
-// .theme-dropdown .dropdown-menu {
-//   position: static;
-//   display: block;
-//   margin-bottom: 20px;
-// }
-
-// .theme-showcase > p > .btn {
-//   margin: 5px 0;
-// }
-
-// .center {
-//   text-align: center;
-// }
+#foodpantry-button {
+  float: right;
+}
 
 .field_with_errors {
   font-size: 12px;

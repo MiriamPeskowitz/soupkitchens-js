@@ -17,7 +17,7 @@ function attachEventListeners() {
 
   $('.submit-comment-button').on('submit', submitNewComment)
   
-  $('.foodpantry-button').on('click', foodpantriesFetch);
+  $('#foodpantry-button').on('click', foodpantriesFetch);
 
   $('.load-comment-form2').hide()
 
@@ -100,7 +100,7 @@ function addSoupkitchensTitle() {
 }
  //clear functions
 function clearFoodpantryDataAndTitle() {
-    $('.foodpantry-data').html("");
+    $('.foodpantry-data').hide();
 }
 
 function clearSoupKitchenDataAndTitle() {
@@ -108,8 +108,8 @@ function clearSoupKitchenDataAndTitle() {
 }
 
 function clearCommentData() {
-    $('.comments-title').html("");
-    $('.comments-data').html("");
+    $('.comments-title').hide();
+    $('.comments-data').hide();
 }
 
 //in case user opens form, but doesn't submit

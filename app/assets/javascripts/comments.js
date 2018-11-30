@@ -52,7 +52,7 @@ function commentsFetch(soupkitchenId) {
     console.log(id, name); 
 
     clearSoupKitchenDataAndTitle();
-
+  
 //adds title  
     const commentsTitle = `<h4 id="comments-title"> Reviews of ${name}</h4>`;
     const $titleDiv = $('.comments-data');
@@ -74,7 +74,7 @@ function commentsFetch(soupkitchenId) {
         }) 
     .catch(error => console.error('Error:', error))
     attachEventListeners();
-    // checkForComments();
+    checkForComments();
 };
    
 function checkForComments(id) {
@@ -88,31 +88,14 @@ function checkForComments(id) {
   }
 } 
 //2. Render the new comments form   
-//challenge: do it as rails form, or as js form pull up rails text on soupkitchens.js? or go to new page? 
 function newCommentFormFetch(event) {
   event.preventDefault();
   event.stopPropagation();
   let id = this.dataset.id;
   console.log(`${id}`);
-  $('.comment-form').html(form(id))
-  
-
-    // console.log("got to newCommentFormFetch");
-    // console.log(this);
-    // console.log(`data-id: ${this.dataset.soupkitchenId}`);
-    // --different ways in have different results 
-    // const id = event.target.attributes[1].value;
-     // id = $(this).data('id');
-     // let id = this.dataset.id;
-     // const name=$(this).data("name")
-    // let url= `/soupkitchens/${id}/comments/new`
-    
-    // console.log(`got to const id and url: ${id}, ${url}`);
-  
-  
-    // clearNewCommentsForm()
-  
-    attachEventListeners(); 
+  $('.comment-form').html(form(id));
+  $('#comments-title').hide();
+  attachEventListeners(); 
  };
 
 function form(id) {
@@ -132,11 +115,6 @@ function form(id) {
    ` 
 }
 
-function clear() {
-    clearSoupKitchenDataAndTitle(); 
-    clearCommentData();
- }
-
 
 
     // do I need to create the class of the form? to include the data as it moves to submit? 
@@ -146,6 +124,21 @@ function clear() {
     //     })
     //  })
 
+    // console.log("got to newCommentFormFetch");
+    // console.log(this);
+    // console.log(`data-id: ${this.dataset.soupkitchenId}`);
+    // --different ways in have different results 
+    // const id = event.target.attributes[1].value;
+     // id = $(this).data('id');
+     // let id = this.dataset.id;
+     // const name=$(this).data("name")
+    // let url= `/soupkitchens/${id}/comments/new`
+    
+    // console.log(`got to const id and url: ${id}, ${url}`);
+  
+  
+    // clearNewCommentsForm()
+  
 
 // //another way to grab values for soupkitchen id
 //     const id = event.target.attributes[1].value;
