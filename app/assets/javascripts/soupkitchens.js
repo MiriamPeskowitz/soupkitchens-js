@@ -15,7 +15,7 @@ function attachEventListeners() {
 
   $('.add-review-button').on('click', newCommentFormFetch);
 
-  $('.submit-comment-button').on('submit', submitNewComment);
+  $('.submit-comment-button').on('click', submitNewComment);
   
   $('#foodpantry-button').on('click', foodpantriesFetch);
 }

@@ -13,16 +13,16 @@ class Comment {
       this.userId = attr.userId;
     } 
  } 
-Comment.prototype.renderCommentHTML = function() {
-      return `
-      <section> 
-        <p>Title: ${this.title}</p>
-        <p>Content: ${this.content}</p>
-        <button class="new-comment-form" data-id=${this.soupkitchenId}  data-user-id=${this.userId}>Submit</button>
+// Comment.prototype.renderCommentHTML = function() {
+//       return `
+//       <section> 
+//         <p>Title: ${this.title}</p>
+//         <p>Content: ${this.content}</p>
+//         <button class="submit-comment-button" data-id=${this.soupkitchenId}  data-user-id=${this.userId}>Submit</button>
 
-      </section>
-      `      
-}   
+//       </section>
+//       `      
+// }   
 
 // Comment.prototype.renderAddAReviewButton = function() {
 //       return `
@@ -99,56 +99,60 @@ function newCommentFormFetch(event) {
               <label for="content">Comment: </label>
               <input type="text" name="content" id="content"> 
           </p> 
-              <button type="submit" class="submit-comment-button" data-id=${id} id="submit-form">Submit</button> 
+              <button type="submit" class="submit-comment-button" data-id=${id}id="submit-form">Submit</button> 
       </form> 
       ` ;  
    
+   const button = `<button type="submit" class="submit-comment-button" data-id=${id}id="submit-form">Submit</button> `
+
     $('.new-comment-form').html(form); 
-    console.log(`got to end of form ${id} ${name}`); 
+    console.log(`got to end of form ${id} ${name} ${button}`);
+    const title = $("input#title").val()
+   const content = $("input#content").val() 
+   console.log(`this is ${this}`)
     attachEventListeners(); 
  };
 
-//what happens next -- post to 
-function submitNewComment() {
-  console.log("hello")
-}
-// function submitNewComment(event) {
-//   console.log("clicked")
-//     event.preventDefault();
-//     event.stopPropagation();
-// console.log('got to submit');
+//what happens next -- 
+debugger
 
-//     const title = $("input#title").val()
-//     const content = $("input#content").val()
+ function submitNewComment(event) {
+   console.log("clicked")
+     event.preventDefault();
+     event.stopPropagation();
+ console.log('got to submit');
+debugger
+     const title = $("input#title").val()
+     const content = $("input#content").val()
     
-//     const comment = ` New comment: ${title} -- ${content}`;
+     const comment = ` New comment: ${title} -- ${content}`;
 
-//     // data-soupkitchenId=${this.soupkitchenId}
-//     const id = this.dataset.id;
-//     console.log(`${id}new comment ${title}, ${content}`);
+// current submit is: "/soupkitchens/1id="submit-form"/comments/:id"
+     // data-soupkitchenId=${this.soupkitchenId}
+     const id = this.dataset.id;
+     console.log(`${id}new comment ${title}, ${content}`);
   
-//     const url = `/soupkitchens/${id}/comments/:id`
-//     //how do we find the :id? THAT"s what rails does/backend. what url: comments/create? 
-//     const postNewComment = new Request(url, {
-//         method: 'POST',
-//         body: JSON.stringify({title:title, content:content}),
-//         headers:  {
-//           // 'Accept': 'application/json',
-//           'Content-Type': 'application/json'
-//         }
-//      })
-//     fetch(postNewComment)
-//     console.log('got to fetch')
-//     .then((res) => res.json())
-//     .then(data => console.log('Success:', JSON.stringify(data)))
-//     .catch(error => console.error('Error:', error));
+     const url = `/soupkitchens/${id}/comments/:id`
+     //how do we find the :id? THAT"s what rails does/backend. what url: comments/create? 
+     const postNewComment = new Request(url, {
+         method: 'POST',
+         body: JSON.stringify({title:title, content:content}),
+         headers:  {
+           // 'Accept': 'application/json',
+           'Content-Type': 'application/json'
+         }
+      })
+     fetch(postNewComment)
+     console.log('got to fetch')
+     .then((res) => res.json())
+     .then(data => console.log('Success:', JSON.stringify(data)))
+     .catch(error => console.error('Error:', error));
     
-//     $()
-//    // //empty the div 
-//    //  clearNewCommentsForm();
-
-//     attachEventListeners();
-// }
+     $()
+    // //empty the div 
+    //  clearNewCommentsForm();
+     attachEventListeners();
+ }
 
 
  // const name = event.target.attributes[2].nodeName.value
