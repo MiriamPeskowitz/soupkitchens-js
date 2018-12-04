@@ -15,13 +15,10 @@ class SoupkitchensController < ApplicationController
     end 
   end
 
-
-
   def create 
    if logged_in? 
       @soupkitchen = Soupkitchen.new(soupkitchen_params)
-      
-
+    
       if @soupkitchen.save
         flash[:notice] = "${@soupkitchen.name} was successfully added to the soup kitchens list. Will you leave the first review?" 
 

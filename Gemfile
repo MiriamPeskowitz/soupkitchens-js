@@ -23,7 +23,7 @@ gem 'jquery-rails'
 gem 'sdoc', '~> 0.4.0', group: :doc
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
-gem 'turbolinks', '~> 5'
+# gem 'turbolinks', '~> 5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'validates_email_format_of', '~> 1.6', '>= 1.6.3'

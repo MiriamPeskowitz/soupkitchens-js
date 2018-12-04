@@ -52,7 +52,6 @@ Comment.prototype.renderNewCommentForm = function() {
 function commentsFetch(event) {
     event.preventDefault();  
     event.stopPropagation();
-console.log("got here")
     clearSoupKitchenDataAndTitle();
     clearCommentData();
 
@@ -88,6 +87,7 @@ function newCommentFormFetch(event) {
 //pull data from <button datasets and create html form (was separate function; this was it has immediate access to const id and name, which is will need to transfer this data to the form submit function >
     const id = $(this).data("id");
     const name = this.dataset.name;
+    // two different ways to call data, js and jquery
     const form =  `
       <form data-id=${id} >
         <h3>Leave a Review of ${name}.</h3>
@@ -99,58 +99,65 @@ function newCommentFormFetch(event) {
               <label for="content">Comment: </label>
               <input type="text" name="content" id="content"> 
           </p> 
-              <button type="submit" class="submit-comment-button" data-id=${id}id="submit-form">Submit</button> 
-      </form> 
-      ` ;  
+              <button type="submit" class="submit-comment-button" data-id="${id}" id="submit-form">Submit</button> 
+      </form> `;  
    
-   const button = `<button type="submit" class="submit-comment-button" data-id=${id}id="submit-form">Submit</button> `
+  // const button = `<button type="submit" class="submit-comment-button" data-id=${id}id="submit-form">Submit</button> `
 
     $('.new-comment-form').html(form); 
-    console.log(`got to end of form ${id} ${name} ${button}`);
-    const title = $("input#title").val()
-   const content = $("input#content").val() 
-   console.log(`this is ${this}`)
+    console.log(`got to end of form ${id} ${name}  this is: ${this}`);
+  const title = $("input#title").val()
+  const content = $("input#content").val() 
+   
     attachEventListeners(); 
  };
 
 //what happens next -- 
-debugger
+
 
  function submitNewComment(event) {
-   console.log("clicked")
      event.preventDefault();
      event.stopPropagation();
- console.log('got to submit');
-debugger
+
      const title = $("input#title").val()
      const content = $("input#content").val()
-    
-     const comment = ` New comment: ${title} -- ${content}`;
-
-// current submit is: "/soupkitchens/1id="submit-form"/comments/:id"
-     // data-soupkitchenId=${this.soupkitchenId}
      const id = this.dataset.id;
-     console.log(`${id}new comment ${title}, ${content}`);
-  
-     const url = `/soupkitchens/${id}/comments/:id`
+
+     console.log(`id: ${id} new comment: ${title}, ${content}`);
+    var values = $(this).serialize();
+    var newComment = (`/soupkitchens/${id}/comments`, values);
+    
+     
+
+  //here, the params have come in. check pry-- what's next-- rails sends them to the db. 
+  // new_soupkitchen_comment_path
+  // /soupkitchens/:soupkitchen_id/comments/new
+  // comments#new
+
+  const url = `/soupkitchens/${id}/comments.json`
      //how do we find the :id? THAT"s what rails does/backend. what url: comments/create? 
+  var token = $('meta[name="csrf-token"]').attr('content');
      const postNewComment = new Request(url, {
          method: 'POST',
          body: JSON.stringify({title:title, content:content}),
+         credentials: 'same-origin',
+         // or  credentials: 'include',
          headers:  {
-           // 'Accept': 'application/json',
-           'Content-Type': 'application/json'
-         }
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-CSRF-Token': token
+         },
       })
      fetch(postNewComment)
-     console.log('got to fetch')
      .then((res) => res.json())
-     .then(data => console.log('Success:', JSON.stringify(data)))
-     .catch(error => console.error('Error:', error));
+     .then( console.log("got to resJSON") )
+     .then((data) => console.log(data))
+     // .then(data => console.log('Success:', JSON.stringify(data)))
+     // .catch(error => console.error('Error:', error));
     
-     $()
-    // //empty the div 
-    //  clearNewCommentsForm();
+     //then, what to do with it -- 
+    //empty the div 
+     clearNewCommentsForm();
      attachEventListeners();
  }
 

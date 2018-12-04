@@ -17,7 +17,6 @@ class CommentsController < ApplicationController
     respond_to do |format|
       format.html {render :new}
       format.json {render json: @comment}
-      # format.json {render json: @soupkitchen}
     end 
     if !logged_in?
       flash[:notice] = "You must be logged in"
@@ -27,17 +26,14 @@ class CommentsController < ApplicationController
 
   def create
     if logged_in?
+      binding.pry
       @soupkitchen = Soupkitchen.find(params[:soupkitchen_id])
       @comment = @soupkitchen.comments.build(comment_params)
-     
-      render json: @comment
-      render json: @soupkitchen
-     
+      render json: @comment, status: 201
 
       if @comment.save 
         flash[:notice] = "Thanks! We added your comment."
         render json: @comment, status: 201
-        render json: @soupkitchen, status: 201
         # redirect_to soupkitchen_path(@soupkitchen)
       else 
         flash.now[:notice] = "Something went wrong, try again."  
@@ -45,6 +41,7 @@ class CommentsController < ApplicationController
       end
     else
       flash[:notice] = "Gotta' log in to leave a review." 
+
       # redirect_to root_path -- delete, because it's now just the same page? 
     end
   end
