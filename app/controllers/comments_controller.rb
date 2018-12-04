@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-
+   skip_before_action :verify_authenticity_token
 
   def index
     @soupkitchens = Soupkitchen.all
@@ -26,10 +26,9 @@ class CommentsController < ApplicationController
 
   def create
     if logged_in?
-      binding.pry
       @soupkitchen = Soupkitchen.find(params[:soupkitchen_id])
       @comment = @soupkitchen.comments.build(comment_params)
-      render json: @comment, status: 201
+      # render json: @comment, status: 201
 
       if @comment.save 
         flash[:notice] = "Thanks! We added your comment."

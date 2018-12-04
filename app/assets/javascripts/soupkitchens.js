@@ -1,8 +1,3 @@
-
-//
-//where do I want to put it in the dom
-//where do I fetch the data 
-
 $(document).ready(function() {
    attachEventListeners();
 })
@@ -71,11 +66,11 @@ function soupkitchensFetch(){
 
             const kitchen = new Soupkitchen(soupkitchen);  //this creates the instance
             $('.soupkitchen-data').append(kitchen.formatHTML());
-        })      
-        attachEventListeners();
+          })      
+          attachEventListeners()
         })
-        // .then($('.comments-button').on('click', commentsFetch)) 
-      .catch(error => console.error('Error:', error));
+        
+      .catch(error => console.error('Error:', error))
     }; 
 
 //add title
@@ -117,4 +112,4 @@ function clearNewCommentsForm() {
 //   return res;}
 
 
-
+ // .then($('.comments-button').on('click', commentsFetch))

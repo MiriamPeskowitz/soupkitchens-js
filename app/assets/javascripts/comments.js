@@ -124,8 +124,8 @@ function newCommentFormFetch(event) {
      const id = this.dataset.id;
 
      console.log(`id: ${id} new comment: ${title}, ${content}`);
-    var values = $(this).serialize();
-    var newComment = (`/soupkitchens/${id}/comments`, values);
+      var values = $(this).serialize();
+      var newComment = (`/soupkitchens/${id}/comments`, values);
     
      
 
@@ -136,23 +136,33 @@ function newCommentFormFetch(event) {
 
   const url = `/soupkitchens/${id}/comments.json`
      //how do we find the :id? THAT"s what rails does/backend. what url: comments/create? 
-  var token = $('meta[name="csrf-token"]').attr('content');
+    // var token = $('meta[name="csrf-token"]').attr('content');
      const postNewComment = new Request(url, {
          method: 'POST',
          body: JSON.stringify({title:title, content:content}),
          credentials: 'same-origin',
          // or  credentials: 'include',
+         cors:  'no-cors',
          headers:  {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
-            'X-CSRF-Token': token
+            // 'X-CSRF-Token': token
          },
       })
      fetch(postNewComment)
      .then((res) => res.json())
-     .then( console.log("got to resJSON") )
      .then((data) => console.log(data))
+     .then((data) => {
+        const comment = data;
+        const newComment = new Comment(comment);//creates the instance of Comment
+        //now, where do I want to put it? 
+        })
+      .catch(error => console.error('Error:', error))
      // .then(data => console.log('Success:', JSON.stringify(data)))
+
+//how do I make it into an object 
+
+
      // .catch(error => console.error('Error:', error));
     
      //then, what to do with it -- 

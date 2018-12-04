@@ -1,6 +1,7 @@
 class SoupkitchensController < ApplicationController
   before_action :set_soupkitchen, only: [:show, :update, :destroy]
-
+  skip_before_action :verify_authenticity_token
+  
   def index
     @soupkitchens = Soupkitchen.all
     render json: @soupkitchens, status: 200
