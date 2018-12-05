@@ -52,15 +52,12 @@ Comment.prototype.renderNewCommentForm = function() {
 function commentsFetch(event) {
     event.preventDefault();  
     event.stopPropagation();
-
+    
 //clear space
     clearSoupKitchenDataAndTitle();
     clearCommentData();
-debugger
-    const id= $(this).data("id");
-    const name=$(this).data("name");
-    const comments=$(this).data("comments");
-   
+
+
      //this will need work to format the comments on the page, sort into title/content, etc. 
 //adds title  
     const commentsTitle = `<h4 id="comments-title"> Reviews of ${name}</h4>`;
@@ -70,6 +67,10 @@ debugger
       <div id="css-review-button">
         <button class="add-review-button" data-id=${id} data-name=${name}data-comments=${comments} >Add a Review </button>
         </div>`;
+       const id= $(this).data("id");
+    const name=$(this).data("name");
+    const comments=$(this).data("comments");
+    console.log(comments);
 
     console.log(id, name, comments, commentsTitle, addReviewButton);
 

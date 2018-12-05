@@ -22,7 +22,8 @@ class Soupkitchen {
       this.zipcode = attr.zipcode;
       this.notes = attr.notes;
       this.id = attr.id;
-      this.comments = attr.comments;
+      this.commentsTitle = attr.comments.title;
+      this.commentsContent = attr.comments.content;
       this.users = attr.users;
     }
 }
