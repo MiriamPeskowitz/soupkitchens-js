@@ -51,26 +51,29 @@ function commentsFetch(event) {
   event.stopPropagation();
     const id= $(this).data("id");
     // event.target.attributes[1].value;
-    const name=$(this).data("name");
+ debugger
+
+    // let skname = ${this.name};
+    // const name=$('p#${this.name}').data("name");
     console.log(id, name); 
 
     clearSoupKitchenDataAndTitle();
     clearNewCommentsForm();
   
 //adds title  
-    const commentsTitle = `<h4 id="comments-title"> Reviews of ${name}</h4>`;
+    const commentsTitle = `<h4 id="comments-title"> Reviews of ${skname}</h4>`;
     const $titleDiv = $('.comments-data');
     if ($titleDiv.empty() ) {
       $titleDiv.prepend(commentsTitle);
     };
 //creates request and headers
-    const commentRequest = new Request(`/soupkitchens/${id}/comments`, {
-      headers: new Headers({
-        'Content-Type': 'application/json'
-      })
-    })
+    // const commentRequest = new Request(`/soupkitchens/${id}/comments`, {
+    //   headers: new Headers({
+    //     'Content-Type': 'application/json'
+    //   })
+    // })
 //fetches data and renders to DOM
-    fetch(commentRequest)
+    fetch(`/soupkitchens/${id}/comments`)
     .then((res) => res.json())  
     .then(data => {
         const commentData = data;
@@ -78,7 +81,7 @@ function commentsFetch(event) {
         }) 
     .catch(error => console.error('Error:', error))
     attachEventListeners();
-    checkForComments();
+    // checkForComments();
 };
    
 function checkForComments(id) {
@@ -208,6 +211,8 @@ function submitNewComment(event) {
     clearNewCommentsForm();
 
     attachEventListeners();
+
+   //append to DOM  
 }
     // fetch(`/soupkitchens/${id}/comments/new`) 
     // .then((res) => res.json())

@@ -11,7 +11,7 @@ function attachEventListeners() {
   $('#soupkitchen-button').on('click',
     soupkitchensFetch)
   
-  $('.comments-button').on('click', commentsFetch1);
+  $('.comments-button').on('click', commentsFetch);
 
   $('.add-review-button').on('click', newCommentFormFetch);
 
@@ -36,13 +36,13 @@ class Soupkitchen {
 Soupkitchen.prototype.formatHTML = function(){
   return `
     <section>
-        <div id=skdata>
-          <p> ${this.name}</p>
+        <div id="skdata-${this.id}">
+          <p id="${this.name}"> ${this.name}</p>
           <p> ${this.address}</p>
           <p> ${this.zipcode}</p>
           <p> Hours: ${this.notes}</p>
       </div>
-        <button class="comments-button" data-id=${this.id} data-name=${this.name}> See Reviews </button>   
+        <button class="comments-button" id=${this.name} data-id=${this.id} data-id=${this.name}> See Reviews </button>   
         
         <button class="add-review-button" data-id=${this.id}>Add a Review</button> 
 
@@ -62,30 +62,30 @@ Soupkitchen.prototype.formatCommentHTML = function() {
 
 
 function soupkitchensFetch(){
-  $(".soupkitchen-data").show();
+  // $(".soupkitchen-data").show();
 
-  const indexRequest = new Request('/soupkitchens', {
-       headers: new Headers({
-      'Content-Type': 'application/json'
-        })
-     })
+  // const indexRequest = new Request('/soupkitchens', {
+  //      headers: new Headers({
+  //     'Content-Type': 'application/json'
+  //       })
+  //    })
     clearFoodpantryDataAndTitle();
-    addSoupkitchensTitle();
+    // addSoupkitchensTitle();
     clearNewCommentsForm();
    
-    fetch(indexRequest)
+
+    fetch('/soupkitchens')
       // .then(res => handleStatusCode(res))    
     .then((res) => res.json())
     .then(data => {
         const soupkitchens = data;
-
+         $('.soupkitchen-data').append(`<h4 id="soupkitchen-title"> Soupkitchens </h4>`)
+        
         soupkitchens.forEach(function(soupkitchen){
 
             const kitchen = new Soupkitchen(soupkitchen);  //this creates the instance
-            $('.soupkitchen-data').append(kitchen.formatHTML);
-       
-          
-    
+            $('.soupkitchen-data').append(kitchen.formatHTML());
+      
         })
          attachEventListeners();
       })
@@ -116,7 +116,7 @@ function addSoupkitchensTitle() {
 // }
 
 function commentsFetch1() {
- $(".comments-data").show();
+ // $(".comments-data").show();
     const commentRequest = new Request('/soupkitchens', {
        headers: new Headers({
       'Content-Type': 'application/json'

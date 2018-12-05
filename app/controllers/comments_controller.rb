@@ -26,10 +26,11 @@ class CommentsController < ApplicationController
 
 
   def create
+    binding.pry
     if logged_in?
       @soupkitchen = Soupkitchen.find(params[:soupkitchen_id])
       @comment = @soupkitchen.comments.build(comment_params)
-binding.pry
+
       if @comment.save 
         flash[:notice] = "Thanks! We added your comment."
         render json: @comment, status: 201
@@ -52,7 +53,7 @@ binding.pry
 
   private 
   def comment_params
-    params.require(:comment).permit(:title, :content, :soupkitchen_id, :user_id)
+    params.require(:comment).permit(:title, :content, :soupkitchen_id)
   end
 
   def set_comment
