@@ -41,9 +41,6 @@ Soupkitchen.prototype.formatHTML = function(){
     `
 }
 
-
- // <button class="add-review-button" data-id=${this.id} data-id=${this.name}>Add a Review</button> 
-
 function soupkitchensFetch(){
   $(".soupkitchen-data").show();
     const indexRequest = new Request('/soupkitchens', {
