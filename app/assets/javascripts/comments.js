@@ -13,12 +13,12 @@ class Comment {
       this.userId = attr.userId;
     } 
  } 
-// Comment.prototype.renderCommentHTML = function() {
+// Comment.prototype.formatCommentHTML = function() {
 //       return `
 //       <section> 
 //         <p>Title: ${this.title}</p>
 //         <p>Content: ${this.content}</p>
-//         <button class="submit-comment-button" data-id=${this.soupkitchenId}  data-user-id=${this.userId}>Submit</button>
+//         <button class="submit-comment-button" data-id=${this.soupkitchenId}>Submit</button>
 
 //       </section>
 //       `      
@@ -50,37 +50,88 @@ Comment.prototype.renderNewCommentForm = function() {
 }
 //1  (2 ways to pull data along, dataset and event.target)event.target.attributes[1].value;
 function commentsFetch(event) {
-    event.preventDefault();  
-    event.stopPropagation();
-    
-//clear space
+  debugger
+   const id = $(this).attr('data-id')
+  console.log(`got to commentsFetch ${id}`)
+  //  $('.comments-data').append(kitchen.formatCommentsHTML) 
+   $(".comments-data").show();
+
+   const commentsRequest = new Request(`/soupkitchens/${id}/comments`, {
+       headers: new Headers({
+      'Content-Type': 'application/json'
+        })
+     })
+   
     clearSoupKitchenDataAndTitle();
     clearCommentData();
+    
+    fetch(commentsRequest)
+      // .then(res => handleStatusCode(res))    
+    .then((res) => res.json())
+    .then(data => {
+        const comments = data;
+
+        comments.forEach(function(comment){
+
+            const showComment = new Soupkitchen(comment);  //this creates the instance
+            $('.comments-data').append(showComment.formatCommentsHTML());
+          })      
+          attachEventListeners()
+        })
+       
+      .catch(error => console.error('Error:', error))
+
+       const commentsTitle = `<h4 id="comments-title"> Reviews of ${name}</h4>`;
+
+      const addReviewButton = `<button class="add-review-button" data-id=${id} data-name=${name} >Add a Review </button>`
+    
+      $('.comments-data').prepend(commentsTitle);
+//     $('.comments-data').append(comments);
+   $('.comments-data').append(addReviewButton);
+
+//     attachEventListeners();
+      
+    }; 
+ 
+
+//     event.preventDefault();  
+//     event.stopPropagation();
+    
+// //clear space
+//     clearSoupKitchenDataAndTitle();
+//     clearCommentData();
+// debugger
+//     const id = $(this).attr('data-id')
+//     const name=$(this).attr('data-name');
+//     //you can't store objects in data-atr, unles you serialize them. 
+//     const comments=this.comments;
+//     console.log(`comments: ${comments}`);
+
+//      //this will need work to format the comments on the page, sort into title/content, etc. 
+// //adds title  
+//     const commentsTitle = `<h4 id="comments-title"> Reviews of ${name}</h4>`;
+
+// // add review button  
+function addReviewButton() {
+  return `
+      <button class="add-review-button" data-id=${id} data-name=${name} >Add a Review </button>`
+}  
+   
+//  
+//         <button class="add-review-button" data-id=${id} data-name=${name} data-comments=${comments} >Add a Review </button>
+//      ;
+//     // const id= $(this).data("id");
 
 
-     //this will need work to format the comments on the page, sort into title/content, etc. 
-//adds title  
-    const commentsTitle = `<h4 id="comments-title"> Reviews of ${name}</h4>`;
+//     console.log(id, name, comments, commentsTitle, addReviewButton);
 
-// add review button    
-    const addReviewButton = `
-      <div id="css-review-button">
-        <button class="add-review-button" data-id=${id} data-name=${name}data-comments=${comments} >Add a Review </button>
-        </div>`;
-       const id= $(this).data("id");
-    const name=$(this).data("name");
-    const comments=$(this).data("comments");
-    console.log(comments);
+//     $('.comments-data').prepend(commentsTitle);
+//     $('.comments-data').append(comments);
+//     $('.comments-data').append(addReviewButton);
 
-    console.log(id, name, comments, commentsTitle, addReviewButton);
-
-    $('.comments-data').prepend(commentsTitle);
-    $('.comments-data').append(comments);
-    $('.comments-data').append(addReviewButton);
-
-    attachEventListeners();
-    // checkForComments();
-};
+//     attachEventListeners();
+//     // checkForComments();
+// };
 
 function newCommentFormFetch(event) {
     event.preventDefault();
@@ -166,13 +217,11 @@ function newCommentFormFetch(event) {
       .catch(error => console.error('Error:', error))
      // .then(data => console.log('Success:', JSON.stringify(data)))
 
-//how do I make it into an object 
-
 
      // .catch(error => console.error('Error:', error));
     
      //then, what to do with it -- 
-    //empty the div 
+   
      clearNewCommentsForm();
      attachEventListeners();
  }

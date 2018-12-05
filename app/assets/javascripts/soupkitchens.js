@@ -37,10 +37,20 @@ Soupkitchen.prototype.formatHTML = function(){
           <p> ${this.zipcode}</p>
           <p> Hours: ${this.notes}</p>
       </div>
-        <button class="comments-button" data-id=${this.id} data-name=${this.name} data-comments=${this.comments}> See Reviews</button> 
+        <button class="comments-button" data-id=${this.id} data-name=${this.name} > See Reviews</button> 
     </section>
     `
 }
+
+Soupkitchen.prototype.formatCommentsHTML = function() {
+      return `
+      <section> 
+        <p>Title: ${this.commentsTitle}</p>
+        <p>Content: ${this.commentsContent}</p>
+       
+      </section>
+      `      
+} 
 
 function soupkitchensFetch(){
   $(".soupkitchen-data").show();
@@ -63,15 +73,17 @@ function soupkitchensFetch(){
         soupkitchens.forEach(function(soupkitchen){
 
             const kitchen = new Soupkitchen(soupkitchen);  //this creates the instance
-            $('.soupkitchen-data').append(kitchen.formatHTML());
-          })      
-          attachEventListeners()
+     
+            $('.soupkitchen-data').append(kitchen.formatHTML());    
         })
-        
+         attachEventListeners() 
+        }) 
       .catch(error => console.error('Error:', error))
+
     }; 
 
-//add title
+
+
 function addSoupkitchensTitle() {
     const soupkitchenTitle = `<h4 id="soupkitchen-title"> Soupkitchens </h4>`;
     
