@@ -14,7 +14,7 @@ class Comment {
       this.userId = attr.userId;
     } 
  } 
-Comment.prototype.renderCommentHTML = function() {
+Comment.prototype.formatCommentHTML = function() {
        return `
         <section> 
           <p>Title: ${this.title}</p>

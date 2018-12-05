@@ -29,15 +29,11 @@ class CommentsController < ApplicationController
     if logged_in?
       @soupkitchen = Soupkitchen.find(params[:soupkitchen_id])
       @comment = @soupkitchen.comments.build(comment_params)
-     
-      render json: @comment
-      render json: @soupkitchen
-     
-
+binding.pry
       if @comment.save 
         flash[:notice] = "Thanks! We added your comment."
         render json: @comment, status: 201
-        render json: @soupkitchen, status: 201
+
         # redirect_to soupkitchen_path(@soupkitchen)
       else 
         flash.now[:notice] = "Something went wrong, try again."  

@@ -11,7 +11,7 @@ function attachEventListeners() {
   $('#soupkitchen-button').on('click',
     soupkitchensFetch)
   
-  $('.comments-button').on('click', commentsFetch);
+  $('.comments-button').on('click', commentsFetch1);
 
   $('.add-review-button').on('click', newCommentFormFetch);
 
@@ -27,7 +27,8 @@ class Soupkitchen {
       this.zipcode = attr.zipcode;
       this.notes = attr.notes;
       this.id = attr.id;
-      this.comments = attr.comments;
+      this.commentsTitle = attr.comments.title;
+      this.commentsContent = attr.comments.content;
       this.users = attr.users;
     }
 }
@@ -48,12 +49,22 @@ Soupkitchen.prototype.formatHTML = function(){
     </section>
     `
 }
+Soupkitchen.prototype.formatCommentHTML = function() {
+       return `
+        <section> 
+          <p>Title: ${this.title}</p>
+          <p>Content: ${this.content}</p>
+          <button id="new-comment-form" data-id=${this.id}>Submit</button>
 
+        </section>
+        `      
+} 
 
 
 function soupkitchensFetch(){
   $(".soupkitchen-data").show();
-    const indexRequest = new Request('/soupkitchens', {
+
+  const indexRequest = new Request('/soupkitchens', {
        headers: new Headers({
       'Content-Type': 'application/json'
         })
@@ -71,15 +82,19 @@ function soupkitchensFetch(){
         soupkitchens.forEach(function(soupkitchen){
 
             const kitchen = new Soupkitchen(soupkitchen);  //this creates the instance
-            $('.soupkitchen-data').append(kitchen.formatHTML());
+            $('.soupkitchen-data').append(kitchen.formatHTML);
+       
+          
+    
         })
-        attachEventListeners();
-        })
-      .then($('.comments-button').on('click', commentsFetch)) 
+         attachEventListeners();
+      })
+
+      // .then($('.comments-button').on('click', commentsFetch)) 
       .catch(error => console.error('Error:', error));
+    
     }; 
 
-//add title
 function addSoupkitchensTitle() {
     const soupkitchenTitle = `<h4 id="soupkitchen-title"> Soupkitchens </h4>`;
     
@@ -87,7 +102,51 @@ function addSoupkitchensTitle() {
         if ($title.empty() ) {
         $title.prepend(soupkitchenTitle);
     };
+
 }
+
+
+
+// function commentsShow(){
+  
+//     const id= $(this).data("id");
+//    console.log(`${comments} ${id}`)
+//      $('.comments-data').append(comments).show();
+
+// }
+
+function commentsFetch1() {
+ $(".comments-data").show();
+    const commentRequest = new Request('/soupkitchens', {
+       headers: new Headers({
+      'Content-Type': 'application/json'
+        })
+     })
+
+    clearFoodpantryDataAndTitle();
+    addSoupkitchensTitle();
+    clearNewCommentsForm();
+   
+    fetch(commentRequest)
+      // .then(res => handleStatusCode(res))    
+    .then((res) => res.json())
+    .then(data => {
+        const comments = data;
+
+        comments.forEach(function(comment){
+
+            const singleComment = new Soupkitchen(comment);  //this creates the instance
+            $('.comments-data').append( singleComment.formatCommentHTML());
+      
+        })
+         attachEventListeners();
+      })
+
+      // .then($('.comments-button').on('click', commentsFetch)) 
+      .catch(error => console.error('Error:', error));
+    }; 
+
+
  //clear functions
 function clearFoodpantryDataAndTitle() {
     $('.foodpantry-data').hide();
