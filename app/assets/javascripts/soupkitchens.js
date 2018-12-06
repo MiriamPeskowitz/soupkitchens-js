@@ -42,6 +42,7 @@ Soupkitchen.prototype.formatHTML = function(){
           <p> ${this.zipcode}</p>
           <p> Hours: ${this.notes}</p>
       </div>
+      <div id="${this.name}-reviews" class="comments-data"></div>
         <button class="comments-button" id=${this.name} data-id=${this.id} data-id=${this.name}> See Reviews </button>   
         
         <button class="add-review-button" data-id=${this.id}>Add a Review</button> 
@@ -95,26 +96,38 @@ function soupkitchensFetch(){
     
     }; 
 
-function addSoupkitchensTitle() {
-    const soupkitchenTitle = `<h4 id="soupkitchen-title"> Soupkitchens </h4>`;
-    
-    const $title = $('.soupkitchen-data');
-        if ($title.empty() ) {
-        $title.prepend(soupkitchenTitle);
-    };
 
-}
+function commentsFetch(event) {
+    event.preventDefault();
+    event.stopPropagation();
 
+    const id= $(this).data("id");
+    // event.target.attributes[1].value;
+    console.log(id); 
 
+    clearSoupKitchenDataAndTitle();
+    clearNewCommentsForm();
 
-// function commentsShow(){
-  
-//     const id= $(this).data("id");
-//    console.log(`${comments} ${id}`)
-//      $('.comments-data').append(comments).show();
+    fetch(`/soupkitchens/${id}/comments`)
+    .then((res) => res.json()) 
+    .then((data) => {
+      const comments = data;
+      console.log('got to data');
+      $('.comments-data').append(`<h4 id="comments-title"> Comments </h4>`)
+      comments.forEach(function(comment){
+      })
+    }) 
+    attachEventListeners();
+    checkForComments();
+};
+   
+function checkForComments(id) {
 
-// }
-
+  const noComments = `<h3>No reviews yet.</h3>`
+    if ($('.comments-data').empty()) {
+    $('.comments-data').append(noComments);
+  }
+} 
 function commentsFetch1() {
  // $(".comments-data").show();
     const commentRequest = new Request('/soupkitchens', {
@@ -180,3 +193,22 @@ function clearNewCommentsForm() {
 // data-id="<%= post.id %> add this instead of ${this.id?}
 // <button id="new-comment-form" data-id="<%= soupkitchen.id %>">Add a Review/erb</button> 
 
+// function addSoupkitchensTitle() {
+//     const soupkitchenTitle = `<h4 id="soupkitchen-title"> Soupkitchens </h4>`;
+    
+//     const $title = $('.soupkitchen-data');
+//         if ($title.empty() ) {
+//         $title.prepend(soupkitchenTitle);
+//     };
+
+// }
+
+
+
+// function commentsShow(){
+  
+//     const id= $(this).data("id");
+//    console.log(`${comments} ${id}`)
+//      $('.comments-data').append(comments).show();
+
+// }

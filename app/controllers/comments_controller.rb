@@ -26,7 +26,6 @@ class CommentsController < ApplicationController
 
 
   def create
-    binding.pry
     if logged_in?
       @soupkitchen = Soupkitchen.find(params[:soupkitchen_id])
       @comment = @soupkitchen.comments.build(comment_params)

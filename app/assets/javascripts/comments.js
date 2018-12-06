@@ -14,16 +14,16 @@ class Comment {
       this.userId = attr.userId;
     } 
  } 
-Comment.prototype.formatCommentHTML = function() {
-       return `
-        <section> 
-          <p>Title: ${this.title}</p>
-          <p>Content: ${this.content}</p>
-          <button id="new-comment-form" data-id=${this.soupkitchenId}  data-user-id=${this.userId}>Submit</button>
+// Comment.prototype.formatCommentHTML = function() {
+//        return `
+//         <section> 
+//           <p>Title: ${this.title}</p>
+//           <p>Content: ${this.content}</p>
+//           <button id="new-comment-form" data-id=${this.soupkitchenId}  data-user-id=${this.userId}>Submit</button>
 
-        </section>
-        `      
-}  
+//         </section>
+//         `      
+// }  
 
 Comment.prototype.renderNewCommentForm = function() {
     return `
@@ -46,26 +46,12 @@ Comment.prototype.renderNewCommentForm = function() {
   //from here - what is the path back to the database? when the comments controller pulls it into create? 
 
 //1  (2 ways to pull data along, dataset and event.target)
-function commentsFetch(event) {
-  event.preventDefault();
-  event.stopPropagation();
-    const id= $(this).data("id");
-    // event.target.attributes[1].value;
- debugger
-
-    // let skname = ${this.name};
-    // const name=$('p#${this.name}').data("name");
-    console.log(id, name); 
-
-    clearSoupKitchenDataAndTitle();
-    clearNewCommentsForm();
-  
 //adds title  
-    const commentsTitle = `<h4 id="comments-title"> Reviews of ${skname}</h4>`;
-    const $titleDiv = $('.comments-data');
-    if ($titleDiv.empty() ) {
-      $titleDiv.prepend(commentsTitle);
-    };
+    // const commentsTitle = `<h4 id="comments-title"> Reviews of ${skname}</h4>`;
+    // const $titleDiv = $('.comments-data');
+    // if ($titleDiv.empty() ) {
+    //   $titleDiv.prepend(commentsTitle);
+    // };
 //creates request and headers
     // const commentRequest = new Request(`/soupkitchens/${id}/comments`, {
     //   headers: new Headers({
@@ -73,27 +59,7 @@ function commentsFetch(event) {
     //   })
     // })
 //fetches data and renders to DOM
-    fetch(`/soupkitchens/${id}/comments`)
-    .then((res) => res.json())  
-    .then(data => {
-        const commentData = data;
-        $('.comments-data').append(commentData.renderCommentHTML);         
-        }) 
-    .catch(error => console.error('Error:', error))
-    attachEventListeners();
-    // checkForComments();
-};
    
-function checkForComments(id) {
-
-  const noComments = 
-    `
-    <h3>No reviews yet.</h3>
-    `
-    if($('.comments-data').empty()) {
-    $('.comments-data').append(noComments);
-  }
-} 
 //2. Render the new comments form   
 function newCommentFormFetch(event) {
     event.preventDefault();
@@ -198,13 +164,16 @@ function submitNewComment(event) {
         method: 'POST',
         body: JSON.stringify({title:title, content:content}),
         headers:  {
-          // 'Accept': 'application/json',
+          'Accept': 'application/json',
           'Content-Type': 'application/json'
         }
      })
     fetch(postNewComment)
     .then((res) => res.json())
-    .then(data => console.log('Success:', JSON.stringify(data)))
+    .then(console.log("got to res json"))
+    .then((data) => console.log('Success:', JSON.stringify(data))
+    )
+    .then(console.log("console.log(data"))
     .catch(error => console.error('Error:', error));
     
    //empty the div 
